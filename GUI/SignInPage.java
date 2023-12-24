@@ -36,7 +36,7 @@ public class SignInPage extends javax.swing.JFrame implements ActionListener {
                     messageLabel.setForeground(Color.GREEN);
                     messageLabel.setText("Login Successful");
                     this.dispose();
-                    WelcomePage welcomePage = new WelcomePage();
+                    new WelcomePage(); //welcome page for the admin login
                 } else {
                     messageLabel.setForeground(Color.RED);
                     messageLabel.setText("Wrong Password");
