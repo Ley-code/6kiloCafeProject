@@ -1,30 +1,17 @@
 package GUI;
 
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import javax.swing.JLabel;
-import javax.swing.JTable;
+import javax.swing.JButton;
 
-public class AttendancePage extends Welcomepage {
-    private JTable attendanceTable;
-    private JLabel tabelname;
+
+public class AttendancePage extends WelcomePage {
+    private JButton myButton;
     AttendancePage(){
-        tabelname = new JLabel();
-
-        cafeFoodsButton.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-            
-        })
-        tabelname.setText("Amir is great");
+        myButton = new JButton("Hello it works");
         centerPanel.setBackground(Color.BLUE);
-        centerPanel.add(tabelname);
+        centerPanel.add(myButton);
+    }    
     }
-    
-    
-}
+
+

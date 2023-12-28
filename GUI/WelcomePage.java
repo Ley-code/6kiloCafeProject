@@ -1,23 +1,16 @@
 package GUI;
-<<<<<<< HEAD
-=======
-
-import java.awt.Dimension;
->>>>>>> b87bf9cd95a0128fbd9f54f6775a27dde9bb2bc1
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.Insets;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-<<<<<<< HEAD
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -44,21 +37,36 @@ public class WelcomePage {
     private void initialize(){
         AttendanceButton = new ButtonStyle();
         AttendanceButton.setText("Attendance Chekcer");
-
+        // a custom listener that creates a new page based on the button clicked
+        //----------------------------------------------------------
+        AttendanceButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new AttendancePage();
+                frame.dispose();
+            }
+        });
+        
         cafeFoodsButton = new ButtonStyle();
         cafeFoodsButton.setText("Cafe Foods");
-
-        TimeLineButton = new ButtonStyle();
+        cafeFoodsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                new FoodListPage();
+                frame.dispose();
+            }
+        });
+        //--------------------------------------------------
+        centerPanel = new JPanel();  //the panel that is going to be edited in the children classes
+        //--------------------------------------------------
+        TimeLineButton = new ButtonStyle(); // custom Buttonstyle that is applied common to all button types
         TimeLineButton.setText("Inventory Management");
         
         InventoryManagementButton = new ButtonStyle();
         InventoryManagementButton.setText("Inventory Management");
 
         pollButton = new ButtonStyle();
-        pollButton.setText("Poll");
-
-        centerPanel = new JPanel();
-        centerPanel.setBackground(Color.BLACK);
+        pollButton.setText("Poll");     
 
         studentButton = new ButtonStyle();
         studentButton.setText("Student Feedback");
@@ -68,17 +76,19 @@ public class WelcomePage {
 
         peakTimeAnalysisButton = new ButtonStyle();
         peakTimeAnalysisButton.setText("Peak Time Analysis");
-        
+        //-----------------------------------------------------------------
+        //creates the Title at the top of the frame
         CafeManagementLabel = new JLabel();
         CafeManagementLabel.setText("Cafe Management System");
         CafeManagementLabel.setFont(new Font("Garamond", 2, 28));
         Border labelBorder = new EmptyBorder(15,15,15,15);
         CafeManagementLabel.setBorder(labelBorder);
 
-        topPanel = new JPanel();
+        topPanel = new JPanel(); //self discriptive
         topPanel.setBackground(new Color(0, 153, 153));
         topPanel.add(CafeManagementLabel,SwingConstants.CENTER);
-        
+        //adds the buttons on the right side of the frame
+        //-----------------------------------------------------------
         rightPanel = new JPanel();
         rightPanel.setLayout(new GridLayout(8, 1, 10, 10));
         rightPanel.add(AttendanceButton);
@@ -89,7 +99,7 @@ public class WelcomePage {
         rightPanel.add(pollButton);
         rightPanel.add(studentButton);
         rightPanel.add(generalInformationButton);
-    
+        //---------------------------------------------------------
         frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800,600);
@@ -100,19 +110,6 @@ public class WelcomePage {
         frame.add(centerPanel,BorderLayout.CENTER);
         frame.setBackground(new Color(185,185,185));
         frame.setVisible(true);
-=======
-
-public class WelcomePage {
-    private JFrame frame = new JFrame();
-
-    WelcomePage() {
-        // creates an empty page for the admin "to be customized:)"
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(new Dimension(500, 500));
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-        System.out.println("FIkr is the smartest person i know");
->>>>>>> b87bf9cd95a0128fbd9f54f6775a27dde9bb2bc1
 
     }
 }

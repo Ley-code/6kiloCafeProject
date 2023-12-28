@@ -7,6 +7,7 @@ public class IdandPassword {
     IdandPassword(){
         logininfo.put("leykun","abc123"); //this are dummy datas but we can change it later
         logininfo.put("kidus","itworks!");
+        logininfo.put("fikr","agoo");
         
 
     }
