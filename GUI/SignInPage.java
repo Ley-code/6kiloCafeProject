@@ -3,8 +3,9 @@ package GUI;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JFrame;
 
-public class SignInPage extends javax.swing.JFrame implements ActionListener {
+public class SignInPage extends JFrame implements ActionListener {
     IdandPassword loginIdPassword = new IdandPassword();
 
     public SignInPage() {
@@ -114,7 +115,7 @@ public class SignInPage extends javax.swing.JFrame implements ActionListener {
         Middlecontainer.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 3, true));
 
         AdminButton.setBackground(new java.awt.Color(0, 0, 204));
-        AdminButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        AdminButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); 
         AdminButton.setForeground(new java.awt.Color(255, 255, 255));
         AdminButton.setText("Admin");
         AdminButton.setFocusable(false);
