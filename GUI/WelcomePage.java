@@ -1,4 +1,9 @@
 package GUI;
+<<<<<<< HEAD
+=======
+
+import java.awt.Dimension;
+>>>>>>> b87bf9cd95a0128fbd9f54f6775a27dde9bb2bc1
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -12,6 +17,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+<<<<<<< HEAD
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -94,6 +100,19 @@ public class WelcomePage {
         frame.add(centerPanel,BorderLayout.CENTER);
         frame.setBackground(new Color(185,185,185));
         frame.setVisible(true);
+=======
+
+public class WelcomePage {
+    private JFrame frame = new JFrame();
+
+    WelcomePage() {
+        // creates an empty page for the admin "to be customized:)"
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(new Dimension(500, 500));
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+        System.out.println("FIkr is the smartest person i know");
+>>>>>>> b87bf9cd95a0128fbd9f54f6775a27dde9bb2bc1
 
     }
 }
