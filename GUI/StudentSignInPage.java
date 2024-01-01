@@ -56,11 +56,14 @@ public class StudentSignInPage extends JFrame implements ActionListener {
     private JButton RegisterButton = new JButton();
     private JButton ScanIdButton = new JButton();
     private JLabel MessageLabel = new JLabel();
+    private JButton loginButton = new JButton();
     private Boolean flag = false;
     public static int scanType = 0;
+
     public StudentSignInPage() {
         initialize();
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         // ----------------------------------------------------------------------------------
@@ -91,8 +94,7 @@ public class StudentSignInPage extends JFrame implements ActionListener {
                     MessageLabel.setText("Wrong Confirmation Password");
                 }
             }
-        }
-        else if (e.getSource() == ScanIdButton) {
+        } else if (e.getSource() == ScanIdButton) {
             MessageLabel.setOpaque(true);
             if (this.flag) {
                 MessageLabel.setForeground(Color.GREEN);
@@ -105,12 +107,15 @@ public class StudentSignInPage extends JFrame implements ActionListener {
                     System.out.println("didnt found the backend");
                     e1.printStackTrace();
                 }
-                 
+
             } else {
                 MessageLabel.setForeground(Color.RED);
                 MessageLabel.setText("Register First");
 
             }
+        } else if (e.getSource() == loginButton){
+            //------------------------------------------
+            //currently no task
         }
     }
 
@@ -165,7 +170,7 @@ public class StudentSignInPage extends JFrame implements ActionListener {
         Topcontainer.setBackground(new Color(0, 153, 153));
         Topcontainer.add(TopPanel, BorderLayout.CENTER);
         // ------------------------------------------------------
-        FullNameField.setPreferredSize(new Dimension(200,30));
+        FullNameField.setPreferredSize(new Dimension(200, 30));
         FullnameLabel.setText("Student Name: ");
         FullnameLabel.setForeground(Color.white);
         JPanel row1 = new JPanel();
@@ -173,7 +178,7 @@ public class StudentSignInPage extends JFrame implements ActionListener {
         row1.add(FullnameLabel);
         row1.add(FullNameField);
         // -------------------------------------------------------
-        IDNumberField.setPreferredSize(new Dimension(200,30));
+        IDNumberField.setPreferredSize(new Dimension(200, 30));
         IDNumberLabel.setText("Student ID: ");
         IDNumberLabel.setForeground(Color.white);
         JPanel row2 = new JPanel();
@@ -181,7 +186,7 @@ public class StudentSignInPage extends JFrame implements ActionListener {
         row2.add(IDNumberLabel);
         row2.add(IDNumberField);
         // ----------------------------------------------------------
-        DepartmentField.setPreferredSize(new Dimension(200,30));
+        DepartmentField.setPreferredSize(new Dimension(200, 30));
         DepartmentLabel.setText("Department: ");
         DepartmentLabel.setForeground(Color.white);
         JPanel row3 = new JPanel();
@@ -189,7 +194,7 @@ public class StudentSignInPage extends JFrame implements ActionListener {
         row3.add(DepartmentLabel, SwingConstants.CENTER);
         row3.add(DepartmentField);
         // -------------------------------------------------------
-        YearField.setPreferredSize(new Dimension(200,30));
+        YearField.setPreferredSize(new Dimension(200, 30));
         YearLabel.setText("Year: ");
         YearLabel.setForeground(Color.white);
         JPanel row4 = new JPanel();
@@ -197,7 +202,7 @@ public class StudentSignInPage extends JFrame implements ActionListener {
         row4.add(YearLabel);
         row4.add(YearField);
         // ----------------------------------------------------------
-        PhoneNumberField.setPreferredSize(new Dimension(200,30));
+        PhoneNumberField.setPreferredSize(new Dimension(200, 30));
         PhoneNumberLabel.setText("PhoneNumber: ");
         PhoneNumberLabel.setForeground(Color.white);
         JPanel row5 = new JPanel();
@@ -205,7 +210,7 @@ public class StudentSignInPage extends JFrame implements ActionListener {
         row5.add(PhoneNumberLabel);
         row5.add(PhoneNumberField);
         // -------------------------------------------------------
-        NewPasswordField.setPreferredSize(new Dimension(200,30));
+        NewPasswordField.setPreferredSize(new Dimension(200, 30));
         NewPasswordLabel.setText("New Password: ");
         NewPasswordLabel.setForeground(Color.white);
         JPanel row6 = new JPanel();
@@ -213,7 +218,7 @@ public class StudentSignInPage extends JFrame implements ActionListener {
         row6.add(NewPasswordLabel);
         row6.add(NewPasswordField);
         // ----------------------------------------------------------
-        ConfirmPasswordField.setPreferredSize(new Dimension(200,30));
+        ConfirmPasswordField.setPreferredSize(new Dimension(200, 30));
         ConfirmPasswordLabel.setText("Confirm Password: ");
         ConfirmPasswordLabel.setForeground(Color.white);
         JPanel row7 = new JPanel();
@@ -223,14 +228,14 @@ public class StudentSignInPage extends JFrame implements ActionListener {
         // ----------------------------------------------------------
         JPanel row8 = new JPanel();
         row8.add(MessageLabel);
-        row8.setBackground(new Color(131,30,200));
+        row8.setBackground(new Color(131, 30, 200));
         MessageLabel.setFont(new Font("Helvetica", 2, 25));
         MessageLabel.setBackground(new Color(131, 30, 199));
         MessageLabel.setHorizontalAlignment(SwingConstants.CENTER);
         MessageLabel.setVerticalAlignment(SwingConstants.CENTER);
         MessageLabel.setOpaque(true);
-        MessageLabel.setText("High baba");
-        
+        MessageLabel.setText("");
+
         // ----------------------------------------------------------
         JPanel row9 = new JPanel();
         row9.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 20));
@@ -250,9 +255,17 @@ public class StudentSignInPage extends JFrame implements ActionListener {
         ScanIdButton.setBackground(new Color(46, 5, 74));
         ScanIdButton.addActionListener(this);
 
+        loginButton = new ButtonStyle();
+        loginButton.setForeground(Color.WHITE);
+        loginButton.setText("LogIn");
+        loginButton.setMargin(new Insets(5, 15, 5, 15));
+        loginButton.setBackground(new Color(46, 5, 74));
+        loginButton.addActionListener(this);
+
         row9.add(RegisterButton);
         row9.add(ScanIdButton);
-        //-------------------------------------------------------------------
+        row9.add(loginButton);
+        // -------------------------------------------------------------------
         centerPanel = new JPanel();
         centerPanel.setLayout(new GridLayout(9, 1, 0, -5));
         centerPanel.add(row1);
@@ -270,22 +283,18 @@ public class StudentSignInPage extends JFrame implements ActionListener {
         BottomPanel.setBackground(new Color(51, 10, 122));
         Topcontainer.setBackground(new Color(51, 10, 122));
         centerPanel.setBackground(new Color(131, 30, 199));
-        setLayout(new BorderLayout(0,20));
+        setLayout(new BorderLayout(0, 20));
         add(Topcontainer, BorderLayout.NORTH);
         add(centerPanel, BorderLayout.CENTER);
         add(BottomPanel, BorderLayout.SOUTH);
         add(rightPanel, BorderLayout.EAST);
         add(leftPanel, BorderLayout.WEST);
 
-        this.setSize(700, 760);
+        this.setSize(900, 790);
         this.getContentPane().setBackground(new Color(131, 30, 199));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
 
-    }
-
-    public static void main(String[] args) {
-        new StudentSignInPage();
     }
 }

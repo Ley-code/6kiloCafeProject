@@ -24,7 +24,7 @@ public class Main {
         java.util.logging.Logger.getLogger(SignInPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
     }
     //---------------------------------------------------------------------------------------------------
-    new SignInPage().setVisible(true); //launches the sign in page
+    new LoginPage(); //launches the sign in page
 
 }
 
