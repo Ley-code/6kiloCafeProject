@@ -6,11 +6,11 @@ import java.sql.SQLException;
 
 public class Backend {
     // we should put the RFID scanned ID as a private static in the class.
-    protected static String stuID;
-    protected static String studentName;
-    protected static String password;
-    protected static String Department;
-    protected static String year;
+    public static String stuID;
+    public static String studentName;
+    public static String password;
+    public static String Department;
+    public static String year;
 
     // This method would be called in the action listener of the scan Your ID button.
     // Remember the Action Listener there must also have a public variable called scanType-->

@@ -37,14 +37,14 @@ public class ConnectionWithDatabase {
         return 3;
     }
     // THis will give you all the student IDs in Student Table
-    public static ArrayList idsForSignUp() throws SQLException {
+    public static ArrayList<String> idsForSignUp() throws SQLException {
         try (Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD)) {
             // Your code to work with the database goes here
             System.out.println("Connected to the database.");
             String sqlQuery = "SELECT student_ID FROM Students";
             PreparedStatement creatingStat = connection.prepareStatement(sqlQuery);
             ResultSet resultSet = creatingStat.executeQuery();
-            ArrayList studentIDs = new ArrayList();
+            ArrayList<String> studentIDs = new ArrayList<String>();
             while(resultSet.next()) {
                 studentIDs.add(resultSet.getString("student_ID"));
             }
@@ -58,13 +58,13 @@ public class ConnectionWithDatabase {
         return null;
     }
     // This will give you student IDs in one of the meal corresponding date
-    public static ArrayList idsForAttendance(String sqlQuery) throws SQLException {
+    public static ArrayList<String> idsForAttendance(String sqlQuery) throws SQLException {
         try (Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD)) {
             // Your code to work with the database goes here
             System.out.println("Connected to the database.");
             PreparedStatement creatingStat = connection.prepareStatement(sqlQuery);
             ResultSet resultSet = creatingStat.executeQuery();
-            ArrayList studentIDs = new ArrayList();
+            ArrayList<String> studentIDs = new ArrayList<String>();
             while(resultSet.next()) {
                 studentIDs.add(resultSet.getString("student_ID"));
             }
