@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import GUI.StudentSignInPage;
+
 public class Attendance extends Backend {
     private static Timestamp scanTimeStamp;
     private static LocalTime localTime;
@@ -79,6 +81,7 @@ public class Attendance extends Backend {
         else {
             System.out.println("You don't have an account. I am loading the signUp page now");
             // This will Load the signUp page and tell you to signUP
+            new StudentSignInPage();
         }
     }
 }
