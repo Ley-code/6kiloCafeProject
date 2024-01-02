@@ -2,7 +2,6 @@ package GUI;
 
 public class Main {
     public static void main(String[] args) {
-    IdandPassword myIdandPassword = new IdandPassword();
     //--------------------------------------------------------------------------------------
     /* Customizes the Look and Feel of the GUI it is a custom UI Manager. it is like a finishing touch to make 
      * the graphics pop up
