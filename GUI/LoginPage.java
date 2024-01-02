@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.*;
 
 public class LoginPage implements ActionListener {
+    
     //-----------------------------------------------------
     //all the objects below are used for making the GUI Components
     JFrame frame = new JFrame();
@@ -148,6 +149,5 @@ public class LoginPage implements ActionListener {
         if (e.getSource() == signInButton) {
             new StudentSignInPage();
         }
-        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
     }
 }
