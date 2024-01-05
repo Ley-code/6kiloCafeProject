@@ -1,5 +1,7 @@
 package My_java_work;
 
+import GUI.StudentSignInPage;
+
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -16,7 +18,7 @@ public class Backend {
     // Remember the Action Listener there must also have a public variable called scanType-->
     //Which is initially zero.
     public static void scan() throws InterruptedException, IOException, SQLException {
-        if (Main.scanType % 2 == 0){
+        if (StudentSignInPage.scanType % 2 == 0){
             ESPcommunication thread = new ESPcommunication();
             System.out.println("I am creating new thread for you to run");
             thread.start();

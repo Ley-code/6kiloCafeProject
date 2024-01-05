@@ -1,5 +1,7 @@
 package My_java_work;
 
+import GUI.StudentSignInPage;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,7 +34,7 @@ public class ESPcommunication extends Thread {
         System.out.println(studentID);
         socket.close();
         SignUp.accountChecker(studentID);
-        Main.scanType++;
+        StudentSignInPage.scanType++;
         method(studentID);
     }
 

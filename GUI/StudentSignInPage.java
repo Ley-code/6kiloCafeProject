@@ -114,6 +114,8 @@ public class StudentSignInPage extends JFrame implements ActionListener {
 
             }
         } else if (e.getSource() == loginButton){
+            new LoginPageForStudent();
+            dispose();
             //------------------------------------------
             //currently no task
         }
