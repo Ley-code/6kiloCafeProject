@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -19,7 +20,7 @@ public class WelcomePage {
     protected JButton AttendanceButton;
     protected JLabel CafeManagementLabel;
     protected JPanel topPanel;
-    protected JPanel centerPanel;
+    public JPanel centerPanel;
     protected JFrame frame;
     protected JPanel rightPanel;
     protected JButton cafeFoodsButton;
@@ -70,12 +71,32 @@ public class WelcomePage {
 
         generalInformationButton = new ButtonStyle();
         generalInformationButton.setText("General Information");
+        generalInformationButton.addActionListener(new ActionListener() {
 
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new GeneralInformationPage();
+                frame.dispose();
+            }
+
+        });
         peakTimeAnalysisButton = new ButtonStyle();
         peakTimeAnalysisButton.setText("Peak Time Analysis");
+        peakTimeAnalysisButton.addActionListener(new ActionListener() {
+          
+        @Override
+        public void actionPerformed(ActionEvent e){
+            new peakTimeAnalysisPage();
+            frame.dispose();
+        }
+        });
+       
         // -----------------------------------------------------------------
-        // creates the Title at the top of the frame
+        // creates the Title and Icon at the top of the frame
+        ImageIcon logo = new ImageIcon("C:\\6kiloCafeProject\\GUI\\icons\\restaurant.png");
         CafeManagementLabel = new JLabel();
+        CafeManagementLabel.setIcon(logo);
+        CafeManagementLabel.setIconTextGap(20);
         CafeManagementLabel.setText("Cafe Management System");
         CafeManagementLabel.setForeground(Color.WHITE);
         CafeManagementLabel.setFont(new Font("Garamond", 2, 28));
@@ -89,15 +110,12 @@ public class WelcomePage {
         // -----------------------------------------------------------
         rightPanel = new JPanel();
         rightPanel.setLayout(new GridLayout(7, 1, 10, 10));
-        rightPanel.add(AttendanceButton);
-        rightPanel.add(peakTimeAnalysisButton);
-        rightPanel.add(cafeFoodsButton);
-        rightPanel.add(InventoryManagementButton);
-        rightPanel.add(pollButton);
-        rightPanel.add(studentButton);
-        rightPanel.add(generalInformationButton);
+        JButton[] buttonGroup = {AttendanceButton,peakTimeAnalysisButton,cafeFoodsButton,InventoryManagementButton,pollButton,studentButton,generalInformationButton};
+        for(int i = 0;i<7;i++){
+            rightPanel.add(buttonGroup[i]);
+        }
         rightPanel.setBackground(new Color(46, 5, 74));
-        // ---------------------------------------------------------
+        //        // ---------------------------------------------------------
         frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1000, 700);

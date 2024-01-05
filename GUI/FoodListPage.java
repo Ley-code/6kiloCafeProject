@@ -1,8 +1,13 @@
 package GUI;
 
+import java.awt.Color;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 
 public class FoodListPage extends WelcomePage {
     private JButton mondayButton;
@@ -25,10 +30,30 @@ public class FoodListPage extends WelcomePage {
         wednesdayButton = new ButtonStyle("Wednesday");
         wednesdayButton.setBounds(0, 60, 800, 30);
         // -----------------------------------
+        FoodIcon myIcon = new FoodIcon();
         FoodListPanel mondayPanel = new FoodListPanel();
-        mondayPanel.imagLabel.setText("no bebe");
+        mondayPanel.breakfastImageLabel.setIcon(myIcon.scaledIcon("C:\\6kiloCafeProject\\GUI\\icons\\Firfir.png"));
+        mondayPanel.lunchimagLabel.setIcon(myIcon.scaledIcon("C:\\6kiloCafeProject\\GUI\\icons\\aynet.png"));
+        mondayPanel.dinnerImageLabel.setIcon(myIcon.scaledIcon("C:\\6kiloCafeProject\\GUI\\icons\\cake.jpg"));
+        mondayPanel.breakfastFoodName.setText("FirFir");
+        mondayPanel.lunchFoodName.setText("aynet");
+        mondayPanel.dinnerFoodName.setText("cake");
         FoodListPanel TuesdayPanel = new FoodListPanel();
+        TuesdayPanel.breakfastImageLabel.setIcon(myIcon.scaledIcon("C:\\6kiloCafeProject\\GUI\\icons\\bread.jpg"));
+        TuesdayPanel.lunchimagLabel.setIcon(myIcon.scaledIcon("C:\\6kiloCafeProject\\GUI\\icons\\alicha.png"));
+        TuesdayPanel.dinnerImageLabel.setIcon(myIcon.scaledIcon("C:\\6kiloCafeProject\\GUI\\icons\\sigawot.jpg"));
+        TuesdayPanel.breakfastFoodName.setText("Bread with Marmlade");
+        TuesdayPanel.lunchFoodName.setText("alicha");
+        TuesdayPanel.dinnerFoodName.setText("Siga wot");
+        // ----------------------------------------
         FoodListPanel wednesdaypanel = new FoodListPanel();
+        wednesdaypanel.breakfastImageLabel.setIcon(myIcon.scaledIcon("C:\\6kiloCafeProject\\GUI\\icons\\Firfir.png"));
+        wednesdaypanel.lunchimagLabel.setIcon(myIcon.scaledIcon("C:\\6kiloCafeProject\\GUI\\icons\\dinch.png"));
+        wednesdaypanel.dinnerImageLabel.setIcon(myIcon.scaledIcon("C:\\6kiloCafeProject\\GUI\\icons\\sigawot.jpg"));
+        ;
+        wednesdaypanel.breakfastFoodName.setText("Fifir");
+        wednesdaypanel.lunchFoodName.setText("dinch wot");
+        wednesdaypanel.dinnerFoodName.setText("sigawot");
         // --------------------------------------
         TuesdayPanel.setBounds(0, 60, 800, 200);
         mondayPanel.setBounds(0, 30, 800, 200);
@@ -37,6 +62,8 @@ public class FoodListPage extends WelcomePage {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (count % 2 == 0) {
+                    countT = 0;
+                    countW = 0;
                     tuesdayButton.setBounds(0, 230, 800, 30);
                     wednesdayButton.setBounds(0, 260, 800, 30);
                     count++;
@@ -57,6 +84,8 @@ public class FoodListPage extends WelcomePage {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (countT % 2 == 0) {
+                    countW = 0;
+                    count = 0;
                     tuesdayButton.setBounds(0, 30, 800, 30);
                     wednesdayButton.setBounds(0, 260, 800, 30);
                     countT++;
@@ -75,7 +104,8 @@ public class FoodListPage extends WelcomePage {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (countW % 2 == 0) {
-
+                    countT = 0;
+                    count = 0;
                     countW++;
                     wednesdaypanel.setVisible(true);
                     TuesdayPanel.setVisible(false);
@@ -99,6 +129,7 @@ public class FoodListPage extends WelcomePage {
         centerPanel.add(mondayPanel);
         centerPanel.add(TuesdayPanel);
         centerPanel.add(wednesdaypanel);
+        centerPanel.setBackground(new Color(46, 5, 74));
 
     }
 

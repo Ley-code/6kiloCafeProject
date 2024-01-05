@@ -4,7 +4,14 @@ import javax.swing.*;
 import java.awt.*;
 
 public class FoodListPanel extends JPanel {
-    public JLabel imagLabel;
+    public JLabel breakfastImageLabel;
+    public JLabel lunchimagLabel;
+    public JLabel dinnerImageLabel;
+    public JLabel breakfastLabel;
+    public JLabel breakfastFoodName;
+    public JLabel dinnerFoodName;
+    public JLabel lunchFoodName;
+
     FoodListPanel() {
         initialize();
     }
@@ -20,7 +27,7 @@ public class FoodListPanel extends JPanel {
         constraints.insets.right = 5;
         constraints.fill = GridBagConstraints.BOTH;
         // ------------------------------------------------------------------------
-        JLabel breakfastLabel = new JLabel("Breakfast");
+        breakfastLabel = new JLabel("Breakfast");
         breakfastLabel.setFont(new Font("Times New Roman", 1, 25));
         breakfastLabel.setForeground(Color.WHITE);
         breakfastLabel.setBackground(new Color(131, 30, 199));
@@ -34,40 +41,35 @@ public class FoodListPanel extends JPanel {
         constraints.weighty = 1.0;
         this.add(breakfastLabel, constraints);
 
-        // ------------------------------------------------------------------------
-        ImageIcon breakfastIcon = new ImageIcon("C:\\6kiloCafeProject\\GUI\\icons\\firfir.png");
-        Image image = breakfastIcon.getImage();
-        Image scaledImage = image.getScaledInstance(150, 150, Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon = new ImageIcon(scaledImage);
+        // -----------------------------------------------------------------------
 
-        imagLabel = new JLabel();
-        imagLabel.setIcon(scaledIcon);
-        imagLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        imagLabel.setBackground(new Color(46, 5, 74));
-        imagLabel.setOpaque(true);
+        breakfastImageLabel = new JLabel();
+        breakfastImageLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        breakfastImageLabel.setBackground(new Color(46, 5, 74));
+        breakfastImageLabel.setOpaque(true);
         constraints.gridx = 0; // row2 col1
         constraints.gridy = 1;
         constraints.gridwidth = 1;
         constraints.gridheight = 1;
         constraints.weightx = 5.0;
         constraints.weighty = 5.0;
-        this.add(imagLabel, constraints);
+        this.add(breakfastImageLabel, constraints);
         // breakfast
         // -------------------------------------------------------------------------
 
-        JLabel Foodname = new JLabel("FirFir");
-        Foodname.setFont(new Font("Times New Roman", 1, 25));
-        Foodname.setForeground(Color.BLACK);
-        Foodname.setBackground(new Color(131, 30, 199));
-        Foodname.setOpaque(true);
-        Foodname.setHorizontalAlignment(SwingConstants.CENTER);
+        breakfastFoodName = new JLabel();
+        breakfastFoodName.setFont(new Font("Times New Roman", 1, 25));
+        breakfastFoodName.setForeground(Color.BLACK);
+        breakfastFoodName.setBackground(new Color(131, 30, 199));
+        breakfastFoodName.setOpaque(true);
+        breakfastFoodName.setHorizontalAlignment(SwingConstants.CENTER);
         constraints.gridx = 0;
         constraints.gridy = 2; // row3 col1
         constraints.gridwidth = 1;
         constraints.gridheight = 1;
         constraints.weightx = 1.0;
         constraints.weighty = 1.0;
-        this.add(Foodname, constraints);
+        this.add(breakfastFoodName, constraints);
         // -------------------------------------------------------------------------
         JLabel lunchLabel = new JLabel("Lunch");
         lunchLabel.setFont(new Font("Times New Roman", 1, 25));
@@ -75,6 +77,7 @@ public class FoodListPanel extends JPanel {
         lunchLabel.setBackground(new Color(131, 30, 199));
         lunchLabel.setOpaque(true);
         lunchLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
         constraints.gridx = 1;
         constraints.gridy = 0; // row1 col2
         constraints.gridwidth = 1;
@@ -83,25 +86,21 @@ public class FoodListPanel extends JPanel {
         constraints.weighty = 1.0;
         this.add(lunchLabel, constraints);
         // -------------------------------------------------------------------------
-        ImageIcon lunchIcon = new ImageIcon("C:\\6kiloCafeProject\\GUI\\icons\\alicha.png");
-        Image lunchImage = lunchIcon.getImage();
-        Image lunchscaled = lunchImage.getScaledInstance(150, 150, Image.SCALE_SMOOTH);
-        ImageIcon lunchscaledIcon = new ImageIcon(lunchscaled);
-        JLabel lunchimagLabel = new JLabel();
+        lunchimagLabel = new JLabel();
         lunchimagLabel.setBackground(new Color(46, 5, 74));
         lunchimagLabel.setOpaque(true);
         lunchimagLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        lunchimagLabel.setIcon(lunchscaledIcon);
+
         constraints.gridx = 1;
-        constraints.gridy = 1;                         //row2 col2
+        constraints.gridy = 1; // row2 col2
         constraints.gridwidth = 1;
         constraints.gridheight = 1;
         constraints.weightx = 5.0;
         constraints.weighty = 5.0;
         this.add(lunchimagLabel, constraints);
         // lunch
-              // -------------------------------------------------------------------------
-        JLabel lunchFoodName = new JLabel("Alicha Wot");
+        // -------------------------------------------------------------------------
+        lunchFoodName = new JLabel();
         lunchFoodName.setFont(new Font("Times New Roman", 1, 25));
         lunchFoodName.setForeground(Color.BLACK);
         lunchFoodName.setBackground(new Color(131, 30, 199));
@@ -109,7 +108,7 @@ public class FoodListPanel extends JPanel {
         lunchFoodName.setHorizontalAlignment(SwingConstants.CENTER);
         constraints.gridx = 1;
         constraints.gridy = 2;
-        constraints.gridwidth = 1;                    //row3 col2
+        constraints.gridwidth = 1; // row3 col 2
         constraints.gridheight = 1;
         constraints.weightx = 1.0;
         constraints.weighty = 1.0;
@@ -122,38 +121,33 @@ public class FoodListPanel extends JPanel {
         dinnerLabel.setOpaque(true);
         dinnerLabel.setHorizontalAlignment(SwingConstants.CENTER);
         constraints.gridx = 2;
-        constraints.gridy = 0;
+        constraints.gridy = 0; // row1 col 3
         constraints.gridwidth = 1;
         constraints.gridheight = 1;
         constraints.weightx = 1.0;
         constraints.weighty = 1.0;
         this.add(dinnerLabel, constraints);
-         // -------------------------------------------------------------------------
-        ImageIcon dinnerIcon = new ImageIcon("C:\\6kiloCafeProject\\GUI\\icons\\dinch.png");
-        Image dinnerImage = dinnerIcon.getImage();
-        Image dinnerScaled = dinnerImage.getScaledInstance(150, 150, Image.SCALE_SMOOTH);
-        ImageIcon dinnerScaledIcon = new ImageIcon(dinnerScaled);
-        JLabel dinnerImageLabel = new JLabel();
+        // -------------------------------------------------------------------------
+        dinnerImageLabel = new JLabel();
         dinnerImageLabel.setBackground(new Color(46, 5, 74));
         dinnerImageLabel.setOpaque(true);
         dinnerImageLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        dinnerImageLabel.setIcon(dinnerScaledIcon);
         constraints.gridx = 2;
         constraints.gridy = 1;
-        constraints.gridwidth = 1;
+        constraints.gridwidth = 1; // row2 col3
         constraints.gridheight = 1;
         constraints.weightx = 5.0;
         constraints.weighty = 5.0;
         this.add(dinnerImageLabel, constraints);
         // lunch
         // --------------------------------------------
-        JLabel dinnerFoodName = new JLabel("Dinch Wot");
+        dinnerFoodName = new JLabel();
         dinnerFoodName.setFont(new Font("Times New Roman", 1, 25));
         dinnerFoodName.setForeground(Color.BLACK);
         dinnerFoodName.setBackground(new Color(131, 30, 199));
         dinnerFoodName.setOpaque(true);
         dinnerFoodName.setHorizontalAlignment(SwingConstants.CENTER);
-        constraints.gridx = 2;
+        constraints.gridx = 2; // row3 col3
         constraints.gridy = 2;
         constraints.gridwidth = 1;
         constraints.gridheight = 1;

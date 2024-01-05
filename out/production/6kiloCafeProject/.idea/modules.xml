@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/6kiloCafeProject.iml" filepath="$PROJECT_DIR$/6kiloCafeProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SIGNUP_BACKEND/SIGNUP_BACKEND.iml" filepath="$PROJECT_DIR$/SIGNUP_BACKEND/SIGNUP_BACKEND.iml" />
+    </modules>
+  </component>
+</project>

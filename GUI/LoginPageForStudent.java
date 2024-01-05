@@ -5,24 +5,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.*;
 
-public class LoginPage implements ActionListener {
+public class LoginPageForStudent implements ActionListener {
     IdandPassword myid = new IdandPassword();
     //-----------------------------------------------------
     //all the objects below are used for making the GUI Components
     JFrame frame = new JFrame();
-    JButton signInButton = new JButton("Sign in");
     JButton loginButton = new JButton("Login");
     JButton resetButton = new JButton("Reset");
     JTextField userIDField = new JTextField();
     JPasswordField userPasswordField = new JPasswordField();
-    JLabel userIDLabel = new JLabel("Admin ID:");
-    JLabel userPasswordLabel = new JLabel("Admin Password:");
+    JLabel userIDLabel = new JLabel();
+    JLabel userPasswordLabel = new JLabel("Student Pass:");
     JLabel messageLabel = new JLabel();
     JLabel Title = new JLabel();
-    JLabel createAccountMessage = new JLabel("Are you a Student?");
     JPanel foreground = new JPanel();
     //--------------------------------------------
-    public LoginPage() {
+    LoginPageForStudent() {
         //--------------------------------------------------
         //this customizes the title of the login page
         Title.setText("Cafe Management");
@@ -32,7 +30,7 @@ public class LoginPage implements ActionListener {
         //-------------------------------------------------
         
         //it customizes the Admin ID text label
-        userIDLabel.setText("Admin ID: ");
+        userIDLabel.setText("Student Name: ");
         userIDLabel.setBounds(50, 100, 100, 25);
         userIDLabel.setFont(new Font("Times New Roman", Font.BOLD, 16));
         userIDLabel.setForeground(Color.WHITE);
@@ -51,17 +49,10 @@ public class LoginPage implements ActionListener {
         userPasswordField.setBorder(BorderFactory.createLineBorder(new Color(56, 43, 0), 5, false));
         //----------------------------------------------------
 
-        //this Displays the message after we login
+        //this Displays the message after we log in
         messageLabel.setBounds(160, 180, 250, 35);
         messageLabel.setFont(new Font(null, Font.ITALIC, 20));
         messageLabel.setForeground(Color.WHITE);
-        //----------------------------------------------------
-
-        //asks if the user is a student or not
-        createAccountMessage.setText("Are you a student?");
-        createAccountMessage.setBounds(140, 300, 200, 25);
-        createAccountMessage.setFont(new Font("Times New Roman", Font.BOLD, 16));
-        createAccountMessage.setForeground(Color.WHITE);
         //----------------------------------------------------
 
         //creates the buttons and designs them accordingly
@@ -77,11 +68,6 @@ public class LoginPage implements ActionListener {
         resetButton.setForeground(Color.white);
         resetButton.setBackground(Color.BLACK);
 
-        signInButton.setBounds(300, 300, 100, 25);
-        signInButton.addActionListener(this);
-        signInButton.setFocusable(false);
-        signInButton.setForeground(Color.white);
-        signInButton.setBackground(Color.BLACK);
         //----------------------------------------------------
 
         //adds the foreground panel which is used to store the above components and sets the background"
@@ -97,13 +83,11 @@ public class LoginPage implements ActionListener {
         foreground.add(messageLabel);
         foreground.add(loginButton);
         foreground.add(resetButton);
-        foreground.add(createAccountMessage);
-        foreground.add(signInButton);
         //----------------------------------------------------
 
         //finally we add the foreground panel to the Frame
         frame.add(foreground);
-        frame.setUndecorated(true); //removes the minimize,maximize and close tabs
+        frame.setUndecorated(true); //removes to minimize,maximize and close tabs
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500, 400);
         frame.setLocationRelativeTo(null); //places it to center
@@ -146,9 +130,5 @@ public class LoginPage implements ActionListener {
             //----------------------------------------------------
         }
         //if the user is a student it creates a studentsigninpage
-        if (e.getSource() == signInButton) {
-            new StudentSignInPage();
-            frame.dispose();
-        }
     }
 }
