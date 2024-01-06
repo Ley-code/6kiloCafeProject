@@ -65,6 +65,13 @@ public class WelcomePage {
 
         pollButton = new ButtonStyle();
         pollButton.setText("Poll");
+        pollButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new PollPage();
+                frame.dispose();
+            }
+        });
 
         studentButton = new ButtonStyle();
         studentButton.setText("Student Feedback");
