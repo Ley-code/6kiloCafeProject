@@ -32,24 +32,24 @@ public class FoodListPage extends WelcomePage {
         // -----------------------------------
         FoodIcon myIcon = new FoodIcon();
         FoodListPanel mondayPanel = new FoodListPanel();
-        mondayPanel.breakfastImageLabel.setIcon(myIcon.scaledIcon("C:\\6kiloCafeProject\\GUI\\icons\\Firfir.png"));
-        mondayPanel.lunchimagLabel.setIcon(myIcon.scaledIcon("C:\\6kiloCafeProject\\GUI\\icons\\aynet.png"));
-        mondayPanel.dinnerImageLabel.setIcon(myIcon.scaledIcon("C:\\6kiloCafeProject\\GUI\\icons\\cake.jpg"));
+        mondayPanel.breakfastImageLabel.setIcon(myIcon.scaledIcon("GUI/icons/Firfir.png"));
+        mondayPanel.lunchimagLabel.setIcon(myIcon.scaledIcon("GUI/icons/aynet.png"));
+        mondayPanel.dinnerImageLabel.setIcon(myIcon.scaledIcon("GUI/icons/cake.jpg"));
         mondayPanel.breakfastFoodName.setText("FirFir");
         mondayPanel.lunchFoodName.setText("aynet");
         mondayPanel.dinnerFoodName.setText("cake");
         FoodListPanel TuesdayPanel = new FoodListPanel();
-        TuesdayPanel.breakfastImageLabel.setIcon(myIcon.scaledIcon("C:\\6kiloCafeProject\\GUI\\icons\\bread.jpg"));
-        TuesdayPanel.lunchimagLabel.setIcon(myIcon.scaledIcon("C:\\6kiloCafeProject\\GUI\\icons\\alicha.png"));
-        TuesdayPanel.dinnerImageLabel.setIcon(myIcon.scaledIcon("C:\\6kiloCafeProject\\GUI\\icons\\sigawot.jpg"));
+        TuesdayPanel.breakfastImageLabel.setIcon(myIcon.scaledIcon("GUI\\icons\\bread.jpg"));
+        TuesdayPanel.lunchimagLabel.setIcon(myIcon.scaledIcon("GUI\\icons\\alicha.png"));
+        TuesdayPanel.dinnerImageLabel.setIcon(myIcon.scaledIcon("GUI\\icons\\sigawot.jpg"));
         TuesdayPanel.breakfastFoodName.setText("Bread with Marmlade");
         TuesdayPanel.lunchFoodName.setText("alicha");
         TuesdayPanel.dinnerFoodName.setText("Siga wot");
         // ----------------------------------------
         FoodListPanel wednesdaypanel = new FoodListPanel();
-        wednesdaypanel.breakfastImageLabel.setIcon(myIcon.scaledIcon("C:\\6kiloCafeProject\\GUI\\icons\\Firfir.png"));
-        wednesdaypanel.lunchimagLabel.setIcon(myIcon.scaledIcon("C:\\6kiloCafeProject\\GUI\\icons\\dinch.png"));
-        wednesdaypanel.dinnerImageLabel.setIcon(myIcon.scaledIcon("C:\\6kiloCafeProject\\GUI\\icons\\sigawot.jpg"));
+        wednesdaypanel.breakfastImageLabel.setIcon(myIcon.scaledIcon("GUI\\icons\\Firfir.png"));
+        wednesdaypanel.lunchimagLabel.setIcon(myIcon.scaledIcon("GUI\\icons\\dinch.png"));
+        wednesdaypanel.dinnerImageLabel.setIcon(myIcon.scaledIcon("GUI\\icons\\sigawot.jpg"));
         ;
         wednesdaypanel.breakfastFoodName.setText("Fifir");
         wednesdaypanel.lunchFoodName.setText("dinch wot");
