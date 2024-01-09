@@ -111,7 +111,7 @@ public class WelcomePage {
         CafeManagementLabel.setBorder(labelBorder);
 
         topPanel = new JPanel(); // self discriptive
-        topPanel.setBackground(new Color(46, 5, 74));
+        topPanel.setBackground(new Color(24, 26, 79));
         topPanel.add(CafeManagementLabel, SwingConstants.CENTER);
         // adds the buttons on the right side of the frame
         // -----------------------------------------------------------
@@ -121,13 +121,13 @@ public class WelcomePage {
         for(int i = 0;i<7;i++){
             rightPanel.add(buttonGroup[i]);
         }
-        rightPanel.setBackground(new Color(46, 5, 74));
+        rightPanel.setBackground(new Color(24, 26, 79));
         //        // ---------------------------------------------------------
         frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1000, 700);
         frame.setLayout(new BorderLayout(10, 10));
-        frame.getContentPane().setBackground(new Color(46, 5, 74));
+        frame.getContentPane().setBackground(new Color(24, 26, 79));
         frame.setLocationRelativeTo(null);
         frame.add(topPanel, BorderLayout.NORTH);
         frame.add(rightPanel, BorderLayout.WEST);

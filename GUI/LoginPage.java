@@ -10,9 +10,9 @@ public class LoginPage implements ActionListener {
     //-----------------------------------------------------
     //all the objects below are used for making the GUI Components
     JFrame frame = new JFrame();
-    JButton signInButton = new JButton("Sign in");
-    JButton loginButton = new JButton("Login");
-    JButton resetButton = new JButton("Reset");
+    JButton signInButton;
+    JButton loginButton;
+    JButton resetButton;
     JTextField userIDField = new JTextField();
     JPasswordField userPasswordField = new JPasswordField();
     JLabel userIDLabel = new JLabel("Admin ID:");
@@ -28,7 +28,7 @@ public class LoginPage implements ActionListener {
         Title.setText("Cafe Management");
         Title.setBounds(150, 40, 300, 30);
         Title.setFont(new Font("Times New Roman", Font.BOLD, 25));   
-        Title.setForeground(Color.RED);
+        Title.setForeground(Color.WHITE);
         //-------------------------------------------------
         
         //it customizes the Admin ID text label
@@ -65,27 +65,21 @@ public class LoginPage implements ActionListener {
         //----------------------------------------------------
 
         //creates the buttons and designs them accordingly
-        loginButton.setBounds(125, 230, 100, 25);
+        loginButton = new ButtonStyle("Login");
+        loginButton.setBounds(80, 230, 150, 25);
         loginButton.addActionListener(this);
-        loginButton.setFocusable(false);
-        loginButton.setForeground(Color.white);
-        loginButton.setBackground(Color.BLACK);
 
-        resetButton.setBounds(250, 230, 100, 25);
+        resetButton = new ButtonStyle("Reset");
+        resetButton.setBounds(250, 230, 150, 25);
         resetButton.addActionListener(this);
-        resetButton.setFocusable(false);
-        resetButton.setForeground(Color.white);
-        resetButton.setBackground(Color.BLACK);
 
-        signInButton.setBounds(300, 300, 100, 25);
+        signInButton = new ButtonStyle("Sign In");
+        signInButton.setBounds(300, 300, 150, 25);
         signInButton.addActionListener(this);
-        signInButton.setFocusable(false);
-        signInButton.setForeground(Color.white);
-        signInButton.setBackground(Color.BLACK);
         //----------------------------------------------------
 
         //adds the foreground panel which is used to store the above components and sets the background"
-        foreground.setBackground(new Color(46, 5, 74));
+        foreground.setBackground(new Color(24, 26, 79));
         foreground.setOpaque(true);
         foreground.setBounds(0, 0, 500, 500);
         foreground.setLayout(null);

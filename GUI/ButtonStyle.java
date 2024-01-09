@@ -7,7 +7,7 @@ import javax.swing.JButton;
 
 public final class ButtonStyle extends JButton {
     ButtonStyle(){
-        this.setBackground(new Color(46, 5, 74));
+        this.setBackground(new Color(32, 35, 133));
         this.setFont(new java.awt.Font("Segoe Print", 2, 14)); 
         this.setForeground(Color.WHITE);
         this.setMargin(new Insets(15, 15, 20, 20));
@@ -15,7 +15,7 @@ public final class ButtonStyle extends JButton {
     }
     ButtonStyle(String text){
         this.setText(text);
-        this.setBackground(new Color(46, 5, 74));
+        this.setBackground(new Color(32, 35, 133));
         this.setFont(new java.awt.Font("Segoe Print", 2, 14)); 
         this.setForeground(Color.WHITE);
         this.setMargin(new Insets(15, 15, 20, 20));
