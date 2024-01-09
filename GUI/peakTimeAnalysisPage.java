@@ -10,18 +10,23 @@ import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.labels.ItemLabelAnchor;
 import org.jfree.chart.labels.ItemLabelPosition;
 import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
+import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
 import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PiePlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.chart.renderer.category.StandardBarPainter;
+import org.jfree.chart.title.TextTitle;
 import org.jfree.chart.ui.TextAnchor;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
+import java.awt.geom.RoundRectangle2D;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -32,10 +37,11 @@ public class peakTimeAnalysisPage extends WelcomePage {
 
     public peakTimeAnalysisPage(){
         JPanel mypanel = new JPanel();
-        mypanel.setLayout(new GridLayout(2,1));
+        mypanel.setLayout(new GridLayout(3,1));
         mypanel.setBorder(new EmptyBorder(30,30,30,30));
         mypanel.add(peakTimeAnalysisPage.createBarGraph());
         mypanel.add(peakTimeAnalysisPage.plotAttendanceGraph());
+        mypanel.add(peakTimeAnalysisPage.pie());
         JScrollPane scrollpane = new JScrollPane(mypanel);
         centerPanel.setLayout(new GridLayout(1,1));
         centerPanel.add(scrollpane);
@@ -130,20 +136,27 @@ public class peakTimeAnalysisPage extends WelcomePage {
         System.out.println("Peak Attendance Time: " + peakTime);
 
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-
         Map<String, Integer> intervalCountMap = new HashMap<>();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat outputFormat = new SimpleDateFormat("HH:mm");
 
         for (String timestamp : timestampData) {
             try {
-                Date date = dateFormat.parse(timestamp);
+                Date date = inputFormat.parse(timestamp);
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(date);
                 calendar.set(Calendar.SECOND, 0); // Reset seconds to zero
-                String intervalStart = dateFormat.format(calendar.getTime());
+                calendar.set(Calendar.MILLISECOND, 0); // Reset milliseconds to zero
 
-                calendar.add(Calendar.MINUTE, 1); // Add one minute
-                String intervalEnd = dateFormat.format(calendar.getTime());
+                // Round minutes to the nearest multiple of 5
+                int minute = calendar.get(Calendar.MINUTE);
+                int roundedMinute = (minute / 5) * 5;
+                calendar.set(Calendar.MINUTE, roundedMinute);
+
+                String intervalStart = outputFormat.format(calendar.getTime());
+
+                calendar.add(Calendar.MINUTE, 15); // Add five minutes
+                String intervalEnd = outputFormat.format(calendar.getTime());
 
                 String interval = intervalStart + " - " + intervalEnd;
 
@@ -204,8 +217,7 @@ public class peakTimeAnalysisPage extends WelcomePage {
         // Display the chart in a chartFrame
         ChartFrame chartFrame = new ChartFrame("Student Attendance Graph", chart);
         chartFrame.pack();
-        ChartPanel peakPanel = chartFrame.getChartPanel();
-        return peakPanel;
+        return chartFrame.getChartPanel();
 
     }
 
@@ -231,5 +243,75 @@ public class peakTimeAnalysisPage extends WelcomePage {
         }
         return peakTime;
     }
+    //3 pie chart for number of students in each department analysis
+    public static ChartPanel pie() {
+        DefaultPieDataset dataset = new DefaultPieDataset();
+        String[] departments = {"Department A", "Department B", "Department C"};//amir give me the array of department
+        int[] studentCounts = {50, 75, 30};//ammmir give me te array of student count oy;
+
+        for (int i = 0; i < departments.length; i++) {
+            dataset.setValue(departments[i], studentCounts[i]);
+        }
+// Create the pie chart
+        JFreeChart chart = ChartFactory.createPieChart(null, dataset, false, false, false);
+
+        // Customize the appearance of the chart
+        chart.setBackgroundPaint(Color.WHITE);
+        chart.setBorderVisible(false);
+
+        PiePlot plot = (PiePlot) chart.getPlot();
+        plot.setSimpleLabels(true); // Use simple labels instead of percentages
+        plot.setLabelGap(0.02);
+        plot.setLabelGenerator(new StandardPieSectionLabelGenerator("{0}: {1} ({2})"));
+
+        plot.setBackgroundPaint(Color.WHITE);
+        plot.setOutlineVisible(false);
+        plot.setShadowPaint(null);
+
+        plot.setSectionPaint(departments[0], new Color(0, 123, 255)); // Set color for Department A
+        plot.setSectionPaint(departments[1], new Color(220, 53, 69)); // Set color for Department B
+        plot.setSectionPaint(departments[2], new Color(40, 167, 69)); // Set color for Department C
+        plot.setExplodePercent(departments[1], 0.1); // Explode Department B slice by 10%
+
+        plot.setLegendLabelGenerator(new StandardPieSectionLabelGenerator("{0} ({1})")); // Show department name and count in the legend
+        plot.setLegendLabelToolTipGenerator(new StandardPieSectionLabelGenerator("{0} : {1}"));
+
+        // Add a title to the chart
+        TextTitle title = new TextTitle("Student Distribution Pie Chart");
+        title.setFont(new Font("Arial", Font.BOLD, 20));
+        title.setPaint(new Color(33, 37, 41));
+        chart.setTitle(title);
+
+        // Create a chart panel with custom rounded edges
+        ChartPanel chartPanel = new ChartPanel(chart) {
+            @Override
+            public void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                Graphics2D g2 = (Graphics2D) g;
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                RoundRectangle2D roundedRectangle = new RoundRectangle2D.Double(0, 0, getWidth() - 1, getHeight() - 1, 20, 20);
+                g2.setStroke(new BasicStroke(2));
+                g2.setColor(new Color(220, 220, 220));
+                g2.draw(roundedRectangle);
+            }
+        };
+
+        // Display the chart panel
+        return chartPanel;
+
+
+    }
+    //4th rating system
+    public static double calculateAverageRating() {
+        int[] ratings = { 4, 5, 3, 2, 4, 5 };//amir
+        int sum = 0;
+
+        for (int rating : ratings) {
+            sum += rating;
+        }
+
+        return (double) sum / ratings.length;
+    }
+
 
 }

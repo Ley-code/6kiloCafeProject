@@ -24,8 +24,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
-import My_java_work.Backend;
-import My_java_work.SignUp;
+import Database.Backend;
+import Database.SignUp;
 
 public class StudentSignInPage extends JFrame implements ActionListener {
     private JPanel Topcontainer;

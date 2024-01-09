@@ -33,7 +33,7 @@ public class PollPage extends WelcomePage {
         descriptionholder.add(descriptionLabel);
         descriptionholder.add(descriptionField);
 
-
+        
         JPanel descriptionPanel = new JPanel();
         descriptionPanel.add(descriptionholder);
 
@@ -41,6 +41,7 @@ public class PollPage extends WelcomePage {
         centerPanel.setLayout(new BorderLayout(10,10));
         centerPanel.add(setPollButton,BorderLayout.NORTH);
         centerPanel.add(descriptionPanel,BorderLayout.CENTER);
+        centerPanel.setBackground(new Color(32, 35, 133));
 
     }
 

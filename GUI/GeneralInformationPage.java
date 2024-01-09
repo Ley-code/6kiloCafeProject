@@ -17,7 +17,7 @@ public class GeneralInformationPage extends WelcomePage {
         AverageStudent.setText("Average Students");
         AverageStudent.setForeground(Color.white);
         AverageStudent.setFont(new Font("Helvici", Font.BOLD, 25));
-        AverageStudent.setBackground(new Color(131, 30, 199));
+        AverageStudent.setBackground(new Color(24, 26, 79));
         AverageStudent.setOpaque(true);
         AverageStudent.setHorizontalAlignment(SwingConstants.CENTER);
         AverageStudent.setVerticalAlignment(SwingConstants.CENTER);
@@ -25,7 +25,7 @@ public class GeneralInformationPage extends WelcomePage {
         FavoriteFood = new JLabel();
         FavoriteFood.setText("Favorite Food");
         FavoriteFood.setFont(new Font("Helvici", Font.BOLD, 25));
-        FavoriteFood.setBackground(new Color(131, 30, 199));
+        FavoriteFood.setBackground(new Color(24, 26, 79));
         FavoriteFood.setOpaque(true);
         FavoriteFood.setHorizontalAlignment(SwingConstants.CENTER);
         FavoriteFood.setVerticalAlignment(SwingConstants.CENTER);
@@ -34,7 +34,7 @@ public class GeneralInformationPage extends WelcomePage {
         BusyDay = new JLabel();
         BusyDay.setText("Busy Day");
         BusyDay.setFont(new Font("Helvici", Font.BOLD, 25));
-        BusyDay.setBackground(new Color(131, 30, 199));
+        BusyDay.setBackground(new Color(24, 26, 79));
         BusyDay.setOpaque(true);
         BusyDay.setHorizontalAlignment(SwingConstants.CENTER);
         BusyDay.setVerticalAlignment(SwingConstants.CENTER);
@@ -43,13 +43,13 @@ public class GeneralInformationPage extends WelcomePage {
         LeastFavoriteFood = new JLabel();
         LeastFavoriteFood.setText("Least Favorite Food");
         LeastFavoriteFood.setFont(new Font("Helvici", Font.BOLD, 25));
-        LeastFavoriteFood.setBackground(new Color(131, 30, 199));
+        LeastFavoriteFood.setBackground(new Color(24, 26, 79));
         LeastFavoriteFood.setOpaque(true);
         LeastFavoriteFood.setHorizontalAlignment(SwingConstants.CENTER);
         LeastFavoriteFood.setVerticalAlignment(SwingConstants.CENTER);
         LeastFavoriteFood.setForeground(Color.white);
 
-        centerPanel.setBackground(new Color(46, 5, 74));
+        centerPanel.setBackground(new Color(32, 35, 133));
         centerPanel.setLayout(new GridLayout(2, 2));
         centerPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         GridLayout layout = (GridLayout) centerPanel.getLayout();

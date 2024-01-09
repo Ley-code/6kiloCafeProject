@@ -129,7 +129,7 @@ public class FoodListPage extends WelcomePage {
         centerPanel.add(mondayPanel);
         centerPanel.add(TuesdayPanel);
         centerPanel.add(wednesdaypanel);
-        centerPanel.setBackground(new Color(46, 5, 74));
+        centerPanel.setBackground(new Color(32, 35, 133));
 
     }
 
