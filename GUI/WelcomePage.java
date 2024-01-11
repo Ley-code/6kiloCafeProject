@@ -17,6 +17,7 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 public class WelcomePage {
+	
     protected JButton AttendanceButton;
     protected JLabel CafeManagementLabel;
     protected JPanel topPanel;
@@ -53,6 +54,7 @@ public class WelcomePage {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new FoodListPage();
+                frame.add(centerPanel, BorderLayout.CENTER);
                 frame.dispose();
             }
         });

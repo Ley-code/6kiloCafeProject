@@ -103,7 +103,7 @@ public class LoginPage implements ActionListener {
 
         //finally we add the foreground panel to the Frame
         frame.add(foreground);
-        frame.setUndecorated(true); //removes the minimize,maximize and close tabs
+        frame.setUndecorated(false); //removes the minimize,maximize and close tabs
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500, 400);
         frame.setLocationRelativeTo(null); //places it to center

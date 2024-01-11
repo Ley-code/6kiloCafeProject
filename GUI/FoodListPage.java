@@ -22,7 +22,7 @@ public class FoodListPage extends WelcomePage {
     }
 
     private void initialize() {
-        frame.setResizable(false);
+        frame.setResizable(true);
         mondayButton = new ButtonStyle("Monday");
         mondayButton.setBounds(0, 0, 800, 30);
         tuesdayButton = new ButtonStyle("Tuesday");
