@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -42,7 +43,11 @@ public class WelcomePage {
         AttendanceButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new AttendancePage();
+                try {
+                    new AttendancePage();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
                 frame.dispose();
             }
         });
