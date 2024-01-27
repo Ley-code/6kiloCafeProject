@@ -57,7 +57,7 @@ public class WelcomePage {
         cafeFoodsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new FoodListPage();
+                new NewFoodListPage();
                 frame.dispose();
             }
         });
@@ -132,14 +132,13 @@ public class WelcomePage {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1000, 700);
         frame.setLayout(new BorderLayout(10, 10));
-        frame.getContentPane().setBackground(new Color(24, 26, 79));
+        frame.getContentPane();
         frame.setLocationRelativeTo(null);
         frame.add(topPanel, BorderLayout.NORTH);
         frame.add(rightPanel, BorderLayout.WEST);
         frame.add(centerPanel, BorderLayout.CENTER);
         frame.setBackground(new Color(185, 185, 185));
+        frame.setResizable(true);;
         frame.setVisible(true);
-        frame.setResizable(true);
-
     }
 }
