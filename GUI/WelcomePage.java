@@ -18,26 +18,25 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 public class WelcomePage {
-    protected JButton AttendanceButton;
+    protected JFrame frame;
     protected JLabel CafeManagementLabel;
     protected JPanel topPanel;
     public JPanel centerPanel;
-    protected JFrame frame;
     protected JPanel rightPanel;
-    protected JButton cafeFoodsButton;
+    protected JButton AttendanceButton;
     protected JButton peakTimeAnalysisButton;
+    protected JButton cafeFoodsButton;
     protected JButton InventoryManagementButton;
     protected JButton pollButton;
     protected JButton studentButton;
     protected JButton generalInformationButton;
 
-    WelcomePage() {
-        initialize();
+    WelcomePage() {initialize();
     }
 
     private void initialize() {
         AttendanceButton = new ButtonStyle();
-        AttendanceButton.setText("Attendance Chekcer");
+        AttendanceButton.setText("Attendance Checker");
         // a custom listener that creates a new page based on the button clicked
         // ----------------------------------------------------------
         AttendanceButton.addActionListener(new ActionListener() {
