@@ -312,6 +312,19 @@ public class peakTimeAnalysisPage extends WelcomePage {
 
         return (double) sum / ratings.length;
     }
+    //5th average number of students preseted  in a day per meal.
+public static int averageStudentPresented(){
+    int [] ASP={10, 30,40};
+    int sum=0;
+    int average=0;
+    for(int i=0; i< ASP.length;i++){
+        sum=+ASP[i];
+
+    }
+    average=sum%ASP.length;
+    return average;
+}
+
 
 
 }
