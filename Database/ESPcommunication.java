@@ -1,6 +1,6 @@
 package Database;
 
-import GUI.StudentSignInPage;
+import GUI.Student.StudentSignInPage;
 
 import java.io.BufferedReader;
 import java.io.IOException;
