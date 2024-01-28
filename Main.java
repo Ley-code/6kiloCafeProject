@@ -26,6 +26,7 @@ public class Main {
         }
         // ---------------------------------------------------------------------------------------------------
         new LoginPage(); // launches the sign-in page
+        System.out.println("login successful");
     }
 
 }
