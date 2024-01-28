@@ -1,4 +1,4 @@
-import GUI.LoginPage;
+import GUI.Admin.LoginPage;
 
 public class main {
     public static void main(String[] args) {
