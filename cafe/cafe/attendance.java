@@ -227,10 +227,6 @@ package cafe;    //daily comparative graph : breakfast, lunch , dinner
 
             return peakTime;
         }
-
-
-
-
 //3 pie chart for number of students in each department analysis
 public static void pie() {
     DefaultPieDataset dataset = new DefaultPieDataset();
