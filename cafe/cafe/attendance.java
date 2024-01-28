@@ -304,7 +304,17 @@ public static double calculateAverageRating() {
 
     return (double) sum / ratings.length;
 }
-
+//5th average student number
+public static int averageStudentPresented(){
+        int [] ASP={10, 30,40};
+        int sum=0;
+        for(int i=0; i< ASP.length;i++){
+            sum+=ASP[i];
+        }
+        //System.out.println(sum);
+        int average=sum/ASP.length;
+        return average;
+    }
 }
 
 
