@@ -1,11 +1,9 @@
-package cafe;
+package backEND;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static GUI.Admin.peakTimeAnalysisPage.peakTime;
 
 public class backEND {
 
@@ -41,13 +39,14 @@ public static int averageStudentPresented(){
         String[] foodChoice = new String[]{"firfir", "dabo", "colo"};
         int max = totalCounts[0];
         String food = null;
+        String food1=null;
         for (int i = 1; i < totalCounts.length; i++) {
-            if (totalCounts[i] > max) {
+            if (totalCounts[i] >= max) {
                 max = totalCounts[i];
                 food = foodChoice[i];
             }
+                        }
 
-        }
 
         return food;
     }

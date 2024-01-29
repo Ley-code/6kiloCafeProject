@@ -1,7 +1,6 @@
 package GUI.Admin;
 //daily comparative graph : breakfast, lunch , dinner
-import  cafe .*;
-import cafe.backEND;
+import backEND.backEND;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.ChartPanel;
@@ -28,7 +27,6 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.RoundRectangle2D;
-import java.security.PublicKey;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
