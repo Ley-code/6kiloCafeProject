@@ -3,11 +3,6 @@ import GUI.Admin.LoginPage;
 public class Main {
     public static void main(String[] args) {
         // --------------------------------------------------------------------------------------
-        /*
-         * Customizes the Look and Feel of the GUI it is a custom UI Manager. it is like
-         * a finishing touch to make
-         * the graphics pop up
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -26,7 +21,6 @@ public class Main {
         }
         // ---------------------------------------------------------------------------------------------------
         new LoginPage(); // launches the sign-in page
-        System.out.println("login successful");
     }
 
 }
