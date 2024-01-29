@@ -1,6 +1,7 @@
 package GUI.Admin;
 //daily comparative graph : breakfast, lunch , dinner
-
+import  cafe .*;
+import cafe.backEND;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.ChartPanel;
@@ -27,6 +28,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.RoundRectangle2D;
+import java.security.PublicKey;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -34,6 +36,8 @@ import java.util.List;
 import java.util.*;
 
 public class peakTimeAnalysisPage extends WelcomePage {
+
+    public static String peakTime;
 
     public peakTimeAnalysisPage(){
         JPanel mypanel = new JPanel();
@@ -117,30 +121,13 @@ public class peakTimeAnalysisPage extends WelcomePage {
 
     public static ChartPanel plotAttendanceGraph() {
         // List<String> timestampData = retrieveTimestampData();
-        List<String> timestampData = new ArrayList<>();
-
-        // Generate sample timestamp data
-        timestampData.add("2022-01-01 09:02:00");
-        timestampData.add("2022-01-01 09:15:00");
-        timestampData.add("2022-01-01 09:30:00");
-        timestampData.add("2022-01-01 09:30:00");
-        timestampData.add("2022-01-01 09:45:30");
-        timestampData.add("2022-01-01 09:45:00");
-        timestampData.add("2022-01-01 09:45:00");
-        timestampData.add("2022-01-01 10:00:00");
-        timestampData.add("2022-01-01 10:15:00");
-        timestampData.add("2022-01-01 10:15:00");
-        timestampData.add("2022-01-01 10:30:00");
-        timestampData.add("2022-01-01 10:30:00");
-        String peakTime = identifyPeakTime(timestampData);
-        System.out.println("Peak Attendance Time: " + peakTime);
 
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         Map<String, Integer> intervalCountMap = new HashMap<>();
         SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         SimpleDateFormat outputFormat = new SimpleDateFormat("HH:mm");
 
-        for (String timestamp : timestampData) {
+        for (String timestamp : backEND.getTimestampData()) {
             try {
                 Date date = inputFormat.parse(timestamp);
                 Calendar calendar = Calendar.getInstance();
@@ -173,21 +160,7 @@ public class peakTimeAnalysisPage extends WelcomePage {
             dataset.addValue(count, "Attendance", interval);
         }
 
-        /*
-         * // Count the number of students for each timestamp
-         * Map<String, Integer> timestampCountMap = new HashMap<>();
-         * for (String timestamp : timestampData) {
-         * timestampCountMap.put(timestamp, timestampCountMap.getOrDefault(timestamp, 0)
-         * + 1);
-         * }
-         * 
-         * // Add data points to the dataset
-         * for (Map.Entry<String, Integer> entry : timestampCountMap.entrySet()) {
-         * String timestamp = entry.getKey();
-         * Integer count = entry.getValue();
-         * dataset.addValue(count, "Attendance", timestamp);
-         * }
-         */
+
         // Create the chart
         JFreeChart chart = ChartFactory.createLineChart(
                 "Student Attendance",
@@ -281,7 +254,6 @@ public class peakTimeAnalysisPage extends WelcomePage {
         title.setFont(new Font("Arial", Font.BOLD, 20));
         title.setPaint(new Color(33, 37, 41));
         chart.setTitle(title);
-
         // Create a chart panel with custom rounded edges
         ChartPanel chartPanel = new ChartPanel(chart) {
             @Override
@@ -295,36 +267,14 @@ public class peakTimeAnalysisPage extends WelcomePage {
                 g2.draw(roundedRectangle);
             }
         };
-
         // Display the chart panel
         return chartPanel;
-
-
     }
-    //4th rating system
-    public static double calculateAverageRating() {
-        int[] ratings = { 4, 5, 3, 2, 4, 5 };//amir
-        int sum = 0;
-
-        for (int rating : ratings) {
-            sum += rating;
-        }
-
-        return (double) sum / ratings.length;
-    }
-    //5th average number of students preseted  in a day per meal.
-public static int averageStudentPresented(){
-    int [] ASP={10, 30,40};
-    int sum=0;
-    int average=0;
-    for(int i=0; i< ASP.length;i++){
-        sum=+ASP[i];
-
-    }
-    average=sum%ASP.length;
-    return average;
-}
-
-
+    backEND obj = new backEND();
+    double rating = obj.CalculateAverageRating();
+    backEND obj2 = new backEND();
+    int avg = obj2.averageStudentPresented();
+    backEND obj3=new backEND();
+    String busyTime= obj3.identifyPeakTime(backEND.getTimestampData());
 
 }

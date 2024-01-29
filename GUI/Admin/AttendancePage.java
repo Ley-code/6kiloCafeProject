@@ -13,10 +13,8 @@ public class AttendancePage extends WelcomePage {
     public AttendancePage() throws SQLException {
         // Create a table model with no data and column names
         DefaultTableModel tableModel = new DefaultTableModel(new Object[][]{}, new Object[]{"Student_ID", "Studnet_Name", "Password", "Department", "Year","Breakfast", "Lunch", "Dinner"});
-
         // Create a JTable with the table model
         table = new JTable(tableModel);
-
         // Create a JScrollPane to add the JTable to and make it scrollable
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setOpaque(false);
