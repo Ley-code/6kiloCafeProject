@@ -19,6 +19,9 @@ public class AttendancePage extends WelcomePage {
         table.setBackground(new Color(34,12,56));
         table.setFont(new Font("Helvici", Font.BOLD,15));
         table.setForeground(Color.WHITE);
+        // Create a JTable with the table model
+        table = new JTable(tableModel);
+
         // Create a JScrollPane to add the JTable to and make it scrollable
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setOpaque(false);

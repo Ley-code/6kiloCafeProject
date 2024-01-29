@@ -1,7 +1,10 @@
 package GUI.Admin;
 //daily comparative graph : breakfast, lunch , dinner
 
+
 import Database.ConnectionWithDatabase;
+import cafe.backEND;
+
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.ChartPanel;
@@ -31,6 +34,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.RoundRectangle2D;
+import java.security.PublicKey;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -48,6 +52,7 @@ public class peakTimeAnalysisPage extends WelcomePage {
     public static int getFlag(){
         return flag;
     }
+    public static String peakTime;
     public peakTimeAnalysisPage(){
         breakFastButton = new JButton("break fast");
         breakFastButton.addActionListener(new ActionListener() {
@@ -93,9 +98,6 @@ public class peakTimeAnalysisPage extends WelcomePage {
         centerPanel.add(scrollpane);
         frame.pack();
         frame.setLocationRelativeTo(null);
-    }
-    public static void main(String[] args) {
-        new peakTimeAnalysisPage();
     }
     public static ChartPanel createBarGraph() {
         int[] totalCounts = new int[] { 10, 34, 25 };
@@ -162,30 +164,13 @@ public class peakTimeAnalysisPage extends WelcomePage {
 
     public static ChartPanel plotAttendanceGraph() {
         // List<String> timestampData = retrieveTimestampData();
-        List<String> timestampData = new ArrayList<>();
-
-        // Generate sample timestamp data
-        timestampData.add("2022-01-01 09:02:00");
-        timestampData.add("2022-01-01 09:15:00");
-        timestampData.add("2022-01-01 09:30:00");
-        timestampData.add("2022-01-01 09:30:00");
-        timestampData.add("2022-01-01 09:45:30");
-        timestampData.add("2022-01-01 09:45:00");
-        timestampData.add("2022-01-01 09:45:00");
-        timestampData.add("2022-01-01 10:00:00");
-        timestampData.add("2022-01-01 10:15:00");
-        timestampData.add("2022-01-01 10:15:00");
-        timestampData.add("2022-01-01 10:30:00");
-        timestampData.add("2022-01-01 10:30:00");
-        String peakTime = identifyPeakTime(timestampData);
-        System.out.println("Peak Attendance Time: " + peakTime);
 
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         Map<String, Integer> intervalCountMap = new HashMap<>();
         SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         SimpleDateFormat outputFormat = new SimpleDateFormat("HH:mm");
 
-        for (String timestamp : timestampData) {
+        for (String timestamp : backEND.getTimestampData()) {
             try {
                 Date date = inputFormat.parse(timestamp);
                 Calendar calendar = Calendar.getInstance();
@@ -289,7 +274,6 @@ public class peakTimeAnalysisPage extends WelcomePage {
         title.setFont(new Font("Arial", Font.BOLD, 20));
         title.setPaint(new Color(33, 37, 41));
         chart.setTitle(title);
-
         // Create a chart panel with custom rounded edges
         ChartPanel chartPanel = new ChartPanel(chart) {
             @Override
@@ -349,5 +333,10 @@ public class peakTimeAnalysisPage extends WelcomePage {
         }
         return peakTime;
     }
-
+    backEND obj = new backEND();
+    double rating = obj.CalculateAverageRating();
+    backEND obj2 = new backEND();
+    int avg = obj2.averageStudentPresented();
+    backEND obj3=new backEND();
+    String busyTime= obj3.identifyPeakTime(backEND.getTimestampData());
 }

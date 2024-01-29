@@ -143,11 +143,21 @@ public class ConnectionWithDatabase {
         }
         return numOfStudent;
     }
-    public static ArrayList<LocalTime> timeForB() {
+    public static ArrayList<LocalTime> timeForPeakAnalysis() {
         ArrayList timeForPeak = null;
         try (Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD)) {
             timeForPeak = new ArrayList();
-            String sqlQueryB = "SELECT * FROM breakfast WHERE DATE(entrytime) = '2033-02-11'";
+            int flag = GUI.Admin.peakTimeAnalysisPage.getFlag();
+            String sqlQueryB = null;
+            if (flag ==0){
+                sqlQueryB = "SELECT * FROM breakfast WHERE DATE(entrytime) = '2033-02-11'"; // The date should be the current date
+            }
+            else if (flag ==1 ){
+                sqlQueryB = "SELECT * FROM lunch WHERE DATE(entrytime) = '2033-02-11'";
+            }
+            else if (flag == 2){
+                sqlQueryB = "SELECT * FROM dinner WHERE DATE(entrytime) = '2033-02-11'";
+            }
             PreparedStatement creatingStat = connection.prepareStatement(sqlQueryB);
             ResultSet result = creatingStat.executeQuery();
             while (result.next()) {
@@ -158,9 +168,49 @@ public class ConnectionWithDatabase {
         }
         return timeForPeak;
     }
+    public static HashMap<String, Integer> numofStudentInDepartment(){
+        HashMap<String, Integer> studentInDepartment = null;
+        try(Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD)) {
+            String sqlQuery = "SELECT Department FROM students ";
+            PreparedStatement crestingStat = connection.prepareStatement(sqlQuery);
+            String key;
+            ResultSet result = crestingStat.executeQuery();
+            result.next();
+            studentInDepartment.put(result.getString("Department"), 0);
+            while (result.next()){
+                if (studentInDepartment.containsKey(result.getString("Department"))){
+                    key = result.getString("Department");
+                    studentInDepartment.put(key,studentInDepartment.get(key)+1);
+                }
+                else{
+                    studentInDepartment.put(result.getString("Department"),0);
+                }
+            }
+        }
+        catch(SQLException e){
+            System.out.println("Same here");
+        }
+        return studentInDepartment;
+    }
+    /*public static boolean pollTableCreator(List<String> foods,String tableName){
+        try(Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD)){
+            String sqlQueryF = "CREATE TABLE " + tableName + " (" +
+                    "Row Number INT AUTO_INCREMENT PRIMARY KEY, " +
+                    "student_ID VARCHAR(15) " +
+                    "FOREIGN KEY(student_ID) REFERENCES students (student_ID) ";
+            PreparedStatement creatingStat = connection.prepareStatement(sqlQueryF);
+            int resultF = creatingStat.executeUpdate();
+            
 
+        }
+        catch (SQLException e){
 
+        }
+
+    }
+     */
 }
+
 
 
 
