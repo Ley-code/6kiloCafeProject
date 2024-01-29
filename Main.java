@@ -2,6 +2,7 @@ import GUI.Admin.LoginPage;
 
 public class Main {
     public static void main(String[] args) {
+        /*
         // --------------------------------------------------------------------------------------
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -21,6 +22,8 @@ public class Main {
         }
         // ---------------------------------------------------------------------------------------------------
         new LoginPage(); // launches the sign-in page
-    }
 
+         */
+
+    }
 }
