@@ -49,7 +49,6 @@ public class AttendancePage extends WelcomePage {
         statement.close();
         myconnection.close();
     }
-
     public static void main(String[] args) {
         try {
             new AttendancePage();

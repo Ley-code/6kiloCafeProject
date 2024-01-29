@@ -1,5 +1,7 @@
 package GUI.Admin;
 
+import GUI.Student.RatingIcon;
+
 import java.awt.*;
 
 import javax.swing.*;
@@ -22,7 +24,7 @@ public class GeneralInformationPage extends WelcomePage {
         JPanel averagePanel = new JPanel();
         averagePanel.setLayout(new GridLayout(2,1));
         averagePanel.add(AverageStudent);
-        JLabel averageValueLabel = new JLabel(""+peakTimeAnalysisPage.averageStudentPresented());
+        JLabel averageValueLabel = new JLabel(""+"peakTimeAnalysisPage.averageStudentPresented()");//uncomment this
         averageValueLabel.setHorizontalAlignment(SwingConstants.CENTER);
         averageValueLabel.setVerticalAlignment(SwingConstants.NORTH);
         averageValueLabel.setForeground(Color.WHITE);
@@ -58,19 +60,35 @@ public class GeneralInformationPage extends WelcomePage {
         LeastFavoriteFood.setVerticalAlignment(SwingConstants.CENTER);
         LeastFavoriteFood.setForeground(Color.white);
 
+        JPanel gridContainer = new JPanel();
+
+        gridContainer.setBackground(new Color(32, 35, 133));
+        gridContainer.setLayout(new GridLayout(2, 2,10,10));
+        gridContainer.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        //gridContainer.add(averagePanel); TO BE UNCOMMENTED LATER
+        gridContainer.add(AverageStudent);
+        gridContainer.add(FavoriteFood);
+        gridContainer.add(BusyDay);
+        gridContainer.add(LeastFavoriteFood);
+
+        JPanel ratepanel = new JPanel();
+        int rateresult = peakTimeAnalysisPage.calculateAverageRating();
+        JLabel mylabel = new JLabel();
+        mylabel.setText("Rating From Students: "+RatingIcon.getIcon(rateresult).getText());
+        mylabel.setFont(new Font("Helvici", Font.BOLD,25));
+        mylabel.setOpaque(true);
+        mylabel.setForeground(Color.YELLOW);
+        mylabel.setBackground(new Color(24, 26, 79));
+        mylabel.setHorizontalAlignment(SwingConstants.CENTER);
+        ratepanel.setBackground(new Color(32,35,133));
+        ratepanel.add(mylabel);
+
+        centerPanel.setLayout(new BorderLayout());
         centerPanel.setBackground(new Color(32, 35, 133));
-        centerPanel.setLayout(new GridLayout(2, 2));
-        centerPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        GridLayout layout = (GridLayout) centerPanel.getLayout();
-        layout.setHgap(10); // Set horizontal gap between cells
-        layout.setVgap(10); // Set vertical gap between cell
-
-        centerPanel.add(averagePanel);
-        centerPanel.add(FavoriteFood);
-        centerPanel.add(BusyDay);
-        centerPanel.add(LeastFavoriteFood);
+        centerPanel.add(gridContainer,BorderLayout.CENTER);
+        centerPanel.add(ratepanel,BorderLayout.SOUTH);
     }
-
     public static void main(String[] args) {
         new GeneralInformationPage();
     }
