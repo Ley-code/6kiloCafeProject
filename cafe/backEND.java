@@ -5,23 +5,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static GUI.Admin.peakTimeAnalysisPage.peakTime;
-
 public class backEND {
 
 //4th rating system
-public static  double CalculateAverageRating() {
-    int[] ratings = { 4, 5, 3, 2, 4, 5 };//amir
-    int sum = 0;
+    public static  double CalculateAverageRating() {
+        int[] ratings = { 4, 5, 3, 2, 4, 5 };//amir
+        int sum = 0;
 
-    for (int rating : ratings) {
-        sum += rating;
+        for (int rating : ratings) {
+            sum += rating;
+        }
+
+        return (double) sum / ratings.length;
     }
-
-    return (double) sum / ratings.length;
-}
-//5th average student number
-public static int averageStudentPresented(){
+    //5th average student number
+    public static int averageStudentPresented(){
         int [] ASP={10, 30,40};
         int sum=0;
         for(int i=0; i< ASP.length;i++){
@@ -62,8 +60,8 @@ public static int averageStudentPresented(){
                 food=foodChoice[i];
             }
         }
-    return food;}
-}
+        return food;
+    }
     public static List<String > getTimestampData(){
         List<String> timestampData = new ArrayList<>();
 
@@ -103,9 +101,7 @@ public static int averageStudentPresented(){
                 peakTime = timestamp;
             }
         }
-
         return peakTime;
-
     }
 }
 

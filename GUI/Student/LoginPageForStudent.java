@@ -24,16 +24,17 @@ public class LoginPageForStudent implements ActionListener {
     JLabel messageLabel = new JLabel();
     JLabel Title = new JLabel();
     JPanel foreground = new JPanel();
+
     //--------------------------------------------
     LoginPageForStudent() {
         //--------------------------------------------------
         //this customizes the title of the login page
         Title.setText("Cafe Management");
         Title.setBounds(150, 40, 300, 30);
-        Title.setFont(new Font("Times New Roman", Font.BOLD, 25));   
+        Title.setFont(new Font("Times New Roman", Font.BOLD, 25));
         Title.setForeground(Color.RED);
         //-------------------------------------------------
-        
+
         //it customizes the Admin ID text label
         userIDLabel.setText("Student Name: ");
         userIDLabel.setBounds(50, 100, 100, 25);
@@ -100,6 +101,7 @@ public class LoginPageForStudent implements ActionListener {
         frame.setResizable(true);
         //----------------------------------------------------
     }
+
     public void validateLogIn(String password, String userName) throws SQLException {
         HashMap<String, String> list = Database.ConnectionWithDatabase.idsForLogIn();
         System.out.println(list);
@@ -109,7 +111,7 @@ public class LoginPageForStudent implements ActionListener {
                 messageLabel.setText("Login Successful");
                 frame.dispose();
                 new StudentWelcomePage();
-            }else {
+            } else {
                 messageLabel.setForeground(Color.RED);
                 messageLabel.setText("Wrong Password");
             }
@@ -124,25 +126,36 @@ public class LoginPageForStudent implements ActionListener {
         if (e.getSource() == resetButton) {
             userIDField.setText("");
             userPasswordField.setText("");
-            
-            //resets the password and IDfield if a user makes a mistake
         }
         if (e.getSource() == loginButton) {
-            
             String userID = userIDField.getText();
             String userPassword = String.valueOf(userPasswordField.getPassword());
-            //the above variables store the password and ID of the user
-            //----------------------------------------------------
+            if (myid.getLogInfo().containsKey(userID)) {
+                if (myid.getLogInfo().get(userID).equals(userPassword)) {
+                    messageLabel.setForeground(Color.GREEN);
+                    messageLabel.setText("Login Successful");
+                    frame.dispose();
+                    new StudentWelcomePage();
+                } else {
+                    messageLabel.setForeground(Color.RED);
+                    messageLabel.setText("Wrong Password");
+                }
+            } else {
+                messageLabel.setForeground(Color.red);
+                messageLabel.setText("Wrong username");
+                //the above variables store the password and ID of the user
+                //----------------------------------------------------
+                //below the methods check if the user ID and Password matches and if it doesnt match shows the respective message
+                //and if it matches opens a new welcome page as an admin
+                try {
+                    validateLogIn(userPassword, userID);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
 
-            //below the methods check if the user ID and Password matches and if it doesnt match shows the respective message
-            //and if it matches opens a new welcome page as an admin
-            try {
-                validateLogIn(userPassword,userID);
-            } catch (SQLException ex) {
-                throw new RuntimeException(ex);
+                }
+                //----------------------------------------------------
             }
-            //----------------------------------------------------
+            //if the user is a student it creates a studentsigninpage
         }
-        //if the user is a student it creates a studentsigninpage
     }
 }
