@@ -295,11 +295,8 @@ public class peakTimeAnalysisPage extends WelcomePage {
                 g2.draw(roundedRectangle);
             }
         };
-
         // Display the chart panel
         return chartPanel;
-
-
     }
     //4th rating system
     public static double calculateAverageRating() {
@@ -309,19 +306,17 @@ public class peakTimeAnalysisPage extends WelcomePage {
         for (int rating : ratings) {
             sum += rating;
         }
-
         return (double) sum / ratings.length;
     }
     //5th average number of students preseted  in a day per meal.
 public static int averageStudentPresented(){
-    int [] ASP={10, 30,40};
+    int [] ASP={10, 30,40};//amir
     int sum=0;
-    int average=0;
     for(int i=0; i< ASP.length;i++){
-        sum=+ASP[i];
+        sum+=ASP[i];
 
     }
-    average=sum%ASP.length;
+    int average = sum/ASP.length;
     return average;
 }
 

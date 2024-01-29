@@ -9,11 +9,12 @@ public class StudentWelcomePage extends JFrame {
     JTabbedPane tabbedPane;
     JPanel Foodpanel;
     JPanel pollpanel;
-
+    JMenuBar
     StudentWelcomePage(){
         initialize();
     }
     private void initialize(){
+
         Foodpanel = new JPanel();
         Foodpanel.setLayout(new BorderLayout());
         Foodpanel.add(new NewFoodListPage().NewFoodListPage(),BorderLayout.CENTER);

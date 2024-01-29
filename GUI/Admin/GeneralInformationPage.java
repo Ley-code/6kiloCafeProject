@@ -2,9 +2,7 @@ package GUI.Admin;
 
 import java.awt.*;
 
-import javax.swing.BorderFactory;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 
 public class GeneralInformationPage extends WelcomePage {
     JLabel AverageStudent;
@@ -21,6 +19,17 @@ public class GeneralInformationPage extends WelcomePage {
         AverageStudent.setOpaque(true);
         AverageStudent.setHorizontalAlignment(SwingConstants.CENTER);
         AverageStudent.setVerticalAlignment(SwingConstants.CENTER);
+        JPanel averagePanel = new JPanel();
+        averagePanel.setLayout(new GridLayout(2,1));
+        averagePanel.add(AverageStudent);
+        JLabel averageValueLabel = new JLabel(""+peakTimeAnalysisPage.averageStudentPresented());
+        averageValueLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        averageValueLabel.setVerticalAlignment(SwingConstants.NORTH);
+        averageValueLabel.setForeground(Color.WHITE);
+        averageValueLabel.setFont(new Font("Helvici",Font.BOLD,20));
+        averagePanel.setBackground(new Color(24, 26, 79));
+        averagePanel.add(averageValueLabel);
+
 
         FavoriteFood = new JLabel();
         FavoriteFood.setText("Favorite Food");
@@ -56,10 +65,14 @@ public class GeneralInformationPage extends WelcomePage {
         layout.setHgap(10); // Set horizontal gap between cells
         layout.setVgap(10); // Set vertical gap between cell
 
-        centerPanel.add(AverageStudent);
+        centerPanel.add(averagePanel);
         centerPanel.add(FavoriteFood);
         centerPanel.add(BusyDay);
         centerPanel.add(LeastFavoriteFood);
+    }
+
+    public static void main(String[] args) {
+        new GeneralInformationPage();
     }
 
 }

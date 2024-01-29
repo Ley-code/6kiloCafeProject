@@ -119,7 +119,6 @@ public class StudentPollPanel extends JPanel {
                         optionArray,
                         optionArray[0]
                 );
-
                 if (selectedOption != null) {
                     // Implement logic to record the user's response
                     JOptionPane.showMessageDialog(this, "You selected: " + selectedOption);

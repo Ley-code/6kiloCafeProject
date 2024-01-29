@@ -104,18 +104,10 @@ public class LoginPageForStudent implements ActionListener {
         if (e.getSource() == resetButton) {
             userIDField.setText("");
             userPasswordField.setText("");
-            
-            //resets the password and IDfield if a user makes a mistake
         }
         if (e.getSource() == loginButton) {
-            
             String userID = userIDField.getText();
             String userPassword = String.valueOf(userPasswordField.getPassword());
-            //the above variables store the password and ID of the user
-            //----------------------------------------------------
-
-            //below the methods check if the user ID and Password matches and if it doesnt match shows the respective message
-            //and if it matches opens a new welcome page as an admin
             if (myid.getLogInfo().containsKey(userID)) {
                 if (myid.getLogInfo().get(userID).equals(userPassword)) {
                     messageLabel.setForeground(Color.GREEN);
