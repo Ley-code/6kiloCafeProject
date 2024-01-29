@@ -1,7 +1,9 @@
 package Database;
 
 import java.sql.*;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -94,6 +96,67 @@ public class ConnectionWithDatabase {
             e.printStackTrace();
         }
         return 3;
+    }
+    public static HashMap<String, String> idsForLogIn() throws SQLException {
+        try (Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD)){
+            System.out.println("Connected to the database.");
+            HashMap<String, String> dictionary = new HashMap<>();
+            String sqlQuery = "SELECT student_full_name, password FROM Students";
+            PreparedStatement creatingStat = connection.prepareStatement(sqlQuery);
+            ResultSet result = creatingStat.executeQuery();
+            while(result.next()){
+                dictionary.put(result.getString("student_full_name"),result.getString("password"));
+            }
+            return dictionary;
+        }
+    }
+    public static ArrayList<Integer> numOfStudent() {
+        ArrayList<Integer> numOfStudent = null;
+        try (Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD)) {
+            int count = 0;
+            int anothercount = 0;
+            String sqlQueryB = "SELECT * FROM breakfast WHERE DATE(entrytime) = '2033-02-11'";
+            String sqlQueryL = "SELECT * FROM lunch WHERE DATE(entrytime) = '2033-02-11'";
+            String sqlQueryD = "SELECT * FROM dinner WHERE DATE(entrytime) = '2033-02-11'";
+            ResultSet result;
+            numOfStudent = new ArrayList<>();
+            for (int i = 0; i < 3; i++) {
+                if (count == 0) {
+                    PreparedStatement creatingStat = connection.prepareStatement(sqlQueryB);
+                    result = creatingStat.executeQuery();
+                } else if (count == 1) {
+                    PreparedStatement creatingStat = connection.prepareStatement(sqlQueryL);
+                    result = creatingStat.executeQuery();
+                } else {
+                    PreparedStatement creatingStat = connection.prepareStatement(sqlQueryD);
+                    result = creatingStat.executeQuery();
+                }
+                count++;
+                while (result.next()) {
+                    anothercount++;
+                }
+                numOfStudent.add(anothercount);
+                anothercount = 0;
+            }
+        } catch (SQLException e) {
+            System.out.println("Put here what you want the exception to say");
+        }
+        return numOfStudent;
+    }
+    public static ArrayList<LocalTime> timeForB() {
+        ArrayList timeForPeak = null;
+        try (Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD)) {
+            timeForPeak = new ArrayList();
+            String sqlQueryB = "SELECT * FROM breakfast WHERE DATE(entrytime) = '2033-02-11'";
+            PreparedStatement creatingStat = connection.prepareStatement(sqlQueryB);
+            ResultSet result = creatingStat.executeQuery();
+            while (result.next()) {
+                timeForPeak.add(result.getTime("entrytime"));
+            }
+        } catch (SQLException e) {
+            System.out.println("Same here");
+        }
+        return timeForPeak;
     }
 
 
