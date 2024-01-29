@@ -7,6 +7,8 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.*;
+import java.sql.SQLException;
+import java.util.HashMap;
 
 public class LoginPageForStudent implements ActionListener {
     IdandPassword myid = new IdandPassword();
@@ -98,6 +100,24 @@ public class LoginPageForStudent implements ActionListener {
         frame.setResizable(true);
         //----------------------------------------------------
     }
+    public void validateLogIn(String password, String userName) throws SQLException {
+        HashMap<String, String> list = Database.ConnectionWithDatabase.idsForLogIn();
+        System.out.println(list);
+        if (list.containsKey(userName)) {
+            if (list.get(userName).equals(password)) {
+                messageLabel.setForeground(Color.GREEN);
+                messageLabel.setText("Login Successful");
+                frame.dispose();
+                new StudentWelcomePage();
+            }else {
+                messageLabel.setForeground(Color.RED);
+                messageLabel.setText("Wrong Password");
+            }
+        } else {
+            messageLabel.setForeground(Color.red);
+            messageLabel.setText("Wrong username");
+        }
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -116,19 +136,10 @@ public class LoginPageForStudent implements ActionListener {
 
             //below the methods check if the user ID and Password matches and if it doesnt match shows the respective message
             //and if it matches opens a new welcome page as an admin
-            if (myid.getLogInfo().containsKey(userID)) {
-                if (myid.getLogInfo().get(userID).equals(userPassword)) {
-                    messageLabel.setForeground(Color.GREEN);
-                    messageLabel.setText("Login Successful");          
-                    frame.dispose();
-                    new StudentWelcomePage();
-                }else {
-                    messageLabel.setForeground(Color.RED);
-                    messageLabel.setText("Wrong Password");
-                } 
-            } else {
-                messageLabel.setForeground(Color.red);
-                messageLabel.setText("Wrong username");
+            try {
+                validateLogIn(userPassword,userID);
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
             }
             //----------------------------------------------------
         }
