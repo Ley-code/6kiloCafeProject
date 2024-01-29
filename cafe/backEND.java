@@ -51,6 +51,19 @@ public static int averageStudentPresented(){
 
         return food;
     }
+    public static String LeastFavorite(){
+        int[] totalCounts = new int[]{10, 34, 45};
+        String[] foodChoice = new String[]{"firfir", "dabo", "colo"};
+        int min = totalCounts[0];
+        String food = null;
+        for(int i=0; i<totalCounts.length; i++){
+            if(totalCounts[i]<=min){
+                min=totalCounts[i];
+                food=foodChoice[i];
+            }
+        }
+    return food;}
+}
     public static List<String > getTimestampData(){
         List<String> timestampData = new ArrayList<>();
 
