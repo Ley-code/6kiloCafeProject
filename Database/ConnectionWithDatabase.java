@@ -192,7 +192,7 @@ public class ConnectionWithDatabase {
         }
         return studentInDepartment;
     }
-    public static boolean pollTableCreator(List<String> foods,String tableName){
+    /*public static boolean pollTableCreator(List<String> foods,String tableName){
         try(Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD)){
             String sqlQueryF = "CREATE TABLE " + tableName + " (" +
                     "Row Number INT AUTO_INCREMENT PRIMARY KEY, " +
@@ -207,6 +207,8 @@ public class ConnectionWithDatabase {
 
         }
     }
+
+     */
 }
 
 

@@ -1,9 +1,13 @@
 package backEND;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static Database.ConnectionWithDatabase.numOfStudent;
+import static Database.ConnectionWithDatabase.timeForPeakAnalysis;
 
 public class backEND {
 
@@ -20,13 +24,13 @@ public static  double CalculateAverageRating() {
 }
 //5th average student number
 public static int averageStudentPresented(){
-        int [] ASP={10, 30,40};
+        ArrayList<Integer> ASP= numOfStudent();
         int sum=0;
-        for(int i=0; i< ASP.length;i++){
-            sum+=ASP[i];
+        for(int i=0; i< 3;i++){
+            sum+= ASP.get(i);
         }
         //System.out.println(sum);
-        int average=sum/ASP.length;
+        int average=sum/3;
         return average;
     }
     //6th average student number
@@ -39,7 +43,7 @@ public static int averageStudentPresented(){
         String[] foodChoice = new String[]{"firfir", "dabo", "colo"};
         int max = totalCounts[0];
         String food = null;
-        String food1=null;
+
         for (int i = 1; i < totalCounts.length; i++) {
             if (totalCounts[i] >= max) {
                 max = totalCounts[i];
@@ -61,24 +65,13 @@ public static int averageStudentPresented(){
                 food=foodChoice[i];
             }
         }
-    return food;}
-}
-    public static List<String > getTimestampData(){
-        List<String> timestampData = new ArrayList<>();
+    return food;
+    }
+
+    public static List<String> getTimestampData(){
+        ArrayList<LocalTime> timestampData = timeForPeakAnalysis();
 
         // Generate sample timestamp data
-        timestampData.add("2022-01-01 09:02:00");
-        timestampData.add("2022-01-01 09:15:00");
-        timestampData.add("2022-01-01 09:30:00");
-        timestampData.add("2022-01-01 09:30:00");
-        timestampData.add("2022-01-01 09:45:30");
-        timestampData.add("2022-01-01 09:45:00");
-        timestampData.add("2022-01-01 09:45:00");
-        timestampData.add("2022-01-01 10:00:00");
-        timestampData.add("2022-01-01 10:15:00");
-        timestampData.add("2022-01-01 10:15:00");
-        timestampData.add("2022-01-01 10:30:00");
-        timestampData.add("2022-01-01 10:30:00");
         return timestampData;
     }
 
