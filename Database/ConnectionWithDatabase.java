@@ -208,6 +208,10 @@ public class ConnectionWithDatabase {
         }
 
     }
+<<<<<<< HEAD
+
+=======
+>>>>>>> 90300935aed25c27243aeff9f964403719ffc15e
      */
 }
 
