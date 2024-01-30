@@ -14,7 +14,7 @@ public class NewFoodListPanel extends JPanel{
 	private String lunch;
 	private String dinner; 
 	public int count = 0;
-	static String[][] imagepath = {{"GUI/icons/Firfir.png","GUI/icons/aynet.png","GUI/icons/cake.jpg"},{"GUI/icons/bread.png","GUI/icons/sigawot.png","GUI/icons/dinch.png"},
+	public static String[][] imagepath = {{"GUI/icons/Firfir.png","GUI/icons/aynet.png","GUI/icons/cake.jpg"},{"GUI/icons/bread.png","GUI/icons/sigawot.png","GUI/icons/dinch.png"},
 			{"GUI/icons/firfir.png","GUI/icons/dinch.png","GUI/icons/sigawot.png"},{"GUI/icons/firfir.png","GUI/icons/dinch.png","GUI/icons/sigawot.png"},{"GUI/icons/firfir.png","GUI/icons/dinch.png","GUI/icons/sigawot.png"},
 			{"GUI/icons/firfir.png","GUI/icons/dinch.png","GUI/icons/sigawot.png"},{"GUI/icons/firfir.png","GUI/icons/dinch.png","GUI/icons/sigawot.png"},};
 
