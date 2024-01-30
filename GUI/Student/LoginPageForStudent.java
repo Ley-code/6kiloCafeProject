@@ -10,8 +10,8 @@ import java.awt.*;
 import java.sql.SQLException;
 import java.util.HashMap;
 
-public class LoginPageForStudent implements ActionListener {
-    IdandPassword myid = new IdandPassword();
+public class LoginPageForStudent extends Component implements ActionListener {
+    IdandPassword my_Id = new IdandPassword();
     //-----------------------------------------------------
     //all the objects below are used for making the GUI Components
     JFrame frame = new JFrame();
@@ -20,54 +20,54 @@ public class LoginPageForStudent implements ActionListener {
     JTextField userIDField = new JTextField();
     JPasswordField userPasswordField = new JPasswordField();
     JLabel userIDLabel = new JLabel();
-    JLabel userPasswordLabel = new JLabel("Student Pass:");
+    JLabel userPasswordLabel = new JLabel("Student Password:");
     JLabel messageLabel = new JLabel();
     JLabel Title = new JLabel();
     JPanel foreground = new JPanel();
+    JPanel topPanel = new JPanel();
     //--------------------------------------------
     LoginPageForStudent() {
         //--------------------------------------------------
         //this customizes the title of the login page
         Title.setText("Cafe Management");
-        Title.setBounds(150, 40, 300, 30);
-        Title.setFont(new Font("Times New Roman", Font.BOLD, 25));   
-        Title.setForeground(Color.RED);
-        //-------------------------------------------------
-        
+        Title.setBounds(150, 40, 30, 30);
+        Title.setFont(new Font("ITALIC", Font.BOLD, 25));
+        Title.setForeground(Color.BLACK);
+
         //it customizes the Admin ID text label
         userIDLabel.setText("Student Name: ");
-        userIDLabel.setBounds(50, 100, 100, 25);
-        userIDLabel.setFont(new Font("Times New Roman", Font.BOLD, 16));
-        userIDLabel.setForeground(Color.WHITE);
+        userIDLabel.setBounds(150, 300, 250, 25);
+        userIDLabel.setFont(new Font("Times New Roman", Font.BOLD, 22));
+        userIDLabel.setForeground(Color.BLACK);
         //----------------------------------------------------
 
         //it customizes the Admin password text Label
-        userPasswordLabel.setBounds(50, 150, 150, 25);
-        userPasswordLabel.setFont(new Font("Times New Roman", Font.BOLD, 16));
-        userPasswordLabel.setForeground(Color.WHITE);
+        userPasswordLabel.setBounds(150, 350, 270, 22);
+        userPasswordLabel.setFont(new Font("Times New Roman", Font.BOLD, 25));
+        userPasswordLabel.setForeground(Color.BLACK);
         //----------------------------------------------------
 
         // The userID field and the userpasswordField both creates the space to write userID and password
-        userIDField.setBounds(180, 100, 200, 25);
-        userIDField.setBorder(BorderFactory.createLineBorder(new Color(56, 43, 0), 5, false));
-        userPasswordField.setBounds(180, 150, 200, 25);
-        userPasswordField.setBorder(BorderFactory.createLineBorder(new Color(56, 43, 0), 5, false));
+        userIDField.setBounds(400, 300, 200, 25);
+        userIDField.setBorder(BorderFactory.createLineBorder(new Color(254, 243, 240)));
+        userPasswordField.setBounds(400, 350, 200, 25);
+        userPasswordField.setBorder(BorderFactory.createLineBorder(new Color(254, 243, 240)));
         //----------------------------------------------------
 
         //this Displays the message after we log in
         messageLabel.setBounds(160, 180, 250, 35);
         messageLabel.setFont(new Font(null, Font.ITALIC, 20));
-        messageLabel.setForeground(Color.WHITE);
+        messageLabel.setForeground(Color.BLACK);
         //----------------------------------------------------
 
         //creates the buttons and designs them accordingly
-        loginButton.setBounds(125, 230, 100, 25);
+        loginButton.setBounds(200, 400, 100, 45);
         loginButton.addActionListener(this);
         loginButton.setFocusable(false);
         loginButton.setForeground(Color.white);
         loginButton.setBackground(Color.BLACK);
 
-        resetButton.setBounds(250, 230, 100, 25);
+        resetButton.setBounds(325, 400, 100, 45);
         resetButton.addActionListener(this);
         resetButton.setFocusable(false);
         resetButton.setForeground(Color.white);
@@ -76,7 +76,7 @@ public class LoginPageForStudent implements ActionListener {
         //----------------------------------------------------
 
         //adds the foreground panel which is used to store the above components and sets the background"
-        foreground.setBackground(new Color(46, 5, 74));
+        foreground.setBackground(new Color(166, 165, 165));
         foreground.setOpaque(true);
         foreground.setBounds(0, 0, 500, 500);
         foreground.setLayout(null);
@@ -90,16 +90,66 @@ public class LoginPageForStudent implements ActionListener {
         foreground.add(resetButton);
         //----------------------------------------------------
 
+        frame.setLayout(new BorderLayout());
+        frame.add(topPanel, BorderLayout.NORTH);
+        topPanel.add(Title);
+
+
         //finally we add the foreground panel to the Frame
-        frame.add(foreground);
-        frame.setUndecorated(true); //removes to minimize,maximize and close tabs
+        frame.add(foreground, BorderLayout.CENTER);
+        //frame.setUndecorated(true); //removes to minimize,maximize and close tabs
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500, 400);
+        frame.setSize(1000, 800);
         frame.setLocationRelativeTo(null); //places it to center
+
+        // Create a menu bar
+        JMenuBar menuBar = new JMenuBar();
+
+        // Create menus
+        JMenu editMenu = new JMenu("Home");
+        JMenu fileMenu = new JMenu("Setting");
+        JMenu helpMenu = new JMenu("Help");
+        JMenu exitMenu = new JMenu("Exit");
+
+        // Create menu items
+        JMenuItem NotificationMenuItem = new JMenuItem("Notification");
+        JMenuItem privacyMenuItem = new JMenuItem("privacy");
+
+
+        // Add action listeners to menu items
+        NotificationMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(LoginPageForStudent.this, "Notification Menu Item Clicked");
+            }
+        });
+
+        privacyMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(LoginPageForStudent.this, "privacy Menu Item Clicked");
+            }
+        });
+
+
+        // Add menu items to the File menu
+        fileMenu.add(NotificationMenuItem);
+        fileMenu.add(privacyMenuItem);
+        fileMenu.addSeparator(); // Adds a separator line
+
+        // Add menus to the menu bar
+        menuBar.add(fileMenu);
+        menuBar.add(editMenu);
+        menuBar.add(helpMenu);
+        menuBar.add(exitMenu);
+
+        // Set the menu bar for the JFrame
+        frame.setJMenuBar(menuBar);
         frame.setVisible(true);
         frame.setResizable(true);
-        //----------------------------------------------------
     }
+
+
     public void validateLogIn(String password, String userName) throws SQLException {
         HashMap<String, String> list = Database.ConnectionWithDatabase.idsForLogIn();
         System.out.println(list);
@@ -124,11 +174,11 @@ public class LoginPageForStudent implements ActionListener {
         if (e.getSource() == resetButton) {
             userIDField.setText("");
             userPasswordField.setText("");
-            
+
             //resets the password and IDfield if a user makes a mistake
         }
         if (e.getSource() == loginButton) {
-            
+
             String userID = userIDField.getText();
             String userPassword = String.valueOf(userPasswordField.getPassword());
             //the above variables store the password and ID of the user

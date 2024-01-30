@@ -26,6 +26,21 @@ public class StudentWelcomePage extends JFrame {
         tabbedPane.addTab("Food Lists", Foodpanel);
         tabbedPane.addTab("Student poll", pollpanel);
 
+        //create a menu bar
+        JMenuBar MenuBar = new JMenuBar();
+
+        //Create a menu
+        JMenu Menu = new JMenu("Menu");
+
+        // Create menu items
+        JMenuItem logOutMenuItem = new JMenuItem("logOut");
+        JMenuItem exitMenuItem = new JMenuItem("Exit");
+
+        Menu.add(logOutMenuItem);
+        Menu.add(exitMenuItem);
+
+        MenuBar.add(Menu);
+        setJMenuBar(MenuBar);
         add(tabbedPane);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(500,500);
