@@ -1,5 +1,7 @@
 package GUI.Admin;
 
+import backEND.backEND;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -58,6 +60,7 @@ public class PollPage extends WelcomePage {
             for (String option : options) {
                 pollOptions.add(option.trim());
             }
+            backEND.Poll poll= new backEND.Poll(pollQuestion, (ArrayList<String>) pollOptions);
             polls.put(pollQuestion, pollOptions);
             //pollListModel.addElement(pollQuestion);
             JOptionPane.showMessageDialog(null, "Poll created successfully!");

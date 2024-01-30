@@ -1,21 +1,26 @@
 package backEND;
 
 import Database.ConnectionWithDatabase;
+
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import static Database.ConnectionWithDatabase.rateExtractor;
 import static Database.ConnectionWithDatabase.timeForPeakAnalysis;
 
 public class backEND {
 //4th rating system
     //------------------------------------------------------------------
     public static int CalculateAverageRating() {
-        ArrayList<Integer> ratings = ConnectionWithDatabase.rateExtractor();
+
+        ArrayList<Integer> ratings = rateExtractor();
         int sum = 0;
         for (int rating : ratings) {
-            sum += rating;                                  //SUCCESSFULLY INTEGRATED WITH GUI and Database
-        }                                                   //Yours Truly Leykun, no need to thank me
+
+            sum += rating;
+        }
         return sum / ratings.size();
     }
     //------------------------------------------------------------------------
@@ -110,7 +115,23 @@ public class backEND {
     }
 
 //12 poll create
+public static class Poll {
+    private String question;
+    private ArrayList<String> options;
 
+    public Poll(String question, ArrayList<String> options) {
+        this.question = question;
+        this.options = options;
+    }
+
+    public String getQuestion() {
+        return question;
+    }
+
+    public ArrayList<String> getOptions() {
+        return options;
+    }
+}
 }
 
 

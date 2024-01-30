@@ -18,9 +18,15 @@ public class NewFoodListPanel extends JPanel{
 	private String lunch;
 	private String dinner; 
 	public int count = 0;
+<<<<<<< HEAD
 	//static String[][] imagepath = {{"GUI/icons/Firfir.png","GUI/icons/aynet.png","GUI/icons/cake.jpg"},{"GUI/icons/bread.png","GUI/icons/sigawot.png","GUI/icons/dinch.png"},
 	//		{"GUI/icons/firfir.png","GUI/icons/pizza.png","GUI/icons/chicken.png"},{"GUI/icons/firfir.png","GUI/icons/dinch.png","GUI/icons/sigawot.png"},{"GUI/icons/firfir.png","GUI/icons/dinch.png","GUI/icons/sigawot.png"},
 	//		{"GUI/icons/firfir.png","GUI/icons/pizza.png","GUI/icons/sigawot.jpg"},{"GUI/icons/firfir.png","GUI/icons/dinch.png","GUI/icons/sigawot.jpg"}};
+=======
+	public static String[][] imagepath = {{"GUI/icons/Firfir.png","GUI/icons/aynet.png","GUI/icons/cake.jpg"},{"GUI/icons/bread.png","GUI/icons/sigawot.png","GUI/icons/dinch.png"},
+			{"GUI/icons/firfir.png","GUI/icons/dinch.png","GUI/icons/sigawot.png"},{"GUI/icons/firfir.png","GUI/icons/dinch.png","GUI/icons/sigawot.png"},{"GUI/icons/firfir.png","GUI/icons/dinch.png","GUI/icons/sigawot.png"},
+			{"GUI/icons/firfir.png","GUI/icons/dinch.png","GUI/icons/sigawot.png"},{"GUI/icons/firfir.png","GUI/icons/dinch.png","GUI/icons/sigawot.png"},};
+>>>>>>> b52857344fe43b0c6ec02a99afbb0539677119ab
 
 	NewFoodListPanel(String breakfast, String lunch, String dinner){
 		this.breakfast = breakfast;

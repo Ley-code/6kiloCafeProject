@@ -17,9 +17,8 @@ public class RatingIcon {
         } else if (starNum == 5) {
             ratingIcon.setText("⭐️⭐️⭐️⭐️⭐️");
         }
-        ratingIcon.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 80));
+        ratingIcon.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 32));
         ratingIcon.setForeground(Color.YELLOW);
-        ratingIcon.setBackground(Color.BLUE);
         ratingIcon.setHorizontalAlignment(SwingConstants.CENTER);
         ratingIcon.setHorizontalTextPosition(SwingConstants.LEADING);
         return ratingIcon;
