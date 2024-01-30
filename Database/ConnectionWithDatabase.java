@@ -1,5 +1,7 @@
 package Database;
 
+import GUI.Admin.graphAndChartPage;
+
 import java.sql.*;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -147,7 +149,7 @@ public class ConnectionWithDatabase {
         ArrayList timeForPeak = null;
         try (Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD)) {
             timeForPeak = new ArrayList();
-            int flag = GUI.Admin.peakTimeAnalysisPage.getFlag();
+            int flag = graphAndChartPage.getFlag();
             String sqlQueryB = null;
             if (flag ==0){
                 sqlQueryB = "SELECT * FROM breakfast WHERE DATE(entrytime) = '2033-02-11'"; // The date should be the current date
