@@ -45,7 +45,6 @@ public class WelcomePage {
                 frame.dispose();
             }
         });
-
         cafeFoodsButton = new ButtonStyle();
         cafeFoodsButton.setText("Cafe Foods");
         cafeFoodsButton.addActionListener(new ActionListener() {

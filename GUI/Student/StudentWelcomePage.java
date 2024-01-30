@@ -1,16 +1,25 @@
 package GUI.Student;
 
 import GUI.Admin.FoodListPageFolder.NewFoodListPage;
+import GUI.Admin.RatingIcon;
+
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class StudentWelcomePage extends JFrame {
+public class StudentWelcomePage extends JFrame implements ActionListener {
     JTabbedPane tabbedPane;
     JPanel Foodpanel;
     JPanel pollpanel;
     JPanel ratePanel;
     ButtonGroup rateButtons;
+    JRadioButton one;
+    JRadioButton two;
+    JRadioButton three;
+    JRadioButton four;
+    JRadioButton five;
     StudentWelcomePage(){
         initialize();
     }
@@ -18,17 +27,21 @@ public class StudentWelcomePage extends JFrame {
 
         Foodpanel = new JPanel();
         Foodpanel.setLayout(new BorderLayout());
-        Foodpanel.add(new NewFoodListPage().NewFoodListPage(),BorderLayout.CENTER);
+        JScrollPane scrollPane = new JScrollPane(new NewFoodListPage().NewFoodListPage());
+        Foodpanel.add(scrollPane,BorderLayout.CENTER);
 
-        pollpanel = new JPanel();
-        pollpanel.setBorder(new LineBorder(Color.BLACK,2,true));
-        pollpanel.add(new StudentPollPanel().StudentPollPanel());
 
-        JRadioButton one = RatingIcon.getIcon(1);
-        JRadioButton two = RatingIcon.getIcon(2);
-        JRadioButton three = RatingIcon.getIcon(3);
-        JRadioButton four = RatingIcon.getIcon(4);
-        JRadioButton five = RatingIcon.getIcon(5);
+        pollpanel =new NewStudentPollPanel().NewStudentPollPanel();
+        one = RatingIcon.getIcon(1);
+        one.addActionListener(this);
+        two = RatingIcon.getIcon(2);
+        two.addActionListener(this);
+        three = RatingIcon.getIcon(3);
+        three.addActionListener(this);
+        four = RatingIcon.getIcon(4);
+        four.addActionListener(this);
+        five = RatingIcon.getIcon(5);
+        five.addActionListener(this);
 
         rateButtons = new ButtonGroup();
         rateButtons.add(one);
@@ -59,5 +72,20 @@ public class StudentWelcomePage extends JFrame {
     }
     public static void main(String[] args) {
         new StudentWelcomePage();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource()==one){
+            System.out.println("");
+        } else if(e.getSource()==two){
+            System.out.println("");
+        } else if (e.getSource()==three) {
+            System.out.println("");
+        } else if (e.getSource()==four) {
+            System.out.println("");
+        } else if (e.getSource()==five) {
+            System.out.println("");
+        }
     }
 }

@@ -1,10 +1,9 @@
-package GUI.Student;
+package GUI.Admin;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class RatingIcon {
-
     public static JRadioButton getIcon(int starNum) {
         JRadioButton ratingIcon = new JRadioButton();
         if (starNum == 1) {

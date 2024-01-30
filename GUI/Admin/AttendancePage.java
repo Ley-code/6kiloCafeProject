@@ -1,6 +1,8 @@
 package GUI.Admin;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.*;
 
 import javax.swing.*;
@@ -21,14 +23,19 @@ public class AttendancePage extends WelcomePage {
         table.setForeground(Color.WHITE);
         // Create a JTable with the table model
         table = new JTable(tableModel);
-
+        JButton updateButton = new JButton("Update");
+        updateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //this executes something on the databse all is you Amir
+            }
+        });
         // Create a JScrollPane to add the JTable to and make it scrollable
         JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setOpaque(false);
-        scrollPane.getViewport().setOpaque(false);
         loadDataFromDatabase(tableModel);
         centerPanel.setLayout(new BorderLayout());
-        centerPanel.add(scrollPane, BorderLayout.CENTER);
+        centerPanel.add(updateButton,BorderLayout.NORTH);
+        centerPanel.add(scrollPane,BorderLayout.CENTER);
         centerPanel.setBackground(Color.BLUE);
 
     }
