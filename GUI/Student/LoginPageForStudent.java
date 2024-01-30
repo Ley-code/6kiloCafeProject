@@ -1,5 +1,6 @@
 package GUI.Student;
 
+import Database.ConnectionWithDatabase;
 import GUI.Admin.IdandPassword;
 import GUI.Admin.WelcomePage;
 
@@ -11,7 +12,6 @@ import java.sql.SQLException;
 import java.util.HashMap;
 
 public class LoginPageForStudent implements ActionListener {
-    IdandPassword myid = new IdandPassword();
     //-----------------------------------------------------
     //all the objects below are used for making the GUI Components
     JFrame frame = new JFrame();
@@ -24,7 +24,7 @@ public class LoginPageForStudent implements ActionListener {
     JLabel messageLabel = new JLabel();
     JLabel Title = new JLabel();
     JPanel foreground = new JPanel();
-
+    public static String logInStudentID;
     //--------------------------------------------
     LoginPageForStudent() {
         //--------------------------------------------------
@@ -111,6 +111,7 @@ public class LoginPageForStudent implements ActionListener {
                 messageLabel.setText("Login Successful");
                 frame.dispose();
                 new StudentWelcomePage();
+                logInStudentID = ConnectionWithDatabase.getStudentID(userName);
             } else {
                 messageLabel.setForeground(Color.RED);
                 messageLabel.setText("Wrong Password");
@@ -130,19 +131,7 @@ public class LoginPageForStudent implements ActionListener {
         if (e.getSource() == loginButton) {
             String userID = userIDField.getText();
             String userPassword = String.valueOf(userPasswordField.getPassword());
-            if (myid.getLogInfo().containsKey(userID)) {
-                if (myid.getLogInfo().get(userID).equals(userPassword)) {
-                    messageLabel.setForeground(Color.GREEN);
-                    messageLabel.setText("Login Successful");
-                    frame.dispose();
-                    new StudentWelcomePage();
-                } else {
-                    messageLabel.setForeground(Color.RED);
-                    messageLabel.setText("Wrong Password");
-                }
-            } else {
-                messageLabel.setForeground(Color.red);
-                messageLabel.setText("Wrong username");
+
                 //the above variables store the password and ID of the user
                 //----------------------------------------------------
                 //below the methods check if the user ID and Password matches and if it doesnt match shows the respective message
@@ -154,8 +143,8 @@ public class LoginPageForStudent implements ActionListener {
 
                 }
                 //----------------------------------------------------
-            }
-            //if the user is a student it creates a studentsigninpage
         }
+            //if the user is a student it creates a studentsigninpage
+
     }
 }
