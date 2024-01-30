@@ -1,10 +1,9 @@
 package GUI.Student;
 
+import Database.ConnectionWithDatabase;
 import GUI.Admin.FoodListPageFolder.NewFoodListPage;
-import GUI.Admin.RatingIcon;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -73,19 +72,20 @@ public class StudentWelcomePage extends JFrame implements ActionListener {
     public static void main(String[] args) {
         new StudentWelcomePage();
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
+        //---------------------------------------------------------------------
         if(e.getSource()==one){
-            System.out.println("");
+            ConnectionWithDatabase.addRating(1);
         } else if(e.getSource()==two){
-            System.out.println("");
-        } else if (e.getSource()==three) {
-            System.out.println("");
+            ConnectionWithDatabase.addRating(2);
+        } else if (e.getSource()==three) {                      //sends the rating to the database
+            ConnectionWithDatabase.addRating(3);
         } else if (e.getSource()==four) {
-            System.out.println("");
+            ConnectionWithDatabase.addRating(4);
         } else if (e.getSource()==five) {
-            System.out.println("");
+            ConnectionWithDatabase.addRating(5);
         }
+        //---------------------------------------------------------------------
     }
 }

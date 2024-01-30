@@ -9,25 +9,28 @@ import static Database.ConnectionWithDatabase.timeForPeakAnalysis;
 
 public class backEND {
 //4th rating system
+    //------------------------------------------------------------------
     public static int CalculateAverageRating() {
-        int[] ratings = {4, 5, 3, 5, 4, 5};//amir
+        ArrayList<Integer> ratings = ConnectionWithDatabase.rateExtractor();
         int sum = 0;
-
         for (int rating : ratings) {
-            sum += rating;
-        }
-        return sum / ratings.length;
+            sum += rating;                                  //SUCCESSFULLY INTEGRATED WITH GUI and Database
+        }                                                   //Yours Truly Leykun, no need to thank me
+        return sum / ratings.size();
     }
+    //------------------------------------------------------------------------
 //5th average student number :- line 30 retrieve data no student at each meal  and calculate the average
+    //---------------------------------------------------------------------
     public static int averageStudentPresented() {
         ArrayList<Integer> ASP = ConnectionWithDatabase.numOfStudent();
         int sum = 0;
         for (int i = 0; i < ASP.size(); i++) {
-            sum += ASP.get(i);
+            sum += ASP.get(i);                                 //SUCCESSFULLY INTEGRATED WITH GUI and Database
         }
         int average = sum / ASP.size();
         return average;
     }
+    //---------------------------------------------------------------------
 //6th  favorite food :- returns the food which get the highest choice in poll.retrieve data from conn...
     public static String FavoriteFood() {
         int[] totalCounts = new int[]{10, 34, 25};
@@ -42,6 +45,7 @@ public class backEND {
         }
         return food;
     }
+    //---------------------------------------------------------------------
 //7 least favorite food :- returns the food which get the lowest choice in poll
     public static String LeastFavorite() {
         int[] totalCounts = new int[]{10, 34, 45};
@@ -56,6 +60,7 @@ public class backEND {
         }
         return food;
     }
+    //---------------------------------------------------------------------
 //8 retrieving  data from the data base.
     public static ArrayList<LocalTime> getTimestampData() {
         ArrayList<LocalTime> timestampData = timeForPeakAnalysis();//timeForPeakAnalysis taken from database.
@@ -83,6 +88,7 @@ public class backEND {
         }
         return peakTime;
     }
+    //---------------------------------------------------------------------
 //10 used to extract the string(department  name) from the hashmap(numofStudentInDepartment)
 //used in pie(line 245)
     public static ArrayList<String> getKeysFromHashMap(HashMap<String, Integer> map) {

@@ -19,6 +19,7 @@ public class PollPage extends WelcomePage {
 
         // Create three buttons
         JButton createPollButton = new JButton("Create Poll");
+
         createPollButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -27,29 +28,24 @@ public class PollPage extends WelcomePage {
         });
         JButton viewResultsButton = new JButton("View Results");
         JButton cancelButton = new JButton("Cancel");
-
-        // Create a panel for the buttons and set its layout
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
-        buttonPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        buttonPanel.add(createPollButton);
-        buttonPanel.add(Box.createVerticalStrut(20)); // Add some vertical space
-        buttonPanel.add(viewResultsButton);
-        buttonPanel.add(Box.createVerticalStrut(20)); // Add some vertical space
-        buttonPanel.add(cancelButton);
-
         // Create a panel for the title and set its layout
         JPanel titlePanel = new JPanel();
         titlePanel.setLayout(new BorderLayout());
         titlePanel.add(titleLabel, BorderLayout.NORTH);
 
         // Create a panel to hold both title and button panels
-        JPanel mainPanel = new JPanel(new BorderLayout());
-        mainPanel.add(titlePanel, BorderLayout.NORTH);
-        mainPanel.add(buttonPanel, BorderLayout.WEST);
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new GridLayout(3,1,10,30));
+        buttonPanel.add(createPollButton);
+        buttonPanel.add(viewResultsButton);
+        buttonPanel.add(cancelButton);
 
         // Set the content pane to the main panel
-        centerPanel.add(mainPanel);
+        centerPanel.setLayout(new BoxLayout(centerPanel,BoxLayout.Y_AXIS));
+        centerPanel.add(titlePanel);
+        centerPanel.add(createPollButton);
+        centerPanel.add(viewResultsButton);
+        centerPanel.add(cancelButton);
 
         // Center the frame on the screen
     }

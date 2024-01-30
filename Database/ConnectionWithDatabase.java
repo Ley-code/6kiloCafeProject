@@ -3,6 +3,7 @@ package Database;
 import GUI.Admin.graphAndChartPage;
 import GUI.Student.LoginPageForStudent;
 
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 import java.time.LocalTime;
@@ -228,7 +229,7 @@ public class ConnectionWithDatabase {
     }
     // IN the meantime lets write the JDBC for Attendance
     public static void attendanceInfo(DefaultTableModel tableModel){
-        List<List<Object>> attendanceInfo = new ArrayList<>();
+        List<List<Object>> attendanceInfo = new ArrayList<>();//I dont think this is necessary From leykun
 
         try(Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD)){
             System.out.println("I am here");
@@ -320,6 +321,7 @@ public class ConnectionWithDatabase {
                 Integer result = creatingStat.executeUpdate();
                 if (result != 0) {
                     // Leykun show add some page to show you have rated successfully
+                    JOptionPane.showMessageDialog(null,"You have Rated Successfully","Message",JOptionPane.INFORMATION_MESSAGE);
                 }
             }
             catch (SQLException e){
@@ -329,6 +331,7 @@ public class ConnectionWithDatabase {
         }
         else{
             //Leykun should create a page that will we displayed to show he has already rated the cafe
+            JOptionPane.showMessageDialog(null,"You have already rated the cafe","Message",JOptionPane.INFORMATION_MESSAGE);
         }
     }
     public static ArrayList<Integer> rateExtractor(){
