@@ -20,7 +20,7 @@ public class NewFoodListPage {
     private JButton saturdayButton;
     private JButton sundayButton;
     private JPanel centerPanel;
-    static String[][] FoodNames = {{"Firfir","Aynet","cake"},{"Bread with marmlade","alicha", "siga wot"},{"firfir", "dinch wot", "siga wot"},
+    public static String[][] FoodNames = {{"Firfir","Aynet","cake"},{"Bread with marmlade","alicha", "siga wot"},{"firfir", "dinch wot", "siga wot"},
             {"Kinche","Key wot","ThereFore"},{"Burger","salad","pizza"},{"amrogn","chicken","shiro wot"},{"Enkulal","French fries","Rice"}};
     public static void main(String[] args) {
     	new NewFoodListPage();
