@@ -147,7 +147,7 @@ public class ConnectionWithDatabase {
         ArrayList timeForPeak = null;
         try (Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD)) {
             timeForPeak = new ArrayList();
-            int flag = 0; // This should be in the GUI.
+            int flag = GUI.Admin.peakTimeAnalysisPage.getFlag();
             String sqlQueryB = null;
             if (flag ==0){
                 sqlQueryB = "SELECT * FROM breakfast WHERE DATE(entrytime) = '2033-02-11'"; // The date should be the current date
@@ -206,8 +206,12 @@ public class ConnectionWithDatabase {
         catch (SQLException e){
 
         }
-    }
 
+    }
+<<<<<<< HEAD
+
+=======
+>>>>>>> 90300935aed25c27243aeff9f964403719ffc15e
      */
 }
 

@@ -59,7 +59,6 @@ public class WelcomePage {
         // --------------------------------------------------
         centerPanel = new JPanel(); // the panel that is going to be edited in the children classes
         // --------------------------------------------------
-
         InventoryManagementButton = new ButtonStyle();
         InventoryManagementButton.setText("Inventory Management");
 
@@ -97,7 +96,21 @@ public class WelcomePage {
             frame.dispose();
         }
         });
-       
+        JLabel copyrightLabel1 = new JLabel("Copyright @ Addis Ababa Institute of Technology");
+        JLabel copyrightLabel2 = new JLabel("2024 All rights reserved");
+        copyrightLabel1.setVerticalAlignment(SwingConstants.BOTTOM);
+        copyrightLabel2.setVerticalAlignment(SwingConstants.TOP);
+        copyrightLabel2.setHorizontalAlignment(SwingConstants.CENTER);
+        copyrightLabel2.setForeground(Color.WHITE);
+        copyrightLabel1.setForeground(Color.WHITE);
+        copyrightLabel1.setFont(new Font("Helvetica",Font.BOLD,12));
+        copyrightLabel2.setFont(new Font("Helvetica",Font.BOLD,12));
+
+        JPanel copyrightContainer = new JPanel();
+        copyrightContainer.setBackground(new Color(24, 26, 79));
+        copyrightContainer.setLayout(new GridLayout(2,1));
+        copyrightContainer.add(copyrightLabel1);
+        copyrightContainer.add(copyrightLabel2);
         // -----------------------------------------------------------------
         // creates the Title and Icon at the top of the frame
 
@@ -114,15 +127,15 @@ public class WelcomePage {
         topPanel.setBackground(new Color(24, 26, 79));
         topPanel.setLayout(new BorderLayout());
         topPanel.add(CafeManagementLabel,BorderLayout.CENTER);
-
         // adds the buttons on the right side of the frame
         // -----------------------------------------------------------
         rightPanel = new JPanel();
-        rightPanel.setLayout(new GridLayout(7, 1, 10, 10));
+        rightPanel.setLayout(new GridLayout(8, 1, 10, 10));
         JButton[] buttonGroup = {AttendanceButton,peakTimeAnalysisButton,cafeFoodsButton,InventoryManagementButton,pollButton,studentButton,generalInformationButton};
         for(int i = 0;i<7;i++){
             rightPanel.add(buttonGroup[i]);
         }
+        rightPanel.add(copyrightContainer);
         rightPanel.setBackground(new Color(24, 26, 79));
         //        // ---------------------------------------------------------
         frame = new JFrame();
@@ -163,10 +176,8 @@ public class WelcomePage {
         frame.setJMenuBar(menubar);
         frame.setBackground(new Color(185, 185, 185));
         frame.setResizable(true);
-
         frame.setVisible(true);
     }
-
     public static void main(String[] args) {
         new WelcomePage();
     }

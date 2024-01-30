@@ -1,6 +1,10 @@
 package GUI.Admin;
 //daily comparative graph : breakfast, lunch , dinner
 import backEND.backEND;
+
+
+
+import Database.ConnectionWithDatabase;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.ChartPanel;
@@ -24,42 +28,89 @@ import org.jfree.data.general.DefaultPieDataset;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.RoundRectangle2D;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.List;
 
 import java.util.*;
 
+import static Database.ConnectionWithDatabase.numofStudentInDepartment;
+import static backEND.backEND.getKeysFromHashMap;
+import static backEND.backEND.getValuesFromHashMap;
+
 public class peakTimeAnalysisPage extends WelcomePage {
-
+    private JButton breakFastButton;
+    private JButton lunchButton;
+    private JButton dinnerButton;
+    private JPanel mypanel;
+    private JPanel centerlayout;
+    private JPanel buttonlayout;
+    private static int flag = 0;
+    public static int getFlag(){
+        return flag;
+    }
     public static String peakTime;
-
     public peakTimeAnalysisPage(){
-        JPanel mypanel = new JPanel();
-        mypanel.setLayout(new GridLayout(3,1));
+        breakFastButton = new JButton("break fast");
+        breakFastButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                flag = 0;
+            }
+        });
+        lunchButton = new JButton("Lunch");
+        lunchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                flag = 1;
+            }
+        });
+        dinnerButton = new JButton("Dinner");
+        dinnerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                flag = 2;
+            }
+        });
+        buttonlayout = new JPanel();
+        buttonlayout.setLayout(new FlowLayout(FlowLayout.CENTER,40,10));
+        buttonlayout.add(breakFastButton);
+        buttonlayout.add(lunchButton);
+        buttonlayout.add(dinnerButton);
+
+        centerlayout = new JPanel();
+        centerlayout.setLayout(new BorderLayout());
+        centerlayout.add(buttonlayout,BorderLayout.NORTH);
+        centerlayout.add(peakTimeAnalysisPage.plotAttendanceGraph(),BorderLayout.CENTER);
+
+        mypanel = new JPanel();
+        mypanel.setLayout(new GridLayout(3,1,30,30));
         mypanel.setBorder(new EmptyBorder(30,30,30,30));
         mypanel.add(peakTimeAnalysisPage.createBarGraph());
-        mypanel.add(peakTimeAnalysisPage.plotAttendanceGraph());
+        mypanel.add(centerlayout);
         mypanel.add(peakTimeAnalysisPage.pie());
+
         JScrollPane scrollpane = new JScrollPane(mypanel);
         centerPanel.setLayout(new GridLayout(1,1));
         centerPanel.add(scrollpane);
         frame.pack();
         frame.setLocationRelativeTo(null);
     }
-    public static void main(String[] args) {
-        new peakTimeAnalysisPage();
-    }
     public static ChartPanel createBarGraph() {
-        int[] totalCounts = new int[] { 10, 34, 25 };
+        ArrayList<Integer> totalCounts =ConnectionWithDatabase.numOfStudent();
+                //new int[] { 10, 34, 25 };
         // retrieveTotalCountsFromDatabase();
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        dataset.addValue(totalCounts[0], "Breakfast", "Breakfast");
-        dataset.addValue(totalCounts[1], "Lunch", "Lunch");
-        dataset.addValue(totalCounts[2], "Dinner", "Dinner");
+        dataset.addValue(totalCounts.get(0), "Breakfast", "Breakfast");
+        dataset.addValue(totalCounts.get(1), "Lunch", "Lunch");
+        dataset.addValue(totalCounts.get(2), "Dinner", "Dinner");
 
         JFreeChart chart = ChartFactory.createBarChart(
                 "Daily comparative graph : breakfast, lunch , dinner", // Chart title
@@ -78,9 +129,7 @@ public class peakTimeAnalysisPage extends WelcomePage {
         plot.setOutlinePaint(null); // Hide the plot outline
         plot.setRangeGridlinesVisible(true);
         plot.setRangeGridlinePaint(new Color(0, 0, 0)); // Set color of range gridlines
-
         // Customize X-axis
-
         // Customize Y-axis
         NumberAxis valueAxis = (NumberAxis) plot.getRangeAxis();
         valueAxis.setTickLabelFont(new Font("Arial", Font.PLAIN, 16));
@@ -111,6 +160,7 @@ public class peakTimeAnalysisPage extends WelcomePage {
         ChartFrame chartFrame = new ChartFrame("Bar Graph", chart);
         chartFrame.pack();
         ChartPanel myChartPanel = chartFrame.getChartPanel();
+        myChartPanel.setBorder(new LineBorder(Color.BLACK,5,true));
         return myChartPanel;
     }
 
@@ -125,9 +175,9 @@ public class peakTimeAnalysisPage extends WelcomePage {
         SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         SimpleDateFormat outputFormat = new SimpleDateFormat("HH:mm");
 
-        for (String timestamp : backEND.getTimestampData()) {
+        for (LocalTime timestamp : backEND.getTimestampData()) {
             try {
-                Date date = inputFormat.parse(timestamp);
+                Date date = inputFormat.parse(String.valueOf(timestamp));
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(date);
                 calendar.set(Calendar.SECOND, 0); // Reset seconds to zero
@@ -157,8 +207,6 @@ public class peakTimeAnalysisPage extends WelcomePage {
             Integer count = entry.getValue();
             dataset.addValue(count, "Attendance", interval);
         }
-
-
         // Create the chart
         JFreeChart chart = ChartFactory.createLineChart(
                 "Student Attendance",
@@ -188,41 +236,23 @@ public class peakTimeAnalysisPage extends WelcomePage {
         // Display the chart in a chartFrame
         ChartFrame chartFrame = new ChartFrame("Student Attendance Graph", chart);
         chartFrame.pack();
-        return chartFrame.getChartPanel();
+        ChartPanel myChartPanel = chartFrame.getChartPanel();
+        myChartPanel.setBorder(new LineBorder(Color.BLACK,5,true));
+        return myChartPanel;
 
-    }
-
-    private static String identifyPeakTime(List<String> timestampData) {
-
-        Map<String, Integer> timestampCountMap = new HashMap<>();
-
-        // Count the number of students for each timestamp
-        for (String timestamp : timestampData) {
-            timestampCountMap.put(timestamp, timestampCountMap.getOrDefault(timestamp, 0) + 1);
-        }
-
-        // Find the timestamp with the maximum student count
-        String peakTime = "";
-        int maxCount = 0;
-        for (Map.Entry<String, Integer> entry : timestampCountMap.entrySet()) {
-            String timestamp = entry.getKey();
-            Integer count = entry.getValue();
-            if (count > maxCount) {
-                maxCount = count;
-                peakTime = timestamp;
-            }
-        }
-        return peakTime;
     }
     //3 pie chart for number of students in each department analysis
     public static ChartPanel pie() {
         DefaultPieDataset dataset = new DefaultPieDataset();
-        String[] departments = {"Department A", "Department B", "Department C"};//amir give me the array of department
-        int[] studentCounts = {50, 75, 30};//ammmir give me te array of student count oy;
+        ConnectionWithDatabase.numofStudentInDepartment();
+        HashMap<String, Integer> studentInDepartment = numofStudentInDepartment();
+        ArrayList<String> departments = getKeysFromHashMap(studentInDepartment);
+        ArrayList<Integer> counts = getValuesFromHashMap(studentInDepartment);
+        for (int i = 0; i < departments.size(); i++) {
+            dataset.setValue(departments.get(i), counts.get(i));
 
-        for (int i = 0; i < departments.length; i++) {
-            dataset.setValue(departments[i], studentCounts[i]);
         }
+
 // Create the pie chart
         JFreeChart chart = ChartFactory.createPieChart(null, dataset, false, false, false);
 
@@ -239,10 +269,10 @@ public class peakTimeAnalysisPage extends WelcomePage {
         plot.setOutlineVisible(false);
         plot.setShadowPaint(null);
 
-        plot.setSectionPaint(departments[0], new Color(0, 123, 255)); // Set color for Department A
-        plot.setSectionPaint(departments[1], new Color(220, 53, 69)); // Set color for Department B
-        plot.setSectionPaint(departments[2], new Color(40, 167, 69)); // Set color for Department C
-        plot.setExplodePercent(departments[1], 0.1); // Explode Department B slice by 10%
+        plot.setSectionPaint(departments.get(0), new Color(0, 123, 255)); // Set color for Department A
+        plot.setSectionPaint(departments.get(1), new Color(220, 53, 69)); // Set color for Department B
+        plot.setSectionPaint(departments.get(2), new Color(40, 167, 69)); // Set color for Department C
+        plot.setExplodePercent(departments.get(1), 0.1); // Explode Department B slice by 10%
 
         plot.setLegendLabelGenerator(new StandardPieSectionLabelGenerator("{0} ({1})")); // Show department name and count in the legend
         plot.setLegendLabelToolTipGenerator(new StandardPieSectionLabelGenerator("{0} : {1}"));
@@ -265,14 +295,17 @@ public class peakTimeAnalysisPage extends WelcomePage {
                 g2.draw(roundedRectangle);
             }
         };
+        chartPanel.setBorder(new LineBorder(Color.BLACK,5,true));
         // Display the chart panel
         return chartPanel;
     }
-    backEND obj = new backEND();
-    double rating = obj.CalculateAverageRating();
-    backEND obj2 = new backEND();
-    int avg = obj2.averageStudentPresented();
-    backEND obj3=new backEND();
-    String busyTime= obj3.identifyPeakTime(backEND.getTimestampData());
+    //5th average number of students preseted  in a day per meal.
 
+
+    backEND obj = new backEND();
+    double rating = obj.CalculateAverageRating(); //average rating general information leykun
+    backEND obj2 = new backEND();
+    int avg = obj2.averageStudentPresented();//averageStudent General information leykun
+    backEND obj3=new backEND();
+    LocalTime busyTime= obj3.identifyPeakTime(backEND.getTimestampData()); //busy time general information leykun
 }
