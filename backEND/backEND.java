@@ -21,7 +21,7 @@ public class backEND {
         for (int rating : ratings) {
             sum += rating;
         }
-
+c
         return (double) sum / ratings.length;
     }
 
