@@ -72,7 +72,7 @@ public class GeneralInformationPage extends WelcomePage {
         gridContainer.add(LeastFavoriteFood);
         //---------------------------------------------------------------
         JPanel ratepanel = new JPanel();
-        int rateresult = peakTimeAnalysisPage.calculateAverageRating();
+        int rateresult = peakTimeAnalysisPage.CalculateAverageRating();
         JLabel mylabel = new JLabel();
         mylabel.setText("Rating From Students: "+RatingIcon.getIcon(rateresult).getText());
         mylabel.setFont(new Font("Helvici", Font.BOLD,25));

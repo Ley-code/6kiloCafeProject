@@ -1,10 +1,10 @@
 package GUI.Admin;
 //daily comparative graph : breakfast, lunch , dinner
+import backEND.backEND;
+
 
 
 import Database.ConnectionWithDatabase;
-import cafe.backEND;
-
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.ChartPanel;
@@ -34,12 +34,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.RoundRectangle2D;
-import java.security.PublicKey;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.List;
 
 import java.util.*;
+
+import static Database.ConnectionWithDatabase.numofStudentInDepartment;
+import static backEND.backEND.getKeysFromHashMap;
+import static backEND.backEND.getValuesFromHashMap;
 
 public class peakTimeAnalysisPage extends WelcomePage {
     private JButton breakFastButton;
@@ -100,12 +104,13 @@ public class peakTimeAnalysisPage extends WelcomePage {
         frame.setLocationRelativeTo(null);
     }
     public static ChartPanel createBarGraph() {
-        int[] totalCounts = new int[] { 10, 34, 25 };
+        ArrayList<Integer> totalCounts =ConnectionWithDatabase.numOfStudent();
+                //new int[] { 10, 34, 25 };
         // retrieveTotalCountsFromDatabase();
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        dataset.addValue(totalCounts[0], "Breakfast", "Breakfast");
-        dataset.addValue(totalCounts[1], "Lunch", "Lunch");
-        dataset.addValue(totalCounts[2], "Dinner", "Dinner");
+        dataset.addValue(totalCounts.get(0), "Breakfast", "Breakfast");
+        dataset.addValue(totalCounts.get(1), "Lunch", "Lunch");
+        dataset.addValue(totalCounts.get(2), "Dinner", "Dinner");
 
         JFreeChart chart = ChartFactory.createBarChart(
                 "Daily comparative graph : breakfast, lunch , dinner", // Chart title
@@ -170,9 +175,9 @@ public class peakTimeAnalysisPage extends WelcomePage {
         SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         SimpleDateFormat outputFormat = new SimpleDateFormat("HH:mm");
 
-        for (String timestamp : backEND.getTimestampData()) {
+        for (LocalTime timestamp : backEND.getTimestampData()) {
             try {
-                Date date = inputFormat.parse(timestamp);
+                Date date = inputFormat.parse(String.valueOf(timestamp));
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(date);
                 calendar.set(Calendar.SECOND, 0); // Reset seconds to zero
@@ -239,12 +244,15 @@ public class peakTimeAnalysisPage extends WelcomePage {
     //3 pie chart for number of students in each department analysis
     public static ChartPanel pie() {
         DefaultPieDataset dataset = new DefaultPieDataset();
-        String[] departments = {"Department A", "Department B", "Department C"};//amir give me the array of department
-        int[] studentCounts = {50, 75, 30};//ammmir give me te array of student count oy;
+        ConnectionWithDatabase.numofStudentInDepartment();
+        HashMap<String, Integer> studentInDepartment = numofStudentInDepartment();
+        ArrayList<String> departments = getKeysFromHashMap(studentInDepartment);
+        ArrayList<Integer> counts = getValuesFromHashMap(studentInDepartment);
+        for (int i = 0; i < departments.size(); i++) {
+            dataset.setValue(departments.get(i), counts.get(i));
 
-        for (int i = 0; i < departments.length; i++) {
-            dataset.setValue(departments[i], studentCounts[i]);
         }
+
 // Create the pie chart
         JFreeChart chart = ChartFactory.createPieChart(null, dataset, false, false, false);
 
@@ -261,10 +269,10 @@ public class peakTimeAnalysisPage extends WelcomePage {
         plot.setOutlineVisible(false);
         plot.setShadowPaint(null);
 
-        plot.setSectionPaint(departments[0], new Color(0, 123, 255)); // Set color for Department A
-        plot.setSectionPaint(departments[1], new Color(220, 53, 69)); // Set color for Department B
-        plot.setSectionPaint(departments[2], new Color(40, 167, 69)); // Set color for Department C
-        plot.setExplodePercent(departments[1], 0.1); // Explode Department B slice by 10%
+        plot.setSectionPaint(departments.get(0), new Color(0, 123, 255)); // Set color for Department A
+        plot.setSectionPaint(departments.get(1), new Color(220, 53, 69)); // Set color for Department B
+        plot.setSectionPaint(departments.get(2), new Color(40, 167, 69)); // Set color for Department C
+        plot.setExplodePercent(departments.get(1), 0.1); // Explode Department B slice by 10%
 
         plot.setLegendLabelGenerator(new StandardPieSectionLabelGenerator("{0} ({1})")); // Show department name and count in the legend
         plot.setLegendLabelToolTipGenerator(new StandardPieSectionLabelGenerator("{0} : {1}"));
@@ -291,52 +299,13 @@ public class peakTimeAnalysisPage extends WelcomePage {
         // Display the chart panel
         return chartPanel;
     }
-    //4th rating system
-    public static int calculateAverageRating() {
-        int[] ratings = { 4, 5, 3, 2, 4, 5 };//amir
-        int sum = 0;
-
-        for (int rating : ratings) {
-            sum += rating;
-        }
-        return sum / ratings.length;
-    }
     //5th average number of students preseted  in a day per meal.
-    public static int averageStudentPresented(){
-        ArrayList<Integer> students = ConnectionWithDatabase.numOfStudent();
-        int sum=0;
-        for(int i=0; i< students.size();i++){
-            sum+= students.get(i);
 
-        }
-        return sum/students.size();
-    }
-    private static String identifyPeakTime(List<String> timestampData) {
 
-        Map<String, Integer> timestampCountMap = new HashMap<>();
-
-        // Count the number of students for each timestamp
-        for (String timestamp : timestampData) {
-            timestampCountMap.put(timestamp, timestampCountMap.getOrDefault(timestamp, 0) + 1);
-        }
-
-        // Find the timestamp with the maximum student count
-        String peakTime = "";
-        int maxCount = 0;
-        for (Map.Entry<String, Integer> entry : timestampCountMap.entrySet()) {
-            String timestamp = entry.getKey();
-            Integer count = entry.getValue();
-            if (count > maxCount) {
-                maxCount = count;
-                peakTime = timestamp;
-            }
-        }
-        return peakTime;
-    }
     backEND obj = new backEND();
-    double rating = obj.CalculateAverageRating();
+    double rating = obj.CalculateAverageRating(); //average rating general information leykun
     backEND obj2 = new backEND();
-    int avg = obj2.averageStudentPresented();
+    int avg = obj2.averageStudentPresented();//averageStudent General information leykun
     backEND obj3=new backEND();
-    String busyTime= obj3.identifyPeakTime(backEND.getTimestampData());
+    LocalTime busyTime= obj3.identifyPeakTime(backEND.getTimestampData()); //busy time general information leykun
 }
