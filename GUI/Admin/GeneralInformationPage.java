@@ -1,7 +1,5 @@
 package GUI.Admin;
 
-import GUI.Student.RatingIcon;
-
 import java.awt.*;
 
 import javax.swing.*;
@@ -21,6 +19,7 @@ public class GeneralInformationPage extends WelcomePage {
         AverageStudent.setOpaque(true);
         AverageStudent.setHorizontalAlignment(SwingConstants.CENTER);
         AverageStudent.setVerticalAlignment(SwingConstants.CENTER);
+        //----------------------------------------------------------
         JPanel averagePanel = new JPanel();
         averagePanel.setLayout(new GridLayout(2,1));
         averagePanel.add(AverageStudent);
@@ -31,7 +30,7 @@ public class GeneralInformationPage extends WelcomePage {
         averageValueLabel.setFont(new Font("Helvici",Font.BOLD,20));
         averagePanel.setBackground(new Color(24, 26, 79));
         averagePanel.add(averageValueLabel);
-
+        //----------------------------------------------------------
 
         FavoriteFood = new JLabel();
         FavoriteFood.setText("Favorite Food");
@@ -71,19 +70,19 @@ public class GeneralInformationPage extends WelcomePage {
         gridContainer.add(FavoriteFood);
         gridContainer.add(BusyDay);
         gridContainer.add(LeastFavoriteFood);
-
+        //---------------------------------------------------------------
         JPanel ratepanel = new JPanel();
         int rateresult = peakTimeAnalysisPage.calculateAverageRating();
         JLabel mylabel = new JLabel();
         mylabel.setText("Rating From Students: "+RatingIcon.getIcon(rateresult).getText());
         mylabel.setFont(new Font("Helvici", Font.BOLD,25));
-        mylabel.setOpaque(true);
+        mylabel.setOpaque(true);                               //displays the rating
         mylabel.setForeground(Color.YELLOW);
         mylabel.setBackground(new Color(24, 26, 79));
         mylabel.setHorizontalAlignment(SwingConstants.CENTER);
         ratepanel.setBackground(new Color(32,35,133));
         ratepanel.add(mylabel);
-
+        //---------------------------------------------------------------
         centerPanel.setLayout(new BorderLayout());
         centerPanel.setBackground(new Color(32, 35, 133));
         centerPanel.add(gridContainer,BorderLayout.CENTER);
