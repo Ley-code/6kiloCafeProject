@@ -37,7 +37,6 @@ import java.awt.geom.RoundRectangle2D;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
-import java.util.List;
 
 import java.util.*;
 
@@ -45,7 +44,7 @@ import static Database.ConnectionWithDatabase.numofStudentInDepartment;
 import static backEND.backEND.getKeysFromHashMap;
 import static backEND.backEND.getValuesFromHashMap;
 
-public class peakTimeAnalysisPage extends WelcomePage {
+public class graphAndChartPage extends WelcomePage {
     private JButton breakFastButton;
     private JButton lunchButton;
     private JButton dinnerButton;
@@ -57,7 +56,7 @@ public class peakTimeAnalysisPage extends WelcomePage {
         return flag;
     }
     public static String peakTime;
-    public peakTimeAnalysisPage(){
+    public graphAndChartPage(){
         breakFastButton = new JButton("break fast");
         breakFastButton.addActionListener(new ActionListener() {
             @Override
@@ -88,14 +87,14 @@ public class peakTimeAnalysisPage extends WelcomePage {
         centerlayout = new JPanel();
         centerlayout.setLayout(new BorderLayout());
         centerlayout.add(buttonlayout,BorderLayout.NORTH);
-        centerlayout.add(peakTimeAnalysisPage.plotAttendanceGraph(),BorderLayout.CENTER);
+        centerlayout.add(graphAndChartPage.plotAttendanceGraph(),BorderLayout.CENTER);
 
         mypanel = new JPanel();
         mypanel.setLayout(new GridLayout(3,1,30,30));
         mypanel.setBorder(new EmptyBorder(30,30,30,30));
-        mypanel.add(peakTimeAnalysisPage.createBarGraph());
+        mypanel.add(graphAndChartPage.createBarGraph());
         mypanel.add(centerlayout);
-        mypanel.add(peakTimeAnalysisPage.pie());
+        mypanel.add(graphAndChartPage.pie());
 
         JScrollPane scrollpane = new JScrollPane(mypanel);
         centerPanel.setLayout(new GridLayout(1,1));
