@@ -1,7 +1,6 @@
 package GUI.Admin;
 
 import GUI.Admin.FoodListPageFolder.FoodManagementPage;
-import GUI.Admin.FoodListPageFolder.NewFoodListPage;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -92,7 +91,7 @@ public class WelcomePage {
           
         @Override
         public void actionPerformed(ActionEvent e){
-            new peakTimeAnalysisPage();
+            new graphAndChartPage();
             frame.dispose();
         }
         });
