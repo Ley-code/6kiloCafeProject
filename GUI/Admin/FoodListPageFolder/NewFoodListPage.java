@@ -1,5 +1,6 @@
 package GUI.Admin.FoodListPageFolder;
 
+import Database.ConnectionWithDatabase;
 import GUI.Admin.ButtonStyle;
 import GUI.Admin.WelcomePage;
 
@@ -22,6 +23,7 @@ public class NewFoodListPage {
     private JPanel centerPanel;
     public static String[][] FoodNames = {{"Firfir","Aynet","cake"},{"Bread with marmlade","alicha", "siga wot"},{"firfir", "dinch wot", "siga wot"},
             {"Kinche","Key wot","ThereFore"},{"Burger","salad","pizza"},{"amrogn","chicken","shiro wot"},{"Enkulal","French fries","Rice"}};
+    public static int daynum;
     public static void main(String[] args) {
     	new NewFoodListPage();
     }
@@ -50,8 +52,9 @@ public class NewFoodListPage {
         // -----------------------------------
         ArrayList<NewFoodListPanel> dayPanels = new ArrayList<NewFoodListPanel>();
         for(int i = 0;i< 7;i++){ //for the seven days
-                NewFoodListPanel  dayPanel = new NewFoodListPanel(FoodNames[i][0], FoodNames[i][1],FoodNames[i][2]);
+                NewFoodListPanel dayPanel = new NewFoodListPanel(FoodNames[i][0], FoodNames[i][1],FoodNames[i][2]);
                 dayPanels.add(dayPanel);
+                daynum = i;
             }
         // Set actions for the buttons
         mondayButton.addActionListener(new ActionListener() {
@@ -169,13 +172,6 @@ public class NewFoodListPage {
     public void hideDayPanel(NewFoodListPanel dayPanel) {
 		dayPanel.count = 0;
 		dayPanel.setVisible(false);
-    }
-    public void resizeButton(ArrayList<JButton> dayButtons) {
-    	// DOESN'T WORK YET BUT IT IS GOING TO BE USED TO RESIZE THE BUTTONS FOR WHEN THEY ARE CLICKED
-    	// It is a bug I will fix later.
-        for (int i = 0; i < dayButtons.size(); i++) {
-        	dayButtons.get(i).setMaximumSize(new Dimension(Short.MAX_VALUE, Short.MAX_VALUE));
-        }
     }
 
 }

@@ -1,26 +1,39 @@
 package GUI.Admin;
 
+import Database.ConnectionWithDatabase;
 import backEND.backEND;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class PollPage extends WelcomePage {
-    private static Map<String, List<String>> polls;
+    private static JList<String> resultList;
+    private static DefaultListModel<String> resultListModel;
     private static String pollQuestion;
+    private static HashMap<String,String[]> questionMap;
+    private static String[] questioninstring;
     PollPage(){
-
         // Create a title label and set its properties
         JLabel titleLabel = new JLabel("Poll Creation");
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 18));
-
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 30));
+        titleLabel.setForeground(Color.WHITE);
+        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        JPanel titlepanel = new JPanel();
+        titlepanel.add(titleLabel);
         // Create three buttons
         JButton createPollButton = new JButton("Create Poll");
+        createPollButton.setFocusable(false);
+        createPollButton.setFont(new Font("Arial",Font.PLAIN,20));
+        createPollButton.setBackground(Color.cyan);
         createPollButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -28,30 +41,56 @@ public class PollPage extends WelcomePage {
             }
         });
         JButton viewResultsButton = new JButton("View Results");
-        JButton cancelButton = new JButton("Cancel");
+        viewResultsButton.setFocusable(false);
+        viewResultsButton.setFont(new Font("Arial",Font.PLAIN,20));
+        viewResultsButton.setBackground(Color.cyan);
 
-        // Create a panel for the buttons and set its layout
+        JButton cancelButton = new JButton("Cancel");
+        cancelButton.setFocusable(false);
+        cancelButton.setFont(new Font("Arial",Font.PLAIN,20));
+        cancelButton.setBackground(Color.cyan);
+        // Create a panel to hold both title and button panels
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
-        buttonPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        buttonPanel.setLayout(new GridLayout(4,1,10,30));
+        buttonPanel.setBackground(new Color(24, 26, 79));
+        buttonPanel.add(titleLabel);
         buttonPanel.add(createPollButton);
-        buttonPanel.add(Box.createVerticalStrut(20)); // Add some vertical space
         buttonPanel.add(viewResultsButton);
-        buttonPanel.add(Box.createVerticalStrut(20)); // Add some vertical space
         buttonPanel.add(cancelButton);
 
-        // Create a panel for the title and set its layout
-        JPanel titlePanel = new JPanel();
-        titlePanel.setLayout(new BorderLayout());
-        titlePanel.add(titleLabel, BorderLayout.NORTH);
-
-        // Create a panel to hold both title and button panels
-        JPanel mainPanel = new JPanel(new BorderLayout());
-        mainPanel.add(titlePanel, BorderLayout.NORTH);
-        mainPanel.add(buttonPanel, BorderLayout.WEST);
+        questionMap = ConnectionWithDatabase.pollOptionDisplay();
+        questioninstring = questionMap.keySet().toArray(new String[0]);
+        //----------------------------------------------
+        //access the questions list by for loop to put in string
 
         // Set the content pane to the main panel
-        centerPanel.add(mainPanel);
+
+        resultListModel = new DefaultListModel<>();
+        for(int i = 0; i<questioninstring.length;i++){
+            resultListModel.addElement(questioninstring[i]);
+        }
+        resultListModel.setSize(50);
+        resultList = new JList<>(resultListModel);
+        resultList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        resultList.setBackground(Color.WHITE);
+        resultList.setVisible(false);
+        resultList.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                displayOptions();
+            }
+        });
+
+        centerPanel.setLayout(new GridLayout(2,1));
+        centerPanel.add(buttonPanel);
+        centerPanel.add(resultList);
+        centerPanel.setBackground(new Color(24, 26, 79));
+        viewResultsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                resultList.setVisible(true);
+            }
+        });
 
         // Center the frame on the screen
     }
@@ -59,21 +98,41 @@ public class PollPage extends WelcomePage {
     private static void createPoll() {
         pollQuestion = JOptionPane.showInputDialog("Enter Poll Question:");
         if (pollQuestion != null && !pollQuestion.trim().isEmpty()) {
-            String[] options = JOptionPane.showInputDialog("Enter Poll Options (comma-separated):").split(",");
+            String[] options = JOptionPane.showInputDialog("Enter Poll Options (comma-separated): not more than 4").split(",");
             List<String> pollOptions = new ArrayList<>();
             for (String option : options) {
                 pollOptions.add(option.trim());
             }
+            //---------------------------------------------------------------------------------------
             backEND.Poll poll= new backEND.Poll(pollQuestion, (ArrayList<String>) pollOptions);
-            polls.put(pollQuestion, pollOptions);
+            ConnectionWithDatabase.pollTableCreator(poll.getOptions(),poll.getQuestion());    //passes the options and question to be stored in the database
+            //----------------------------------------------------------------------------------------
+            //polls.put(pollQuestion, pollOptions);
             //pollListModel.addElement(pollQuestion);
             JOptionPane.showMessageDialog(null, "Poll created successfully!");
         }
     }
-    //---------------------------------------------------------------------
-    public static String getPollQuestion(){
-        return pollQuestion;
-        //currently not working you can remove it
+    private static void displayOptions() {
+        StringBuilder message = new StringBuilder("Option Counts:\n");
+        //ConnectionWithDatabase.voteExtractor()
+        int selectedQuestionIndex = resultList.getSelectedIndex();
+        if (selectedQuestionIndex != -1) {
+            String selectedQuestion = resultListModel.getElementAt(selectedQuestionIndex);
+            //setQuestion(selectedQuestion);
+            System.out.println(selectedQuestion);
+            message.append(selectedQuestion+"\n");
+            String[] options = questionMap.get(selectedQuestion);
+            ArrayList<String> toarray = new ArrayList<>();
+            for(int i = 0; i<options.length;i++){
+                toarray.add(options[i]);
+            }
+            int[] voteresult = ConnectionWithDatabase.voteExtractor(toarray,selectedQuestion);
+            message.append("Total Vote"+voteresult[4]+"\n");
+            for(int i = 0; i<4;i++){
+                message.append(options[i]+" : "+voteresult[i]+"\n");
+            }
+        }
+        JOptionPane.showMessageDialog(null,message.toString(),"Result",JOptionPane.INFORMATION_MESSAGE);
     }
     public static void main(String[] args) {
         new PollPage();

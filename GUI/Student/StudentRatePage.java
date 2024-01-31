@@ -1,13 +1,11 @@
 package GUI.Student;
-
-import GUI.Admin.RatingIcon;
-
+import Database.ConnectionWithDatabase;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class RateClass extends JFrame implements ActionListener {
+public class StudentRatePage extends JFrame implements ActionListener {
     JPanel ratePanel;
     JPanel topPanel;
     JLabel label_1;
@@ -19,9 +17,7 @@ public class RateClass extends JFrame implements ActionListener {
     JRadioButton five;
     JMenu Menu;
     JMenuBar MenuBar;
-    RateClass(){
-        setSize(600,700);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    StudentRatePage(){
 
         one = RatingIcon.getIcon(1);
         one.addActionListener(this);
@@ -57,11 +53,6 @@ public class RateClass extends JFrame implements ActionListener {
 
         topPanel = new JPanel();
         topPanel.add(label_1);
-        setLayout(new BorderLayout(5,5));
-        add(ratePanel,BorderLayout.CENTER);
-        add(topPanel,BorderLayout.NORTH);
-
-
 
         MenuBar = new JMenuBar();
         Menu = new JMenu("Menu");
@@ -76,28 +67,34 @@ public class RateClass extends JFrame implements ActionListener {
                 dispose();
             }
         });
-
-
+        setSize(600,700);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new BorderLayout(5,5));
+        add(ratePanel,BorderLayout.CENTER);
+        add(topPanel,BorderLayout.NORTH);
         setJMenuBar(MenuBar);
         setLocationRelativeTo(null);
         setVisible(true);
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
+        //---------------------------------------------------------------------
         if(e.getSource()==one){
-            System.out.println("");
+            ConnectionWithDatabase.addRating(1);
         } else if(e.getSource()==two){
-            System.out.println("");
-        } else if (e.getSource()==three) {
-            System.out.println("");
+            ConnectionWithDatabase.addRating(2);
+        } else if (e.getSource()==three) {                      //sends the rating to the database
+            ConnectionWithDatabase.addRating(3);
         } else if (e.getSource()==four) {
-            System.out.println("");
+            ConnectionWithDatabase.addRating(4);
         } else if (e.getSource()==five) {
-            System.out.println("");
+            ConnectionWithDatabase.addRating(5);
         }
+        //---------------------------------------------------------------------
     }
 
     public static void main(String[] args) {
-        new RateClass();
+        new StudentRatePage();
     }
 }

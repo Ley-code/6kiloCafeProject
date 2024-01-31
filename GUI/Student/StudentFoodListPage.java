@@ -22,17 +22,6 @@ public class StudentFoodListPage extends JFrame {
         JScrollPane scrollPane = new JScrollPane(new NewFoodListPage().NewFoodListPage());
         Foodpanel.add(scrollPane,BorderLayout.CENTER);
 
-
-        pollpanel =new NewStudentPollPanel().NewStudentPollPanel();
-
-
-
-
-        tabbedPane = new JTabbedPane();
-        tabbedPane.addTab("Food Lists", Foodpanel);
-        tabbedPane.addTab("Student poll", pollpanel);
-
-
         //create a menu bar
         JMenuBar MenuBar = new JMenuBar();
 
@@ -53,7 +42,7 @@ public class StudentFoodListPage extends JFrame {
 
         MenuBar.add(Menu);
         setJMenuBar(MenuBar);
-        add(tabbedPane);
+        add(Foodpanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800,800);
         setLocationRelativeTo(null);

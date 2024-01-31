@@ -1,6 +1,7 @@
 package backEND;
 
 import Database.ConnectionWithDatabase;
+
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,25 +12,29 @@ import static Database.ConnectionWithDatabase.timeForPeakAnalysis;
 
 public class backEND {
 //4th rating system
+    //------------------------------------------------------------------
     public static int CalculateAverageRating() {
         ArrayList<Integer> ratings = rateExtractor();
         int sum = 0;
-
         for (int rating : ratings) {
+
             sum += rating;
         }
         return sum / ratings.size();
     }
+    //------------------------------------------------------------------------
 //5th average student number :- line 30 retrieve data no student at each meal  and calculate the average
+    //---------------------------------------------------------------------
     public static int averageStudentPresented() {
         ArrayList<Integer> ASP = ConnectionWithDatabase.numOfStudent();
         int sum = 0;
         for (int i = 0; i < ASP.size(); i++) {
-            sum += ASP.get(i);
+            sum += ASP.get(i);                                 //SUCCESSFULLY INTEGRATED WITH GUI and Database
         }
         int average = sum / ASP.size();
         return average;
     }
+    //---------------------------------------------------------------------
 //6th  favorite food :- returns the food which get the highest choice in poll.retrieve data from conn...
     public static String FavoriteFood() {
         int[] totalCounts = new int[]{10, 34, 25};
@@ -44,6 +49,7 @@ public class backEND {
         }
         return food;
     }
+    //---------------------------------------------------------------------
 //7 least favorite food :- returns the food which get the lowest choice in poll
     public static String LeastFavorite() {
         int[] totalCounts = new int[]{10, 34, 45};
@@ -58,6 +64,7 @@ public class backEND {
         }
         return food;
     }
+    //---------------------------------------------------------------------
 //8 retrieving  data from the data base.
     public static ArrayList<LocalTime> getTimestampData() {
         ArrayList<LocalTime> timestampData = timeForPeakAnalysis();//timeForPeakAnalysis taken from database.
@@ -85,6 +92,7 @@ public class backEND {
         }
         return peakTime;
     }
+    //---------------------------------------------------------------------
 //10 used to extract the string(department  name) from the hashmap(numofStudentInDepartment)
 //used in pie(line 245)
     public static ArrayList<String> getKeysFromHashMap(HashMap<String, Integer> map) {
@@ -122,7 +130,19 @@ public static class Poll {
     public ArrayList<String> getOptions() {
         return options;
     }
-}
+}   public static ArrayList<Integer> rateResult(int selectedOption){
+        ArrayList<Integer> selectedOptionArray = new ArrayList<>();
+        for(int i= 0; i<4;i++){
+            if (i!=selectedOption){
+                selectedOptionArray.add(0);    //backend
+            }
+            else{
+                selectedOptionArray.add(1);
+            }
+        }
+        System.out.println(selectedOptionArray.toString());
+        return selectedOptionArray;
+    }
 }
 
 

@@ -1,7 +1,5 @@
 package GUI.Student;
 
-import GUI.Admin.FoodListPageFolder.NewFoodListPage;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,9 +9,9 @@ public class WelcomePageForStudents extends JFrame {
 
     JPanel Panel_1 = new JPanel();
     JPanel Panel_2 = new JPanel();
-    JButton button_1 = new JButton("Student Page");
-    JButton button_2 = new JButton("Food Page");
-    JButton button_3 = new JButton("Cafe Ratting");
+    JButton PollButton = new JButton("Poll page");
+    JButton FoodButton = new JButton("Food Page");
+    JButton rateButton = new JButton("Cafe Ratting");
     JLabel label_1 = new JLabel();
     JLabel label_2 = new JLabel("This is a Welcome Page for Students");
     JButton button_4 = new JButton("Poll Page");
@@ -29,11 +27,23 @@ public class WelcomePageForStudents extends JFrame {
 
         Panel_1.setBackground(new Color(179,168,238));
 
-        button_1.setBackground(new Color(1,0,7));
-        button_1.setForeground(Color.WHITE);
-        button_1.setSize(30,50);
-        button_1.setFont(new Font("Times New Roman", Font.ITALIC, 12));
-        button_1.addActionListener(new ActionListener() {
+        PollButton.setBackground(new Color(1,0,7));
+        PollButton.setForeground(Color.WHITE);
+        PollButton.setSize(30,50);
+        PollButton.setFont(new Font("Times New Roman", Font.ITALIC, 12));
+        PollButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new StudentPollPage();
+                dispose();
+            }
+        });
+
+        FoodButton.setBackground(new Color(1,0,7));
+        FoodButton.setForeground(Color.WHITE);
+        FoodButton.setSize(30,50);
+        FoodButton.setFont(new Font("Times New Roman", Font.ITALIC, 12));
+        FoodButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new StudentFoodListPage();
@@ -41,38 +51,14 @@ public class WelcomePageForStudents extends JFrame {
             }
         });
 
-        button_2.setBackground(new Color(1,0,7));
-        button_2.setForeground(Color.WHITE);
-        button_2.setSize(30,50);
-        button_2.setFont(new Font("Times New Roman", Font.ITALIC, 12));
-        button_2.addActionListener(new ActionListener() {
+        rateButton.setBackground(new Color(1,0,7));
+        rateButton.setForeground(Color.WHITE);
+        rateButton.setMargin(new Insets(10,100,100,100));
+        rateButton.setFont(new Font("Times New Roman", Font.ITALIC, 12));
+        rateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new NewFoodListPage();
-                dispose();
-            }
-        });
-
-        button_3.setBackground(new Color(1,0,7));
-        button_3.setForeground(Color.WHITE);
-        button_3.setMargin(new Insets(10,100,100,100));
-        button_3.setFont(new Font("Times New Roman", Font.ITALIC, 12));
-        button_3.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new RateClass();
-                dispose();
-            }
-        });
-
-        button_4.setBackground(new Color(1,0,7));
-        button_4.setForeground(Color.WHITE);
-        button_4.setSize(30,50);
-        button_4.setFont(new Font("Times New Roman", Font.ITALIC, 12));
-        button_4.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new NewStudentPollPanel();
+                new StudentRatePage();
                 dispose();
             }
         });
@@ -82,11 +68,11 @@ public class WelcomePageForStudents extends JFrame {
         add(Panel_2,BorderLayout.CENTER);
         add(label_2,BorderLayout.NORTH);
         Panel_1.setLayout(new GridLayout(3,1));
-        Panel_1.add(button_1);
-        Panel_1.add(button_2);
-        Panel_1.add(button_3);
+        Panel_1.add(PollButton);
+        Panel_1.add(FoodButton);
+        Panel_1.add(rateButton);
         Panel_2.add(label_1);
-        ImageIcon photo = new ImageIcon("C:\\Users\\hp\\OneDrive\\Desktop\\Final_Project\\6kiloCafeProject\\GUI\\icons\\cafeImage.jfif");
+        ImageIcon photo = new ImageIcon("GUI\\icons\\cafeImage.jfif");
         label_1.setIcon(photo);
         label_2.setFont(new Font("Times New Roman", Font.ITALIC, 24));
         label_2.setForeground(Color.BLACK);
