@@ -23,7 +23,7 @@ public class NewFoodListPage {
     private JPanel centerPanel;
     public static String[][] FoodNames = {{"Firfir","Aynet","cake"},{"Bread with marmlade","alicha", "siga wot"},{"firfir", "dinch wot", "siga wot"},
             {"Kinche","Key wot","ThereFore"},{"Burger","salad","pizza"},{"amrogn","chicken","shiro wot"},{"Enkulal","French fries","Rice"}};
-    public static int daynum;
+    public static int daynum = 0;
     public static void main(String[] args) {
     	new NewFoodListPage();
     }
@@ -52,9 +52,10 @@ public class NewFoodListPage {
         // -----------------------------------
         ArrayList<NewFoodListPanel> dayPanels = new ArrayList<NewFoodListPanel>();
         for(int i = 0;i< 7;i++){ //for the seven days
+                daynum = i;
                 NewFoodListPanel dayPanel = new NewFoodListPanel(FoodNames[i][0], FoodNames[i][1],FoodNames[i][2]);
                 dayPanels.add(dayPanel);
-                daynum = i;
+
             }
         // Set actions for the buttons
         mondayButton.addActionListener(new ActionListener() {
