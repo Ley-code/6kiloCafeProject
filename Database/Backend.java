@@ -1,13 +1,13 @@
 package Database;
 
-import GUI.Student.StudentSignInPage;
+import GUI.Student.StudentSignUpPage;
 
 import java.io.IOException;
 import java.sql.SQLException;
 
 
 public class Backend {
-    // we should put the RFID scanned ID as a private static in the class.
+// we should put the RFID scanned ID as a private static in the class.
     public static String stuID;
     public static String studentName;
     public static String password;
@@ -18,8 +18,11 @@ public class Backend {
     // This method would be called in the action listener of the scan Your ID button.
     // Remember the Action Listener there must also have a public variable called scanType-->
     //Which is initially zero.
+// This method would be called in the action listener of the scan Your ID button.
+// Remember the Action Listener there must also have a public variable called scanType-->
+//Which is initially zero.
     public static void scan() throws InterruptedException, IOException, SQLException {
-        if (StudentSignInPage.scanType % 2 == 0){
+        if (StudentSignUpPage.scanType % 2 == 0){
             ESPcommunication thread = new ESPcommunication();
             System.out.println("I am creating new thread for you to run");
             thread.start();
@@ -31,8 +34,8 @@ public class Backend {
             Thread.sleep(10);
         }
     }
-    // This method check if an Id is already registered in the database.
-    // This method is used in many other methods.
+// This method check if an Id is already registered in the database.
+// This method is used in many other methods.
     public static boolean existanceChecker(String stuID) throws SQLException {
         if (ConnectionWithDatabase.idsForSignUp().contains(stuID)) {
             return true;

@@ -1,6 +1,6 @@
 package GUI.Admin;
 
-import GUI.Student.StudentSignInPage;
+import GUI.Student.StudentSignUpPage;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -12,18 +12,18 @@ public class LoginPage implements ActionListener {
     IdandPassword myid = new IdandPassword();
     //-----------------------------------------------------
     //all the objects below are used for making the GUI Components
-    JFrame frame = new JFrame();
-    JButton signInButton;
-    JButton loginButton;
-    JButton resetButton;
-    JTextField userIDField = new JTextField();
-    JPasswordField userPasswordField = new JPasswordField();
-    JLabel userIDLabel = new JLabel("Admin ID:");
-    JLabel userPasswordLabel = new JLabel("Admin Password:");
-    JLabel messageLabel = new JLabel();
-    JLabel Title = new JLabel();
-    JLabel createAccountMessage = new JLabel("Are you a Student?");
-    JPanel foreground = new JPanel();
+    private JFrame frame = new JFrame();
+    private JButton signInButton;
+    private JButton loginButton;
+    private JButton resetButton;
+    private JTextField userIDField = new JTextField();
+    private JPasswordField userPasswordField = new JPasswordField();
+    private JLabel userIDLabel = new JLabel("Admin ID:");
+    private JLabel userPasswordLabel = new JLabel("Admin Password:");
+    private JLabel messageLabel = new JLabel();
+    private JLabel Title = new JLabel();
+    private JLabel createAccountMessage = new JLabel("Are you a Student?");
+    private JPanel foreground = new JPanel();
     //--------------------------------------------
     public LoginPage() {
         //--------------------------------------------------
@@ -82,7 +82,7 @@ public class LoginPage implements ActionListener {
         //----------------------------------------------------
 
         //adds the foreground panel which is used to store the above components and sets the background"
-        foreground.setBackground(new Color(24, 26, 79));
+        foreground.setBackground(new Color(0, 0, 0));
         foreground.setOpaque(true);
         foreground.setBounds(0, 0, 500, 500);
         foreground.setLayout(null);
@@ -100,30 +100,25 @@ public class LoginPage implements ActionListener {
 
         //finally we add the foreground panel to the Frame
         frame.add(foreground);
-        frame.setUndecorated(true); //removes the minimize,maximize and close tabs
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500, 400);
         frame.setLocationRelativeTo(null); //places it to center
         frame.setVisible(true);
-        frame.setResizable(true);
+        frame.setResizable(false);
         //----------------------------------------------------
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == resetButton) {
             userIDField.setText("");
             userPasswordField.setText("");
-            
             //resets the password and IDfield if a user makes a mistake
         }
         if (e.getSource() == loginButton) {
-            
             String userID = userIDField.getText();
             String userPassword = String.valueOf(userPasswordField.getPassword());
             //the above variables store the password and ID of the user
             //----------------------------------------------------
-
             //below the methods check if the user ID and Password matches and if it doesnt match shows the respective message
             //and if it matches opens a new welcome page as an admin
             if (myid.getLogInfo().containsKey(userID)) {
@@ -148,7 +143,7 @@ public class LoginPage implements ActionListener {
         }
         //if the user is a student it creates a studentsigninpage
         if (e.getSource() == signInButton) {
-            new StudentSignInPage();
+            new StudentSignUpPage();
             frame.dispose();
         }
     }

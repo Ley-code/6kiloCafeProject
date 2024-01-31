@@ -1,6 +1,5 @@
 package GUI.Admin.FoodListPageFolder;
 import Database.ConnectionWithDatabase;
-import GUI.Admin.ButtonStyle;
 import GUI.Admin.WelcomePage;
 
 import javax.swing.*;
@@ -15,8 +14,8 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class FoodManagementPage extends WelcomePage {
-    private JPanel panel1;
-    private JPanel panel2;
+    private JPanel mainpanel;
+    private JPanel sidepanel;
     private JButton previewButton;
     private JButton changeFoodButton;
     private final JComboBox datebox;
@@ -39,6 +38,8 @@ public class FoodManagementPage extends WelcomePage {
     private JPanel placeholder;
     private JPanel FoodInputHolder;
     private JPanel openButtonContainer;
+    private JPanel saveButtonContainer;
+    private JPanel bottompanel;
     public FoodManagementPage(){
         //----------------------------------------------------------
         datelabel = new JLabel("Date: ");
@@ -130,7 +131,6 @@ public class FoodManagementPage extends WelcomePage {
         openButtonContainer.setBackground(new Color(100, 178, 237));
         openButtonContainer.setLayout(new FlowLayout(FlowLayout.CENTER));
         OpenButton = new JButton("Open Image");
-
         OpenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -141,14 +141,12 @@ public class FoodManagementPage extends WelcomePage {
                 int response = fileChooser.showOpenDialog(null);
                 if(response==JFileChooser.APPROVE_OPTION){
                     ImagePath = fileChooser.getSelectedFile().getPath();
-                    //ImageLabel.setIcon(FoodIcon.scaledIcon(ImagePath,300,300));
                 }
             }
         });
         openButtonContainer.add(new JLabel("New Food Image: "));
         openButtonContainer.add(OpenButton);
-        //-----------------------------------------------------
-        JPanel placeholder3 = new JPanel();
+        saveButtonContainer = new JPanel();
         SaveButton = new JButton("Save");
         SaveButton.addActionListener(new ActionListener() {
             @Override
@@ -158,44 +156,40 @@ public class FoodManagementPage extends WelcomePage {
                 }
                 else{
                     ConnectionWithDatabase.imageAdder(FoodNameField.getText(),ImagePath,Date,Mealtime);
+                    //adds the selected image to the database
                     JOptionPane.showMessageDialog(null,"saved successfully","save",JOptionPane.INFORMATION_MESSAGE);  //sets the food name and food image to the array
-                    //-------------------------------------------------------------------
-                    //NewFoodListPage.setFoodName(Date,Mealtime,FoodNameField.getText());
-                    //NewFoodListPanel.setFoodImage(Date,Mealtime, ImagePath);        //worked with local data
-                    //-------------------------------------------------------------------
                 }
             }
         });
-        placeholder3.setLayout(new FlowLayout(FlowLayout.CENTER));
-        placeholder3.setBackground(new Color(23,56,121));
-        placeholder3.add(SaveButton);
+        saveButtonContainer.setLayout(new FlowLayout(FlowLayout.CENTER));
+        saveButtonContainer.setBackground(new Color(23,56,121));
+        saveButtonContainer.add(SaveButton);
         //-------------------------------------------------------
-        JPanel bottompanel = new JPanel();
+        bottompanel = new JPanel();
         bottompanel.setBackground(new Color(100, 178, 237));
         bottompanel.setLayout(new GridLayout(3,1));
         bottompanel.add(FoodInputHolder);
         bottompanel.add(openButtonContainer);           //the bottom panel which contains the save button label and the two inputs
-        bottompanel.add(placeholder3);
+        bottompanel.add(saveButtonContainer);
         bottompanel.setBorder(new LineBorder(Color.GRAY,2,true));
         //-------------------------------------------------------
-        panel1 = new JPanel();
-        panel1.setLayout(new BorderLayout());
-        panel1.setSize(500,1000);
-        panel1.setBorder(new EmptyBorder(new Insets(10,10,10,10)));
-        panel1.setBackground(new Color(90, 116, 204));
-        panel1.add(tempcont,BorderLayout.NORTH);
-        panel1.add(placeholder,BorderLayout.CENTER);
-        panel1.add(bottompanel,BorderLayout.SOUTH);
+        mainpanel = new JPanel();
+        mainpanel.setLayout(new BorderLayout());
+        mainpanel.setSize(500,1000);
+        mainpanel.setBorder(new EmptyBorder(new Insets(10,10,10,10)));
+        mainpanel.setBackground(new Color(90, 116, 204));
+        mainpanel.add(tempcont,BorderLayout.NORTH);
+        mainpanel.add(placeholder,BorderLayout.CENTER);
+        mainpanel.add(bottompanel,BorderLayout.SOUTH);
 
-        panel2 = new JPanel();
-        panel2.setSize(500,1000);
-        panel2.setBackground(Color.GRAY);
+        sidepanel = new JPanel();
+        sidepanel.setSize(500,1000);
+        sidepanel.setBackground(Color.cyan);
         //-------------------------------------------------------
         centerPanel.setLayout(new GridLayout(1,2));
-        centerPanel.add(panel1);
-        centerPanel.add(panel2);
+        centerPanel.add(mainpanel);
+        centerPanel.add(sidepanel);
         frame.setExtendedState(Frame.MAXIMIZED_BOTH);
-
     }
     public static void main(String[] args) {
         new FoodManagementPage();

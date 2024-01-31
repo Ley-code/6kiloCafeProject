@@ -7,6 +7,8 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -48,6 +50,19 @@ public class StudentPollPage {
         mainframe.add(mainPanel);
         mainframe.setSize(600,700);
         mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JMenuBar menuBar = new JMenuBar();
+        JMenu menu = new JMenu("Menu");
+        JMenuItem homeMenuItem = new JMenuItem("Home");
+        homeMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new WelcomePageForStudents();
+                mainframe.dispose();
+            }
+        });
+        menuBar.add(menu);
+        menu.add(homeMenuItem);
+        mainframe.setJMenuBar(menuBar);
         mainframe.setLocationRelativeTo(null);
         mainframe.setVisible(true);
     }
