@@ -1,6 +1,8 @@
 package GUI.Admin;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.*;
 
 import javax.swing.*;
@@ -12,18 +14,28 @@ public class AttendancePage extends WelcomePage {
 
     public AttendancePage() throws SQLException {
         // Create a table model with no data and column names
-        DefaultTableModel tableModel = new DefaultTableModel(new Object[][]{}, new Object[]{"Student_ID", "Studnet_Name", "Password", "Department", "Year","Breakfast", "Lunch", "Dinner"});
+        DefaultTableModel tableModel = new DefaultTableModel(new Object[][]{}, new Object[]{"Student_ID", "Student_Name", "Department", "Year","Breakfast", "Lunch", "Dinner"});
 
         // Create a JTable with the table model
         table = new JTable(tableModel);
-
+        table.setBackground(new Color(34,12,56));
+        table.setFont(new Font("Helvici", Font.BOLD,15));
+        table.setForeground(Color.WHITE);
+        // Create a JTable with the table model
+        table = new JTable(tableModel);
+        JButton updateButton = new JButton("Update");
+        updateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //this executes something on the databse all is you Amir
+            }
+        });
         // Create a JScrollPane to add the JTable to and make it scrollable
         JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setOpaque(false);
-        scrollPane.getViewport().setOpaque(false);
         loadDataFromDatabase(tableModel);
         centerPanel.setLayout(new BorderLayout());
-        centerPanel.add(scrollPane, BorderLayout.CENTER);
+        centerPanel.add(updateButton,BorderLayout.NORTH);
+        centerPanel.add(scrollPane,BorderLayout.CENTER);
         centerPanel.setBackground(Color.BLUE);
 
     }
@@ -37,15 +49,21 @@ public class AttendancePage extends WelcomePage {
         while (result.next()) {
             String studentID = result.getString(1);
             String studentName = result.getString(2);
-            String password = result.getString(3);
             String department = result.getString(4);
             String year = result.getString(5);
             System.out.println(studentID + " " + studentName);
             // Add the data to the table model
-            tableModel.addRow(new Object[]{studentID, studentName, password, department,year});
+            tableModel.addRow(new Object[]{studentID, studentName, department,year});
         }
         result.close();
         statement.close();
         myconnection.close();
+    }
+    public static void main(String[] args) {
+        try {
+            new AttendancePage();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 }

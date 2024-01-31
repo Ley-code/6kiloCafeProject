@@ -1,7 +1,6 @@
 package GUI.Student;
 
-import GUI.Admin.IdandPassword;
-import GUI.Admin.WelcomePage;
+import Database.ConnectionWithDatabase;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -10,8 +9,7 @@ import java.awt.*;
 import java.sql.SQLException;
 import java.util.HashMap;
 
-public class LoginPageForStudent extends Component implements ActionListener {
-    IdandPassword my_Id = new IdandPassword();
+public class LoginPageForStudent implements ActionListener {
     //-----------------------------------------------------
     //all the objects below are used for making the GUI Components
     JFrame frame = new JFrame();
@@ -25,6 +23,7 @@ public class LoginPageForStudent extends Component implements ActionListener {
     JLabel Title = new JLabel();
     JPanel foreground = new JPanel();
     JPanel topPanel = new JPanel();
+    public static String logInStudentID;
     //--------------------------------------------
     LoginPageForStudent() {
         //--------------------------------------------------
@@ -33,6 +32,7 @@ public class LoginPageForStudent extends Component implements ActionListener {
         Title.setBounds(150, 40, 30, 30);
         Title.setFont(new Font("ITALIC", Font.BOLD, 25));
         Title.setForeground(Color.BLACK);
+
 
         //it customizes the Admin ID text label
         userIDLabel.setText("Student Name: ");
@@ -75,7 +75,7 @@ public class LoginPageForStudent extends Component implements ActionListener {
 
         //----------------------------------------------------
 
-        //adds the foreground panel which is used to store the above components and sets the background"
+        //adds the foreground panel which is used to store the above components and sets the background
         foreground.setBackground(new Color(166, 165, 165));
         foreground.setOpaque(true);
         foreground.setBounds(0, 0, 500, 500);
@@ -106,40 +106,50 @@ public class LoginPageForStudent extends Component implements ActionListener {
         JMenuBar menuBar = new JMenuBar();
 
         // Create menus
-        JMenu editMenu = new JMenu("Home");
-        JMenu fileMenu = new JMenu("Setting");
+        JMenu Menu = new JMenu("Menu");
+        JMenu settingMenu = new JMenu("Setting");
         JMenu helpMenu = new JMenu("Help");
         JMenu exitMenu = new JMenu("Exit");
 
         // Create menu items
+        JMenuItem homeMenuItem = new JMenuItem("Home");
         JMenuItem NotificationMenuItem = new JMenuItem("Notification");
         JMenuItem privacyMenuItem = new JMenuItem("privacy");
 
 
         // Add action listeners to menu items
+        homeMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new WelcomePageForStudents();
+                frame.dispose();
+            }
+        });
         NotificationMenuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(LoginPageForStudent.this, "Notification Menu Item Clicked");
+                JOptionPane.showMessageDialog(null, "Notification Menu Item Clicked");
             }
         });
 
         privacyMenuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(LoginPageForStudent.this, "privacy Menu Item Clicked");
+                JOptionPane.showMessageDialog(null, "privacy Menu Item Clicked");
             }
         });
 
 
         // Add menu items to the File menu
-        fileMenu.add(NotificationMenuItem);
-        fileMenu.add(privacyMenuItem);
-        fileMenu.addSeparator(); // Adds a separator line
+        Menu.add(homeMenuItem);
+        settingMenu.add(NotificationMenuItem);
+        settingMenu.add(privacyMenuItem);
+        settingMenu.addSeparator(); // Adds a separator line
+
 
         // Add menus to the menu bar
-        menuBar.add(fileMenu);
-        menuBar.add(editMenu);
+        menuBar.add(settingMenu);
+        menuBar.add(Menu);
         menuBar.add(helpMenu);
         menuBar.add(exitMenu);
 
@@ -149,7 +159,6 @@ public class LoginPageForStudent extends Component implements ActionListener {
         frame.setResizable(true);
     }
 
-
     public void validateLogIn(String password, String userName) throws SQLException {
         HashMap<String, String> list = Database.ConnectionWithDatabase.idsForLogIn();
         System.out.println(list);
@@ -158,8 +167,9 @@ public class LoginPageForStudent extends Component implements ActionListener {
                 messageLabel.setForeground(Color.GREEN);
                 messageLabel.setText("Login Successful");
                 frame.dispose();
-                new StudentWelcomePage();
-            }else {
+                new StudentFoodListPage();
+                logInStudentID = ConnectionWithDatabase.getStudentID(userName);
+            } else {
                 messageLabel.setForeground(Color.RED);
                 messageLabel.setText("Wrong Password");
             }
@@ -175,24 +185,24 @@ public class LoginPageForStudent extends Component implements ActionListener {
             userIDField.setText("");
             userPasswordField.setText("");
 
-            //resets the password and IDfield if a user makes a mistake
         }
         if (e.getSource() == loginButton) {
-
             String userID = userIDField.getText();
             String userPassword = String.valueOf(userPasswordField.getPassword());
-            //the above variables store the password and ID of the user
-            //----------------------------------------------------
 
-            //below the methods check if the user ID and Password matches and if it doesnt match shows the respective message
-            //and if it matches opens a new welcome page as an admin
-            try {
-                validateLogIn(userPassword,userID);
-            } catch (SQLException ex) {
-                throw new RuntimeException(ex);
-            }
-            //----------------------------------------------------
+                //the above variables store the password and ID of the user
+                //----------------------------------------------------
+                //below the methods check if the user ID and Password matches and if it doesn't match shows the respective message
+                //and if it matches opens a new welcome page as an admin
+                try {
+                    validateLogIn(userPassword, userID);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+
+                }
+                //----------------------------------------------------
         }
-        //if the user is a student it creates a studentsigninpage
+            //if the user is a student it creates a studentSigninPage
+
     }
 }

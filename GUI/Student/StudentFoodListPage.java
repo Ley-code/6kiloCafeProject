@@ -1,30 +1,37 @@
 package GUI.Student;
 
 import GUI.Admin.FoodListPageFolder.NewFoodListPage;
-import javax.swing.*;
-import javax.swing.border.LineBorder;
-import java.awt.*;
 
-public class StudentWelcomePage extends JFrame {
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class StudentFoodListPage extends JFrame {
     JTabbedPane tabbedPane;
     JPanel Foodpanel;
     JPanel pollpanel;
 
-    StudentWelcomePage(){
+    StudentFoodListPage(){
         initialize();
     }
     private void initialize(){
+
         Foodpanel = new JPanel();
         Foodpanel.setLayout(new BorderLayout());
-        Foodpanel.add(new NewFoodListPage().NewFoodListPage(),BorderLayout.CENTER);
+        JScrollPane scrollPane = new JScrollPane(new NewFoodListPage().NewFoodListPage());
+        Foodpanel.add(scrollPane,BorderLayout.CENTER);
 
-        pollpanel = new JPanel();
-        pollpanel.setBorder(new LineBorder(Color.BLACK,2,true));
-        pollpanel.add(new StudentPollPanel().StudentPollPanel());
+
+        pollpanel =new NewStudentPollPanel().NewStudentPollPanel();
+
+
+
 
         tabbedPane = new JTabbedPane();
         tabbedPane.addTab("Food Lists", Foodpanel);
         tabbedPane.addTab("Student poll", pollpanel);
+
 
         //create a menu bar
         JMenuBar MenuBar = new JMenuBar();
@@ -33,21 +40,26 @@ public class StudentWelcomePage extends JFrame {
         JMenu Menu = new JMenu("Menu");
 
         // Create menu items
-        JMenuItem logOutMenuItem = new JMenuItem("logOut");
-        JMenuItem exitMenuItem = new JMenuItem("Exit");
-
-        Menu.add(logOutMenuItem);
-        Menu.add(exitMenuItem);
+        JMenuItem homeMenuItem = new JMenuItem("Home");
+        homeMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Show the home panel when "Home" is selected
+                new WelcomePageForStudents();
+                dispose();
+            }
+        });
+        Menu.add(homeMenuItem);
 
         MenuBar.add(Menu);
         setJMenuBar(MenuBar);
         add(tabbedPane);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(500,500);
+        setSize(800,800);
         setLocationRelativeTo(null);
         setVisible(true);
     }
     public static void main(String[] args) {
-        new StudentWelcomePage();
+        new StudentFoodListPage();
     }
 }

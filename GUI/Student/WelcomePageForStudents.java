@@ -1,7 +1,11 @@
 package GUI.Student;
 
+import GUI.Admin.FoodListPageFolder.NewFoodListPage;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class WelcomePageForStudents extends JFrame {
 
@@ -12,6 +16,7 @@ public class WelcomePageForStudents extends JFrame {
     JButton button_3 = new JButton("Cafe Ratting");
     JLabel label_1 = new JLabel();
     JLabel label_2 = new JLabel("This is a Welcome Page for Students");
+    JButton button_4 = new JButton("Poll Page");
     // Create a menu bar
     JMenuBar menuBar = new JMenuBar();
 
@@ -28,16 +33,49 @@ public class WelcomePageForStudents extends JFrame {
         button_1.setForeground(Color.WHITE);
         button_1.setSize(30,50);
         button_1.setFont(new Font("Times New Roman", Font.ITALIC, 12));
+        button_1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new StudentFoodListPage();
+                dispose();
+            }
+        });
 
         button_2.setBackground(new Color(1,0,7));
         button_2.setForeground(Color.WHITE);
         button_2.setSize(30,50);
         button_2.setFont(new Font("Times New Roman", Font.ITALIC, 12));
+        button_2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new NewFoodListPage();
+                dispose();
+            }
+        });
 
         button_3.setBackground(new Color(1,0,7));
         button_3.setForeground(Color.WHITE);
         button_3.setMargin(new Insets(10,100,100,100));
         button_3.setFont(new Font("Times New Roman", Font.ITALIC, 12));
+        button_3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new RateClass();
+                dispose();
+            }
+        });
+
+        button_4.setBackground(new Color(1,0,7));
+        button_4.setForeground(Color.WHITE);
+        button_4.setSize(30,50);
+        button_4.setFont(new Font("Times New Roman", Font.ITALIC, 12));
+        button_4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new NewStudentPollPanel();
+                dispose();
+            }
+        });
 
         setLayout(new BorderLayout(5,10));
         add(Panel_1,BorderLayout.WEST);
@@ -48,7 +86,7 @@ public class WelcomePageForStudents extends JFrame {
         Panel_1.add(button_2);
         Panel_1.add(button_3);
         Panel_2.add(label_1);
-        ImageIcon photo = new ImageIcon("C:\\Users\\hp\\Downloads\\Infosys.Electronic.City.Cafeteria.jfif", "Hello, Java Swing!");
+        ImageIcon photo = new ImageIcon("C:\\Users\\hp\\OneDrive\\Desktop\\Final_Project\\6kiloCafeProject\\GUI\\icons\\cafeImage.jfif");
         label_1.setIcon(photo);
         label_2.setFont(new Font("Times New Roman", Font.ITALIC, 24));
         label_2.setForeground(Color.BLACK);
@@ -79,7 +117,7 @@ public class WelcomePageForStudents extends JFrame {
 }
 
 
-class ImageLabel extends JLabel {
+/*class ImageLabel extends JLabel {
 
     private String text;
 
@@ -105,4 +143,4 @@ class ImageLabel extends JLabel {
             g2d.dispose();
         }
     }
-}
+}*/
