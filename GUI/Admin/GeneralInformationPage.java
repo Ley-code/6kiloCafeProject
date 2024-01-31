@@ -5,6 +5,7 @@ import GUI.Student.RatingIcon;
 import java.awt.*;
 
 import javax.swing.*;
+import backEND.backEND;
 
 public class GeneralInformationPage extends WelcomePage {
     JLabel AverageStudent;
@@ -25,7 +26,7 @@ public class GeneralInformationPage extends WelcomePage {
         JPanel averagePanel = new JPanel();
         averagePanel.setLayout(new GridLayout(2,1));
         averagePanel.add(AverageStudent);
-        JLabel averageValueLabel = new JLabel(""+backEND.backEND.averageStudentPresented());//data from backend
+        JLabel averageValueLabel = new JLabel(""+backEND.averageStudentPresented());//data from backend
         averageValueLabel.setHorizontalAlignment(SwingConstants.CENTER);
         averageValueLabel.setVerticalAlignment(SwingConstants.NORTH);
         averageValueLabel.setForeground(Color.WHITE);
@@ -35,7 +36,7 @@ public class GeneralInformationPage extends WelcomePage {
         //----------------------------------------------------------
 
         FavoriteFood = new JLabel();
-        FavoriteFood.setText("Favorite Food");
+        FavoriteFood.setText(backEND.highestNumberOfAtendance());
         FavoriteFood.setFont(new Font("Helvici", Font.BOLD, 25));
         FavoriteFood.setBackground(new Color(24, 26, 79));
         FavoriteFood.setOpaque(true);
@@ -74,7 +75,7 @@ public class GeneralInformationPage extends WelcomePage {
         gridContainer.add(LeastFavoriteFood);
         //---------------------------------------------------------------
         JPanel ratepanel = new JPanel();
-        int rateresult = backEND.backEND.CalculateAverageRating();
+        int rateresult = backEND.CalculateAverageRating();
         JLabel mylabel = new JLabel();
         mylabel.setText("Rating From Students: "+ RatingIcon.getIcon(rateresult).getText());
         mylabel.setFont(new Font("Helvici", Font.BOLD,25));

@@ -114,7 +114,6 @@ public class PollPage extends WelcomePage {
     }
     private static void displayOptions() {
         StringBuilder message = new StringBuilder("Option Counts:\n");
-        //ConnectionWithDatabase.voteExtractor()
         int selectedQuestionIndex = resultList.getSelectedIndex();
         if (selectedQuestionIndex != -1) {
             String selectedQuestion = resultListModel.getElementAt(selectedQuestionIndex);

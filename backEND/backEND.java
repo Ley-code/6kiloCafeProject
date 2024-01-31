@@ -51,18 +51,18 @@ public class backEND {
     }
     //---------------------------------------------------------------------
 //7 least favorite food :- returns the food which get the lowest choice in poll
-    public static String LeastFavorite() {
-        int[] totalCounts = new int[]{10, 34, 45};
-        String[] foodChoice = new String[]{"firfir", "dabo", "colo"};
-        int min = totalCounts[0];
+    public static String highestNumberOfAtendance() {
+        ArrayList<Integer> totalCounts =ConnectionWithDatabase.numOfStudent();//new int[]{10, 34, 45};
+        String[] foodChoice = new String[]{"BreakFast", "Lunch", "Dinner"};
+        int max = totalCounts.get(0);
         String food = null;
-        for (int i = 0; i < totalCounts.length; i++) {
-            if (totalCounts[i] <= min) {
-                min = totalCounts[i];
+        for (int i = 0; i < totalCounts.size(); i++) {
+            if (totalCounts.get(i) > max) {
+                max = totalCounts.get(i);
                 food = foodChoice[i];
             }
         }
-        return food;
+        return food +" : "+ max;
     }
     //---------------------------------------------------------------------
 //8 retrieving  data from the data base.
@@ -113,7 +113,7 @@ public class backEND {
         return values;
     }
 
-//12 poll create
+//12 poll. questions and options input for database from
 public static class Poll {
     private String question;
     private ArrayList<String> options;
