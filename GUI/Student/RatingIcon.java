@@ -1,4 +1,4 @@
-package GUI.Admin;
+package GUI.Student;
 
 import javax.swing.*;
 import java.awt.*;

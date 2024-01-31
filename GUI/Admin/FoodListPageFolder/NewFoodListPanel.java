@@ -1,6 +1,10 @@
 package GUI.Admin.FoodListPageFolder;
 
+import Database.ConnectionWithDatabase;
+
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.*;
 
@@ -33,33 +37,31 @@ public class NewFoodListPanel extends JPanel{
         this.setLayout(new GridLayout(3, 3, 10, 10));
         this.setVisible(false);
         this.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        
+        //--------------------------------------------------------------------------------------------
         for (int i = 0; i < 3; i++) {
             JLabel label = new JLabel(topSection[i], SwingConstants.CENTER);
             label.setBorder(BorderFactory.createLineBorder(Color.BLACK)); // Add border for clarity
-            this.add(label);
+            this.add(label);                                   //Top section it is constant
         }
-
-		FoodIcon myIcon = new FoodIcon();
+		//---------------------------------------------------------------------------------------------
+		//need which day it is
 		for(int i = 0;i<3;i++){
 			JLabel label = new JLabel();
-			label.setIcon(FoodIcon.scaledIcon(imagepath[0][i]));
-			label.setHorizontalAlignment(JLabel.CENTER);
+	//		label.setIcon(FoodIcon.scaledIcon(imagepath[NewFoodListPage.daynum][i]));
+			label.setHorizontalAlignment(JLabel.CENTER);                        //Middle section changes the image
 			label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 			this.add(label);
-		}
-        for (int i = 0; i < 3; i++) {
-            JLabel label = new JLabel(bottomSection[i], SwingConstants.CENTER);
-			label.setFont(new Font("Helvetica",Font.BOLD,25));
-            label.setBorder(BorderFactory.createLineBorder(Color.BLACK)); // Add border for clarity
-            this.add(label);
+            JLabel namelabel = new JLabel(bottomSection[i], SwingConstants.CENTER);
+			namelabel.setFont(new Font("Helvetica",Font.BOLD,25));
+            namelabel.setBorder(BorderFactory.createLineBorder(Color.BLACK)); // Add border for clarity
+            this.add(namelabel);
         }
 
 	}
-	public static String getFoodImage(int date,int mealtime){
+	/*public static String getFoodImage(int date,int mealtime){
 		return imagepath[date][mealtime];
 	}
 	public static void setFoodImage(int date,int mealtime,String path){
 		imagepath[date][mealtime] = path;
-	}
+	}*/
 }

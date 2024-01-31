@@ -23,7 +23,6 @@ public class ESPcommunication extends Thread {
         }
     }
     public static String studentID;
-
     public static void openComm() throws IOException, SQLException {
         System.out.println("I am waiting");
         socket = serverSocket.accept();

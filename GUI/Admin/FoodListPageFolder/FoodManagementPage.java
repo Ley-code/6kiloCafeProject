@@ -1,4 +1,5 @@
 package GUI.Admin.FoodListPageFolder;
+import Database.ConnectionWithDatabase;
 import GUI.Admin.ButtonStyle;
 import GUI.Admin.WelcomePage;
 
@@ -11,6 +12,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
 
 public class FoodManagementPage extends WelcomePage {
     private JPanel panel1;
@@ -98,8 +100,9 @@ public class FoodManagementPage extends WelcomePage {
         previewButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ImageLabel.setIcon(FoodIcon.scaledIcon(NewFoodListPanel.getFoodImage(Date,Mealtime),300,300));
-                ImageLabel.setText(NewFoodListPage.getFoodName(Date,Mealtime));
+                //ArrayList<String> imagevalues = ConnectionWithDatabase.imageExtractor(Date,Mealtime);
+                //ImageLabel.setIcon(FoodIcon.scaledIcon(imagevalues.get(1),300,300));
+                //ImageLabel.setText(imagevalues.get(0));
             }
         });
         //-------------------------------------------------------
@@ -126,7 +129,7 @@ public class FoodManagementPage extends WelcomePage {
                 int response = fileChooser.showOpenDialog(null);
                 if(response==JFileChooser.APPROVE_OPTION){
                     ImagePath = fileChooser.getSelectedFile().getPath();
-                    ImageLabel.setIcon(FoodIcon.scaledIcon(ImagePath,300,300));
+                    //ImageLabel.setIcon(FoodIcon.scaledIcon(ImagePath,300,300));
                 }
             }
         });
@@ -142,9 +145,12 @@ public class FoodManagementPage extends WelcomePage {
                     JOptionPane.showMessageDialog(null,"Put the new Food Name first!","Warning",JOptionPane.WARNING_MESSAGE);
                 }
                 else{
-                    JOptionPane.showMessageDialog(null,"saved successfully","save",JOptionPane.INFORMATION_MESSAGE);            //sets the food name and food image to the array
-                    NewFoodListPage.setFoodName(Date,Mealtime,FoodNameField.getText());
-                    NewFoodListPanel.setFoodImage(Date,Mealtime, ImagePath);
+                    //ConnectionWithDatabase.imageAdder(FoodNameField.getText(),ImagePath,Date,Mealtime);
+                    JOptionPane.showMessageDialog(null,"saved successfully","save",JOptionPane.INFORMATION_MESSAGE);  //sets the food name and food image to the array
+                    //-------------------------------------------------------------------
+                    //NewFoodListPage.setFoodName(Date,Mealtime,FoodNameField.getText());
+                    //NewFoodListPanel.setFoodImage(Date,Mealtime, ImagePath);        //worked with local data
+                    //-------------------------------------------------------------------
                 }
             }
         });
