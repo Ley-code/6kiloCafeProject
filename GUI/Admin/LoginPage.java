@@ -2,10 +2,13 @@ package GUI.Admin;
 
 import GUI.Student.StudentSignUpPage;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class LoginPage implements ActionListener {
@@ -24,27 +27,34 @@ public class LoginPage implements ActionListener {
     private JLabel Title = new JLabel();
     private JLabel createAccountMessage = new JLabel("Are you a Student?");
     private JPanel foreground = new JPanel();
+    private JLayeredPane layeredPane = new JLayeredPane();
     //--------------------------------------------
     public LoginPage() {
         //--------------------------------------------------
+        try {
+            Image backgroundImage = ImageIO.read(new File("C:\\Users\\hp\\OneDrive\\Desktop\\6kiloCafeProject\\GUI\\icons\\cafeImage.jfif"));
+            setBackgroundImage(backgroundImage);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         //this customizes the title of the login page
         Title.setText("Cafe Management");
         Title.setBounds(150, 40, 300, 30);
         Title.setFont(new Font("Times New Roman", Font.BOLD, 25));   
-        Title.setForeground(Color.WHITE);
+        Title.setForeground(Color.BLACK);
         //-------------------------------------------------
         
         //it customizes the Admin ID text label
         userIDLabel.setText("Admin ID: ");
         userIDLabel.setBounds(50, 100, 100, 25);
         userIDLabel.setFont(new Font("Times New Roman", Font.BOLD, 16));
-        userIDLabel.setForeground(Color.WHITE);
+        userIDLabel.setForeground(Color.BLACK);
         //----------------------------------------------------
 
         //it customizes the Admin password text Label
         userPasswordLabel.setBounds(50, 150, 150, 25);
         userPasswordLabel.setFont(new Font("Times New Roman", Font.BOLD, 16));
-        userPasswordLabel.setForeground(Color.WHITE);
+        userPasswordLabel.setForeground(Color.BLACK);
         //----------------------------------------------------
 
         // The userID field and the userpasswordField both creates the space to write userID and password
@@ -64,7 +74,7 @@ public class LoginPage implements ActionListener {
         createAccountMessage.setText("Are you a student?");
         createAccountMessage.setBounds(140, 300, 200, 25);
         createAccountMessage.setFont(new Font("Times New Roman", Font.BOLD, 16));
-        createAccountMessage.setForeground(Color.WHITE);
+        createAccountMessage.setForeground(Color.BLACK);
         //----------------------------------------------------
 
         //creates the buttons and designs them accordingly
@@ -80,32 +90,34 @@ public class LoginPage implements ActionListener {
         signInButton.setBounds(300, 300, 150, 25);
         signInButton.addActionListener(this);
         //----------------------------------------------------
+        // Add components to the top layer of the JLayeredPane
 
-        //adds the foreground panel which is used to store the above components and sets the background"
-        foreground.setBackground(new Color(0, 0, 0));
-        foreground.setOpaque(true);
-        foreground.setBounds(0, 0, 500, 500);
-        foreground.setLayout(null);
-        foreground.add(Title);
-        foreground.add(userIDLabel);
-        foreground.add(userPasswordLabel);
-        foreground.add(userIDField);
-        foreground.add(userPasswordField);
-        foreground.add(messageLabel);
-        foreground.add(loginButton);
-        foreground.add(resetButton);
-        foreground.add(createAccountMessage);
-        foreground.add(signInButton);
-        //----------------------------------------------------
+        layeredPane.add(Title, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(messageLabel, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(loginButton, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(resetButton, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(signInButton, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(createAccountMessage, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(userIDLabel, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(userPasswordLabel, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(userIDField, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(userPasswordField, JLayeredPane.PALETTE_LAYER);
 
-        //finally we add the foreground panel to the Frame
-        frame.add(foreground);
+        // Set up the JFrame with the JLayeredPane
+        frame.setLayout(new BorderLayout());
+        frame.add(layeredPane, BorderLayout.CENTER);
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500, 400);
         frame.setLocationRelativeTo(null); //places it to center
         frame.setVisible(true);
         frame.setResizable(false);
         //----------------------------------------------------
+    }
+    private void setBackgroundImage(Image backgroundImage) {
+        JLabel backgroundLabel = new JLabel(new ImageIcon(backgroundImage));
+        backgroundLabel.setBounds(0, 0, 1000, 700);  // Set the size according to your JFrame size
+        layeredPane.add(backgroundLabel, JLayeredPane.DEFAULT_LAYER);
     }
     @Override
     public void actionPerformed(ActionEvent e) {

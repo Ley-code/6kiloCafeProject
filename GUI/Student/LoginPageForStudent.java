@@ -2,31 +2,42 @@ package GUI.Student;
 
 import Database.ConnectionWithDatabase;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
 
 public class LoginPageForStudent implements ActionListener {
     //-----------------------------------------------------
     //all the objects below are used for making the GUI Components
-    JFrame frame = new JFrame();
-    JButton loginButton = new JButton("Login");
-    JButton resetButton = new JButton("Reset");
-    JTextField userIDField = new JTextField();
-    JPasswordField userPasswordField = new JPasswordField();
-    JLabel userIDLabel = new JLabel();
-    JLabel userPasswordLabel = new JLabel("Student Password:");
-    JLabel messageLabel = new JLabel();
-    JLabel Title = new JLabel();
-    JPanel foreground = new JPanel();
-    JPanel topPanel = new JPanel();
+    private JFrame frame = new JFrame();
+    private JButton loginButton = new JButton("Login");
+    private JButton resetButton = new JButton("Reset");
+    private JTextField userIDField = new JTextField();
+    private JPasswordField userPasswordField = new JPasswordField();
+    private JLabel userIDLabel = new JLabel();
+    private JLabel userPasswordLabel = new JLabel("Student Password:");
+    private JLabel messageLabel = new JLabel();
+    private JLabel Title = new JLabel();
+    private JPanel foreground = new JPanel();
+    private JPanel topPanel = new JPanel();
+    private JLayeredPane layeredPane = new JLayeredPane();
+
     public static String logInStudentID;
     //--------------------------------------------
     LoginPageForStudent() {
         //--------------------------------------------------
+        try {
+            Image backgroundImage = ImageIO.read(new File("C:\\Users\\hp\\OneDrive\\Desktop\\6kiloCafeProject\\GUI\\icons\\cafeImage.jfif"));
+            setBackgroundImage(backgroundImage);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         //this customizes the title of the login page
         Title.setText("Cafe Management");
         Title.setBounds(150, 40, 30, 30);
@@ -39,15 +50,14 @@ public class LoginPageForStudent implements ActionListener {
         userIDLabel.setBounds(150, 300, 250, 25);
 
         userIDLabel.setFont(new Font("Times New Roman", Font.BOLD, 22));
-        userIDLabel.setForeground(Color.WHITE);
+        userIDLabel.setForeground(Color.BLACK);
         //----------------------------------------------------
 
         //it customizes the Admin password text Label
         userPasswordLabel.setBounds(150, 350, 270, 22);
 
         userPasswordLabel.setFont(new Font("Times New Roman", Font.BOLD, 22));
-        userPasswordLabel.setForeground(Color.WHITE);
-
+        userPasswordLabel.setForeground(Color.BLACK);
         //----------------------------------------------------
 
         // The userID field and the userpasswordField both creates the space to write userID and password
@@ -77,26 +87,23 @@ public class LoginPageForStudent implements ActionListener {
 
         resetButton.setForeground(Color.white);
         resetButton.setBackground(new Color(0, 14, 93));
-
-        //adds the foreground panel which is used to store the above components and sets the background
-        foreground.setBackground(new Color(7, 5, 5));
-        foreground.setOpaque(true);
-        foreground.setBounds(0, 0, 500, 500);
-        foreground.setLayout(null);
-        foreground.add(Title);
-        foreground.add(userIDLabel);
-        foreground.add(userPasswordLabel);
-        foreground.add(userIDField);
-        foreground.add(userPasswordField);
-        foreground.add(messageLabel);
-        foreground.add(loginButton);
-        foreground.add(resetButton);
         //----------------------------------------------------
-        frame.setLayout(new BorderLayout());
-        frame.add(topPanel, BorderLayout.NORTH);
-        topPanel.add(Title);
 
-        frame.add(foreground, BorderLayout.CENTER);
+
+        // Add components to the top layer of the JLayeredPane
+        layeredPane.add(topPanel, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(messageLabel, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(loginButton, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(resetButton, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(userIDLabel, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(userPasswordLabel, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(userIDField, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(userPasswordField, JLayeredPane.PALETTE_LAYER);
+        topPanel.add(Title);
+        // Set up the JFrame with the JLayeredPane
+        frame.setLayout(new BorderLayout());
+        frame.add(layeredPane, BorderLayout.CENTER);
+        frame.add(topPanel,BorderLayout.NORTH);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1000, 700);
         frame.setLocationRelativeTo(null); //places it to center
@@ -105,17 +112,16 @@ public class LoginPageForStudent implements ActionListener {
         JMenuBar menuBar = new JMenuBar();
 
         // Create menus
-        JMenu Menu = new JMenu("Menu");
+        JMenu backMenu = new JMenu("Back");
         JMenu settingMenu = new JMenu("Setting");
         JMenu helpMenu = new JMenu("Help");
         JMenu exitMenu = new JMenu("Exit");
 
         // Create menu items
-
-        JMenuItem NotificationMenuItem = new JMenuItem("Notification");
-        JMenuItem privacyMenuItem = new JMenuItem("privacy");
-        JMenuItem backMenuItem = new JMenuItem("previous Page");
-
+        JMenuItem NotificationMenuItem = new JMenuItem("Notification Setting");
+        JMenuItem privacyMenuItem = new JMenuItem("privacy Policy");
+        JMenuItem helpMenuItem = new JMenuItem("privacy Policy");
+        JMenuItem backMenuItem = new JMenuItem("SignUp Page");
 
         NotificationMenuItem.addActionListener(new ActionListener() {
             @Override
@@ -130,6 +136,12 @@ public class LoginPageForStudent implements ActionListener {
                 JOptionPane.showMessageDialog(null, "privacy Menu Item Clicked");
             }
         });
+        helpMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "help Menu Item Clicked");
+            }
+        });
         backMenuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -141,18 +153,24 @@ public class LoginPageForStudent implements ActionListener {
         settingMenu.add(NotificationMenuItem);
         settingMenu.add(privacyMenuItem);
         settingMenu.addSeparator(); // Adds a separator line
-        menuBar.add(backMenuItem);
+        backMenu.add(backMenuItem);
 
         // Add menus to the menu bar
         menuBar.add(settingMenu);
-        menuBar.add(Menu);
+        menuBar.add(backMenu);
         menuBar.add(helpMenu);
         menuBar.add(exitMenu);
 
         // Set the menu bar for the JFrame
         frame.setJMenuBar(menuBar);
+        //set the visibility of the frame
         frame.setVisible(true);
         frame.setResizable(false);
+    }
+    private void setBackgroundImage(Image backgroundImage) {
+        JLabel backgroundLabel = new JLabel(new ImageIcon(backgroundImage));
+        backgroundLabel.setBounds(0, 0, 1000, 700);  // Set the size according to your JFrame size
+        layeredPane.add(backgroundLabel, JLayeredPane.DEFAULT_LAYER);
     }
 
     public void validateLogIn(String password, String userName) throws SQLException {
@@ -196,5 +214,9 @@ public class LoginPageForStudent implements ActionListener {
                 //----------------------------------------------------
         }
             //if the user is a student it creates a studentSigninPage
+    }
+
+    public static void main(String[] args) {
+        new LoginPageForStudent();
     }
 }
