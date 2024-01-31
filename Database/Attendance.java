@@ -37,7 +37,7 @@ public class Attendance extends Backend {
             System.out.println("You already have an account so You are here to eat");
 //Now we can proceed to the next condition.
 //We need to check whether you are not eating again or not.
-            if (7 <= hour && hour <=10){
+            if (7 <= hour && hour <=9){
 // He came to eat his breakfast.
                 if (Backend.existanceChecker(stuID,sqlQuerySB)){
 // This means he has already eaten his breakfast Kick him out.
@@ -49,7 +49,7 @@ public class Attendance extends Backend {
 // Record the attendance and let him in.
                 }
             }
-            else if (11 <= hour && hour <=14){
+            else if (11 <= hour && hour <=15){
 // He came to eat his lunch.
                 if (Backend.existanceChecker(stuID,sqlQuerySL)){
                     System.out.println("Why are you trying to eat again");
@@ -63,7 +63,7 @@ public class Attendance extends Backend {
 // Record the attendance and let him in.
                 }
             }
-            else if (16 <= hour && hour <= 22){//change it to 19 after u checked
+            else if (2 <= hour && hour <= 3){//change it to 19 after u checked
 // He came to eat his dinner.
                 if (Backend.existanceChecker(stuID,sqlQuerySD)){
                     System.out.println("Why are you trying to eat again");

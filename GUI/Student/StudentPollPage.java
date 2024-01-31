@@ -15,12 +15,13 @@ import java.util.HashMap;
 public class StudentPollPage {
     DefaultListModel<String> questionListModel;
     JList<String> questionList;
-    HashMap<String, String[]> amirsquestionoption;
+    HashMap<String, ArrayList<String>> amirsquestionoption;
+    JFrame mainframe;
     StudentPollPage(){
         initialize();
     }
     private void initialize() {
-        HashMap<String,String[]> amirsquestionoption = ConnectionWithDatabase.pollOptionDisplay();
+        amirsquestionoption = ConnectionWithDatabase.pollOptionDisplay();
         //----------------------------------------------
         //access the questions list by for loop to put in string
         String[] questioninstring = amirsquestionoption.keySet().toArray(new String[0]);
@@ -46,7 +47,7 @@ public class StudentPollPage {
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.add(titleLabel, BorderLayout.NORTH);
         mainPanel.add(questionList, BorderLayout.CENTER);
-        JFrame mainframe = new JFrame();
+        mainframe = new JFrame();
         mainframe.add(mainPanel);
         mainframe.setSize(600,700);
         mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -76,8 +77,12 @@ public class StudentPollPage {
             setQuestion(selectedQuestion);
             System.out.println(selectedQuestion);
             //-----------------------------------------------------------------------
+            ArrayList<String> result = amirsquestionoption.get(selectedQuestion);
             //String[] options = questionOptionsMap.get(selectedQuestion);
-            String[] amirsoptions = amirsquestionoption.get(selectedQuestion);
+            String[] amirsoptions = new String[4];
+            for(int i =0;i<4;i++){
+                amirsoptions[i] = result.get(i);
+            }
             //-----------------------------------------------------------------------
             JComboBox<String> optionsComboBox = new JComboBox<>(amirsoptions);
 
@@ -96,9 +101,18 @@ public class StudentPollPage {
                 int selectedOption = optionsComboBox.getSelectedIndex();
                 System.out.println(selectedOption);
                 return backEND.backEND.rateResult(selectedOption);
+            } else if (optionDialogResult == JOptionPane.CANCEL_OPTION) {
+                new StudentPollPage();
+                mainframe.dispose();
+
             }
         }
-        System.out.println("No selected item");
+        else {
+            System.out.println("No selected item");
+            new StudentPollPage();
+            mainframe.dispose();
+        }
+        System.out.println("Hello");
         return null;
     }
     public void setQuestion(String question){

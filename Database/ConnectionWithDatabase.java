@@ -18,6 +18,7 @@ public class ConnectionWithDatabase {
     private static final String JDBC_URL = "jdbc:mysql://localhost:3306/cafe_database";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "000000000";
+    static String logInStudentID;
 
     public static int signingUp(String studentInfo[]) {
         try (Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD)) {
@@ -217,24 +218,20 @@ public class ConnectionWithDatabase {
     // This will be called in the Admin part of poll creator
     public static void  pollTableCreator(ArrayList<String> foods,String question){
         try(Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD)){
-            String sqlQueryF = "CREATE TABLE ? ( " +
+            String sqlQueryF = "CREATE TABLE " + question + " ( " +
                     "Number INT AUTO_INCREMENT PRIMARY KEY, " +
-                    "? INT, " +
-                    "? INT, " +
-                    "? INT, " +
-                    "? INT, " +
+                    foods.get(0) + " INT, " +
+                    foods.get(1) + " INT, " +
+                    foods.get(2) + " INT, " +
+                    foods.get(3) + " INT, " +
                     "student_ID VARCHAR(15), " +
                     "FOREIGN KEY (student_ID) REFERENCES students(student_ID) );"; // CHECK THIS wHEN YOU FINISH
             PreparedStatement creatingStat = connection.prepareStatement(sqlQueryF);
-            creatingStat.setString(1,question);
-            creatingStat.setString(2,foods.get(0));
-            creatingStat.setString(3,foods.get(1));
-            creatingStat.setString(4,foods.get(2));
-            creatingStat.setString(5,foods.get(3));
             System.out.println(sqlQueryF);
             System.out.println("is it here");
             creatingStat.execute();
             System.out.println("What is wrong with excuteing the query");
+            pollComplement(foods,question);
         }
         catch (SQLException e){
             System.out.println("Just for the one");
@@ -242,54 +239,62 @@ public class ConnectionWithDatabase {
         }
     }
     public static void pollComplement(ArrayList<String> foods,String question){
+        System.out.println("I told you leykun it is not woring");
         try(Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD)){
-            String sqlQuery = "INSERT INTO Polls VALUES (?,?,?,?,?,?)";
+            String sqlQuery = "INSERT INTO Polls (Number, Questions, Food_A, Food_B, Food_C, Food_D) VALUES (?,?,?,?,?,?) ";
             PreparedStatement creatingStat = connection.prepareStatement(sqlQuery);
             creatingStat.setInt(1,0);
             creatingStat.setString(2,question);
             creatingStat.setString(3,foods.get(0));
-            creatingStat.setString(3,foods.get(1));
-            creatingStat.setString(3,foods.get(2));
-            creatingStat.setString(3,foods.get(3));
-            int result = creatingStat.executeUpdate();
-            if (result != 0){
-                System.out.println("It is added");
-                //Leykun add something to be uploaded to show poll is created successfully.
-            }
+            creatingStat.setString(4,foods.get(1));
+            creatingStat.setString(5,foods.get(2));
+            creatingStat.setString(6,foods.get(3));
+            System.out.println(sqlQuery);
+            creatingStat.executeUpdate();
         }
         catch(SQLException e){
             e.printStackTrace();
             System.out.println("Complement");
         }
     }
-    public static HashMap<String, String[]> pollOptionDisplay(){
-        HashMap<String, String[]> pollOption = new HashMap<>();
+    public static HashMap<String, ArrayList<String>> pollOptionDisplay(){
+        HashMap<String, ArrayList<String>> pollOption = new HashMap<>();
         try(Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD)){
             String sqlQuery = "SELECT Questions, Food_A, Food_B, Food_C, Food_D FROM Polls";
             PreparedStatement creatingStat = connection.prepareStatement(sqlQuery);
             ResultSet result = creatingStat.executeQuery();
             while(result.next()){
-                String[] optionsArray = {result.getString("Food_A"),result.getString("Food_B"),result.getString("Food_C"),result.getString("Food_D")};
-                pollOption.put(result.getString("Questions"),optionsArray);
+                ArrayList<String> optionsArray= new ArrayList<>();
+                System.out.println(result.getString("Questions"));
+                System.out.println(result.getString("Food_A"));
+                optionsArray.add(result.getString("Food_A"));
+                optionsArray.add(result.getString("Food_B"));
+                optionsArray.add(result.getString("Food_C"));
+                optionsArray.add(result.getString("Food_D"));
+                pollOption.put(result.getString("Questions"), optionsArray);
             }
         }
         catch(SQLException e){
             System.out.println("poll displayer");
             e.printStackTrace();
         }
+        System.out.println(pollOption);
         return pollOption;
     }
     //You have stated the number of poll is limited
     public static void voteAdder(ArrayList<Integer> votes,String pollName){
         try(Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD)){
-            String sqlQuery = "INSERT INTO ? VALUES (?,?,?,?)";
+            String sqlQuery = "INSERT INTO " + pollName + " VALUES (?,?,?,?,?,?)";
             PreparedStatement creatingStat = connection.prepareStatement(sqlQuery);
-            creatingStat.setString(1,pollName);
+            creatingStat.setInt(1,0);
             creatingStat.setInt(2,votes.get(0));
-            creatingStat.setInt(2,votes.get(1));
-            creatingStat.setInt(2,votes.get(2));
-            creatingStat.setInt(2,votes.get(3));
+            creatingStat.setInt(3,votes.get(1));
+            creatingStat.setInt(4,votes.get(2));
+            creatingStat.setInt(5,votes.get(3));
+            creatingStat.setString(6,ConnectionWithDatabase.logInStudentID);
+            System.out.println(sqlQuery);
             int result = creatingStat.executeUpdate();
+            System.out.println(sqlQuery);
             if (result != 0){
                 JOptionPane.showMessageDialog(null,"You voted Successfuly","Message",JOptionPane.INFORMATION_MESSAGE);
                 // You have voted successfully.
@@ -302,18 +307,20 @@ public class ConnectionWithDatabase {
         }
     }
     public static int[] voteExtractor(ArrayList<String> foods, String Question){
+        System.out.println(foods);
+        System.out.println(Question);
         int[] vote = {0,0,0,0,0}; //This will return array with total vote on each food, Since the food and the number occupy
                                      // the same index, you can access them easily, and the 4th index is the total number of vote
         try(Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD)){
-            String sqlQuery = "SELECT ?, ?, ?, ? FROM ?";
+            String sqlQuery = "SELECT " + foods.get(0) + " , " + foods.get(1) + " , " + foods.get(2) + " , " + foods.get(3) + " FROM " + Question;
             PreparedStatement creatingStat = connection.prepareStatement(sqlQuery);
-            creatingStat.setString(1,foods.get(0));
-            creatingStat.setString(1,foods.get(1));
-            creatingStat.setString(1,foods.get(2));
-            creatingStat.setString(1,foods.get(3));
-            creatingStat.setString(1,Question);
+            System.out.println("Before");
             ResultSet result = creatingStat.executeQuery();
+
+            System.out.println(result.getType());
+
             while (result.next()){
+                System.out.println("after");
                 vote[4]++;
                 if (result.getInt(foods.get(0)) == 1){
                     vote[0]++;
@@ -333,6 +340,7 @@ public class ConnectionWithDatabase {
             e.printStackTrace();
             System.out.println("Vote extractor exception");
         }
+        System.out.println("Finnnay");
         return vote;
     }
         // BREAKFAST
@@ -416,7 +424,7 @@ public class ConnectionWithDatabase {
     }
     // IN the meantime lets write the JDBC for Attendance
     public static String getStudentID(String studentName){
-        String logInStudentID = null;
+
         try(Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD)){
             System.out.println("I am before the query");
             String sqlQuery = "SELECT student_ID FROM students WHERE student_full_name = ?";
@@ -426,7 +434,7 @@ public class ConnectionWithDatabase {
             ResultSet result = creatingStat.executeQuery();
             System.out.println("It must be here");
             if (result.next()) {
-                logInStudentID = result.getString("student_ID");
+                ConnectionWithDatabase.logInStudentID = result.getString("student_ID");
                 System.out.println(logInStudentID);
             }
             else
@@ -452,7 +460,6 @@ public class ConnectionWithDatabase {
         catch(SQLException e){
             System.out.println("same here");
             e.printStackTrace();
-
         }
         return bool;
     }
@@ -500,20 +507,20 @@ public class ConnectionWithDatabase {
     public static boolean imageAdder(String imageName, String imagePath, int Day, int Meal){
         boolean bool = false;
         try(Connection connectionI = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD)){
-            String sqlQueryI = "SELECT Days, Meal WHERE Days = ?, AND Meals = ?";
+            String sqlQueryI = "SELECT Days, Meals FROM foods WHERE Days = ? AND Meals = ?";
             PreparedStatement creatingStatI = connectionI.prepareStatement(sqlQueryI);
+            creatingStatI.setInt(1,Day);
+            creatingStatI.setInt(2,Meal);
             ResultSet resultI = creatingStatI.executeQuery();
             if(resultI.next()){
                 try(Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD)){
-                    String sqlQuery = "UPDATE Foods SET Number = ?, Food_Name = ?, Food_File_Path = ?, Days = ?, Meal = ? WHERE Days = ? AND Meals = ?";
+                    String sqlQuery = "UPDATE foods SET Number = ?, Food_Name = ?, Food_File_Path = ? WHERE Days = ? AND Meals = ? ";
                     PreparedStatement creatingStat = connection.prepareStatement(sqlQuery);
                     creatingStat.setInt(1,0);
                     creatingStat.setString(2,imageName);
                     creatingStat.setString(3,imagePath);
                     creatingStat.setInt(4,Day);
                     creatingStat.setInt(5,Meal);
-                    creatingStat.setInt(6,Day);
-                    creatingStat.setInt(7,Meal);
                     int result = creatingStat.executeUpdate();
                     if (result != 0){
                         bool = true;
@@ -528,7 +535,7 @@ public class ConnectionWithDatabase {
             }
             else{
                 try(Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD)){
-                    String sqlQueryF = "INSERT INTO Foods (Number, Food_Name, Food_File_Path, Days, Meal) VALUES (?,?,?,?,?) ";
+                    String sqlQueryF = "INSERT INTO foods (Number, Food_Name, Food_File_Path, Days, Meals) VALUES (?,?,?,?,?) ";
                     PreparedStatement creatingStatF = connection.prepareStatement(sqlQueryF);
                     creatingStatF.setInt(1,0);
                     creatingStatF.setString(2,imageName);
@@ -557,13 +564,15 @@ public class ConnectionWithDatabase {
     public static ArrayList<String> imageExtractor(int Day, int Meal){
         ArrayList<String> imageInfo  = new ArrayList<>();
         try(Connection connection  = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD)){
-            String sqlQuery = "SELECT Food_Name, Food_File_Path FROM Foods WHERE Days = ? AND Meals = ? ";
+            String sqlQuery = "SELECT Food_Name, Food_File_Path FROM foods WHERE Days = ? AND Meals = ? ";
             PreparedStatement creatingStat = connection.prepareStatement(sqlQuery);
             creatingStat.setInt(1,Day);
             creatingStat.setInt(2,Meal);
             ResultSet result = creatingStat.executeQuery();
+            result.next();
             imageInfo.add(result.getString("Food_Name"));
             imageInfo.add(result.getString("Food_File_Path"));
+            System.out.println();
         }
         catch(SQLException e){
             System.out.println("When Extracting Image");
@@ -581,7 +590,7 @@ public class ConnectionWithDatabase {
             Set<String> keysNames = names.keySet();
             Set<String> keysPath = paths.keySet();
 
-            String sqlQuery = "SELECT Food_Name, Food_File_Path, Days, Meals FROM Foods" ;
+            String sqlQuery = "SELECT Food_Name, Food_File_Path, Days, Meals FROM foods" ;
             PreparedStatement creatingStat = connection.prepareStatement(sqlQuery);
             ResultSet result = creatingStat.executeQuery();
 
@@ -599,10 +608,12 @@ public class ConnectionWithDatabase {
                 StringTokenizer tokenizer = new StringTokenizer(key,"#");
                 int row = Integer.parseInt(tokenizer.nextToken());
                 int column = Integer.parseInt(tokenizer.nextToken());
-                arrayForPath[row][column] = names.get(key);
+                arrayForPath[row][column] = paths.get(key);
             }
             NewFoodListPage.FoodNames = arrayForNames;
+            System.out.println(Arrays.deepToString(arrayForNames));
             NewFoodListPanel.imagepath = arrayForPath;
+            System.out.println(Arrays.deepToString(arrayForPath));
         }
         catch(SQLException e){
             System.out.println("Extractor Failed");

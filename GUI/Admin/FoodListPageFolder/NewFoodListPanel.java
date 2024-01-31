@@ -32,7 +32,6 @@ public class NewFoodListPanel extends JPanel{
 	public void initialize() {
 
 		String[] bottomSection = {this.breakfast, this.lunch, this.dinner};
-		
 //		this.setBackground(new Color(46, 5, 74));
         this.setLayout(new GridLayout(3, 3, 10, 10));
         this.setVisible(false);
