@@ -145,7 +145,7 @@ public class FoodManagementPage extends WelcomePage {
                     JOptionPane.showMessageDialog(null,"Put the new Food Name first!","Warning",JOptionPane.WARNING_MESSAGE);
                 }
                 else{
-                    //ConnectionWithDatabase.imageAdder(FoodNameField.getText(),ImagePath,Date,Mealtime);
+                    ConnectionWithDatabase.imageAdder(FoodNameField.getText(),ImagePath,Date,Mealtime);
                     JOptionPane.showMessageDialog(null,"saved successfully","save",JOptionPane.INFORMATION_MESSAGE);  //sets the food name and food image to the array
                     //-------------------------------------------------------------------
                     //NewFoodListPage.setFoodName(Date,Mealtime,FoodNameField.getText());
