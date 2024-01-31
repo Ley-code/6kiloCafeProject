@@ -73,7 +73,7 @@ public class WelcomePageForStudents extends JFrame {
         buttonPanel.add(foodButton);
         buttonPanel.add(cafeRattingButton);
         imagePanel.add(imageLabel);
-        ImageIcon photo = new ImageIcon("C:\\Users\\hp\\OneDrive\\Desktop\\6kiloCafeProject\\GUI\\icons\\cafeImage.jfif");
+        ImageIcon photo = new ImageIcon("GUI\\icons\\cafeImage.jfif");
         imageLabel.setIcon(photo);
         textLabel.setFont(new Font("Times New Roman", Font.ITALIC, 24));
         textLabel.setForeground(Color.BLACK);
