@@ -1,5 +1,7 @@
 package GUI.Student;
 
+import Database.ConnectionWithDatabase;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -43,6 +45,7 @@ public class WelcomePageForStudents extends JFrame {
         foodButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                ConnectionWithDatabase.imageDisplayExtractor();
                 new StudentFoodListPage();
                 dispose();
             }
@@ -95,9 +98,7 @@ public class WelcomePageForStudents extends JFrame {
     public static void main(String[] args) {
         new WelcomePageForStudents();
     }
-}
-
-
+    }
 /*class ImageLabel extends JLabel {
 
     private String text;
