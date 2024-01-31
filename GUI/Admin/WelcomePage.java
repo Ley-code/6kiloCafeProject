@@ -61,6 +61,13 @@ public class WelcomePage {
         // --------------------------------------------------
         InventoryManagementButton = new ButtonStyle();
         InventoryManagementButton.setText("Inventory Management");
+        InventoryManagementButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new InventoryManagementPage();
+                frame.dispose();
+            }
+        });
 
         pollButton = new ButtonStyle();
         pollButton.setText("Poll");
