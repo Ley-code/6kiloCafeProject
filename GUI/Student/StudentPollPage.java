@@ -20,6 +20,9 @@ public class StudentPollPage {
         initialize();
     }
     private void initialize() {
+        JFrame mainframe = new JFrame();
+        mainframe.setSize(600,700);
+        mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         HashMap<String,String[]> amirsquestionoption = ConnectionWithDatabase.pollOptionDisplay();
         //----------------------------------------------
         //access the questions list by for loop to put in string
@@ -40,19 +43,17 @@ public class StudentPollPage {
             }
         });
         JLabel titleLabel = new JLabel("Poll Participation");
-        titleLabel.setFont(new Font("Helvici", Font.BOLD, 25));
+        titleLabel.setFont(new Font("Times New Roman", Font.BOLD, 25));
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.add(titleLabel, BorderLayout.NORTH);
         mainPanel.add(questionList, BorderLayout.CENTER);
-        JFrame mainframe = new JFrame();
         mainframe.add(mainPanel);
-        mainframe.setSize(600,700);
-        mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         JMenuBar menuBar = new JMenuBar();
-        JMenu menu = new JMenu("Menu");
-        JMenuItem homeMenuItem = new JMenuItem("Home");
+        JMenu menu = new JMenu("Back");
+        JMenuItem homeMenuItem = new JMenuItem("Home Page");
         homeMenuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

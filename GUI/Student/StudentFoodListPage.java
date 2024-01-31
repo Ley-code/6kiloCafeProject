@@ -10,7 +10,6 @@ import java.awt.event.ActionListener;
 public class StudentFoodListPage extends JFrame {
     JTabbedPane tabbedPane;
     JPanel Foodpanel;
-    JPanel pollpanel;
 
     StudentFoodListPage(){
         initialize();
@@ -19,17 +18,16 @@ public class StudentFoodListPage extends JFrame {
 
         Foodpanel = new JPanel();
         Foodpanel.setLayout(new BorderLayout());
-        JScrollPane scrollPane = new JScrollPane(new NewFoodListPage().NewFoodListPage());
+        NewFoodListPage mypage = new NewFoodListPage();
+        JScrollPane scrollPane = new JScrollPane(mypage.NewFoodListPage());
         Foodpanel.add(scrollPane,BorderLayout.CENTER);
 
         //create a menu bar
         JMenuBar MenuBar = new JMenuBar();
-
         //Create a menu
-        JMenu Menu = new JMenu("Menu");
-
+        JMenu Menu = new JMenu("Back");
         // Create menu items
-        JMenuItem homeMenuItem = new JMenuItem("Home");
+        JMenuItem homeMenuItem = new JMenuItem("Welcome Page");
         homeMenuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -38,11 +36,12 @@ public class StudentFoodListPage extends JFrame {
                 dispose();
             }
         });
-        Menu.add(homeMenuItem);
 
+        Menu.add(homeMenuItem);
         MenuBar.add(Menu);
         setJMenuBar(MenuBar);
         add(Foodpanel);
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800,800);
         setLocationRelativeTo(null);
