@@ -19,7 +19,7 @@ public class ConnectionWithDatabase {
 
     public static int signingUp(String studentInfo[]) throws SQLException {
         try (Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD)) {
-            // Your code to work with the database goes here
+// Your code to work with the database goes here
             System.out.println("Connected to the database.");
             String student_ID = studentInfo[0];
             String student_name = studentInfo[1];
@@ -43,10 +43,10 @@ public class ConnectionWithDatabase {
         }
         return 3;
     }
-    // THis will give you all the student IDs in Student Table
+// THis will give you all the student IDs in Student Table
     public static ArrayList<String> idsForSignUp() throws SQLException {
         try (Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD)) {
-            // Your code to work with the database goes here
+// Your code to work with the database goes here
             System.out.println("Connected to the database.");
             String sqlQuery = "SELECT student_ID FROM Students";
             PreparedStatement creatingStat = connection.prepareStatement(sqlQuery);
@@ -64,10 +64,10 @@ public class ConnectionWithDatabase {
         }
         return null;
     }
-    // This will give you student IDs in one of the meal corresponding date
+// This will give you student IDs in one of the meal corresponding date
     public static ArrayList<String> idsForAttendance(String sqlQuery) throws SQLException {
         try (Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD)) {
-            // Your code to work with the database goes here
+// Your code to work with the database goes here
             System.out.println("Connected to the database.");
             PreparedStatement creatingStat = connection.prepareStatement(sqlQuery);
             ResultSet resultSet = creatingStat.executeQuery();
@@ -85,7 +85,7 @@ public class ConnectionWithDatabase {
     }
     public static int addAttendance(String sqlQuery, List<Object> attendance) throws SQLException {
         try (Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD)) {
-            // Your code to work with the database goes here
+// Your code to work with the database goes here
             System.out.println("Connected to the database.");
             String student_ID = (String)attendance.get(1);
             Timestamp timestamp = (Timestamp)attendance.get(0);
@@ -115,6 +115,7 @@ public class ConnectionWithDatabase {
             return dictionary;
         }
     }
+    //retrieving
     public static ArrayList<Integer> numOfStudent() {
         ArrayList<Integer> numOfStudent = null;
         try (Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD)) {

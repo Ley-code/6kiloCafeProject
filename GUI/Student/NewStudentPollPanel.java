@@ -12,7 +12,7 @@ public class NewStudentPollPanel{
     DefaultListModel<String> listModel;
     JList<String> polllist;
     public JPanel NewStudentPollPanel() {
-        // Create a title label and set its properties
+// Create a title label and set its properties
         JLabel titleLabel = new JLabel("Poll Participation");
         titleLabel.setFont(new Font("Helvici",Font.BOLD,25));
         JButton participateButton = new JButton("Particicpate");

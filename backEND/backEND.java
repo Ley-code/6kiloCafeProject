@@ -105,7 +105,7 @@ public class backEND {
         return values;
     }
 
-//12 poll create
+//12 poll. questions and options input for database from
 public static class Poll {
     private String question;
     private ArrayList<String> options;
