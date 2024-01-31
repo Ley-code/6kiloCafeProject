@@ -13,22 +13,16 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 import Database.Backend;
 import Database.SignUp;
 import GUI.Admin.ButtonStyle;
+import GUI.Admin.LoginPage;
 
-public class StudentSignInPage extends JFrame implements ActionListener {
+public class StudentSignUpPage extends JFrame implements ActionListener {
     private JPanel Topcontainer;
     private JPanel TopPanel;
     private JPanel centerPanel;
@@ -54,14 +48,15 @@ public class StudentSignInPage extends JFrame implements ActionListener {
     private JTextField PhoneNumberField = new JTextField();
     private JPasswordField NewPasswordField = new JPasswordField();
     private JPasswordField ConfirmPasswordField = new JPasswordField();
-    private JButton RegisterButton = new JButton();
-    private JButton ScanIdButton = new JButton();
+    private JButton RegisterButton = new ButtonStyle();
+    private JButton ScanIdButton = new ButtonStyle();
     private JLabel MessageLabel = new JLabel();
-    private JButton loginButton = new JButton();
+    private JButton loginButton = new ButtonStyle();
     private Boolean flag = false;
     public static int scanType = 0;
+    public static boolean flag1 = false;
 
-    public StudentSignInPage() {
+    public StudentSignUpPage() {
         initialize();
     }
 
@@ -108,6 +103,9 @@ public class StudentSignInPage extends JFrame implements ActionListener {
                     System.out.println("didnt found the backend");
                     e1.printStackTrace();
                 }
+                if(flag1){
+                    new WelcomePageForStudents();
+                }
 
             } else {
                 MessageLabel.setForeground(Color.RED);
@@ -149,7 +147,7 @@ public class StudentSignInPage extends JFrame implements ActionListener {
         TopPanel.setLayout(new BorderLayout());
         TopPanel.add(titleLabel, BorderLayout.NORTH);
         TopPanel.add(subtitleLabel, BorderLayout.SOUTH);
-        TopPanel.setBackground(new Color(51, 10, 122));
+        TopPanel.setBackground(new Color(0, 0, 0));
 
         Border spaceborder = new EmptyBorder(20, 60, 20, 60);
         spaceLabel = new JLabel();
@@ -170,14 +168,14 @@ public class StudentSignInPage extends JFrame implements ActionListener {
 
         Topcontainer = new JPanel();
         Topcontainer.setLayout(new FlowLayout(FlowLayout.CENTER));
-        Topcontainer.setBackground(new Color(0, 153, 153));
+        Topcontainer.setBackground(new Color(0, 0, 0));
         Topcontainer.add(TopPanel, BorderLayout.CENTER);
         // ------------------------------------------------------
         FullNameField.setPreferredSize(new Dimension(200, 30));
         FullnameLabel.setText("Student Name: ");
         FullnameLabel.setForeground(Color.white);
         JPanel row1 = new JPanel();
-        row1.setBackground(new Color(131, 30, 199));
+        row1.setBackground(new Color(0, 0, 0));
         row1.add(FullnameLabel);
         row1.add(FullNameField);
         // -------------------------------------------------------
@@ -185,7 +183,7 @@ public class StudentSignInPage extends JFrame implements ActionListener {
         IDNumberLabel.setText("Student ID: ");
         IDNumberLabel.setForeground(Color.white);
         JPanel row2 = new JPanel();
-        row2.setBackground(new Color(131, 30, 199));
+        row2.setBackground(new Color(0, 0, 0));
         row2.add(IDNumberLabel);
         row2.add(IDNumberField);
         // ----------------------------------------------------------
@@ -193,7 +191,7 @@ public class StudentSignInPage extends JFrame implements ActionListener {
         DepartmentLabel.setText("Department: ");
         DepartmentLabel.setForeground(Color.white);
         JPanel row3 = new JPanel();
-        row3.setBackground(new Color(131, 30, 199));
+        row3.setBackground(new Color(0, 0, 0));
         row3.add(DepartmentLabel, SwingConstants.CENTER);
         row3.add(DepartmentField);
         // -------------------------------------------------------
@@ -201,23 +199,15 @@ public class StudentSignInPage extends JFrame implements ActionListener {
         YearLabel.setText("Year: ");
         YearLabel.setForeground(Color.white);
         JPanel row4 = new JPanel();
-        row4.setBackground(new Color(131, 30, 199));
+        row4.setBackground(new Color(0, 0, 0));
         row4.add(YearLabel);
         row4.add(YearField);
-        // ----------------------------------------------------------
-        PhoneNumberField.setPreferredSize(new Dimension(200, 30));
-        PhoneNumberLabel.setText("PhoneNumber: ");
-        PhoneNumberLabel.setForeground(Color.white);
-        JPanel row5 = new JPanel();
-        row5.setBackground(new Color(131, 30, 199));
-        row5.add(PhoneNumberLabel);
-        row5.add(PhoneNumberField);
         // -------------------------------------------------------
         NewPasswordField.setPreferredSize(new Dimension(200, 30));
         NewPasswordLabel.setText("New Password: ");
         NewPasswordLabel.setForeground(Color.white);
         JPanel row6 = new JPanel();
-        row6.setBackground(new Color(131, 30, 199));
+        row6.setBackground(new Color(0, 0, 0));
         row6.add(NewPasswordLabel);
         row6.add(NewPasswordField);
         // ----------------------------------------------------------
@@ -225,15 +215,15 @@ public class StudentSignInPage extends JFrame implements ActionListener {
         ConfirmPasswordLabel.setText("Confirm Password: ");
         ConfirmPasswordLabel.setForeground(Color.white);
         JPanel row7 = new JPanel();
-        row7.setBackground(new Color(131, 30, 199));
+        row7.setBackground(new Color(0, 0, 0));
         row7.add(ConfirmPasswordLabel);
         row7.add(ConfirmPasswordField);
         // ----------------------------------------------------------
         JPanel row8 = new JPanel();
         row8.add(MessageLabel);
-        row8.setBackground(new Color(131, 30, 200));
+        row8.setBackground(new Color(0, 0, 0));
         MessageLabel.setFont(new Font("Helvetica", 2, 25));
-        MessageLabel.setBackground(new Color(131, 30, 199));
+        MessageLabel.setBackground(new Color(0, 0, 0));
         MessageLabel.setHorizontalAlignment(SwingConstants.CENTER);
         MessageLabel.setVerticalAlignment(SwingConstants.CENTER);
         MessageLabel.setOpaque(true);
@@ -242,12 +232,12 @@ public class StudentSignInPage extends JFrame implements ActionListener {
         // ----------------------------------------------------------
         JPanel row9 = new JPanel();
         row9.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 20));
-        row9.setBackground(new Color(131, 30, 199));
+        row9.setBackground(new Color(0, 0, 0));
 
         RegisterButton = new ButtonStyle();
         RegisterButton.setText("Register");
         RegisterButton.setMargin(new Insets(5, 15, 5, 15));
-        RegisterButton.setBackground(new Color(46, 5, 74));
+        RegisterButton.setBackground(new Color(0, 9, 105));
         RegisterButton.setForeground(Color.WHITE);
         RegisterButton.addActionListener(this);
 
@@ -255,14 +245,14 @@ public class StudentSignInPage extends JFrame implements ActionListener {
         ScanIdButton.setForeground(Color.WHITE);
         ScanIdButton.setText("ScanId");
         ScanIdButton.setMargin(new Insets(5, 15, 5, 15));
-        ScanIdButton.setBackground(new Color(46, 5, 74));
+        ScanIdButton.setBackground(new Color(0, 14, 93));
         ScanIdButton.addActionListener(this);
 
         loginButton = new ButtonStyle();
         loginButton.setForeground(Color.WHITE);
         loginButton.setText("LogIn");
         loginButton.setMargin(new Insets(5, 15, 5, 15));
-        loginButton.setBackground(new Color(46, 5, 74));
+        loginButton.setBackground(new Color(1, 19, 103));
         loginButton.addActionListener(this);
 
         row9.add(RegisterButton);
@@ -275,29 +265,51 @@ public class StudentSignInPage extends JFrame implements ActionListener {
         centerPanel.add(row2);
         centerPanel.add(row3);
         centerPanel.add(row4);
-        centerPanel.add(row5);
         centerPanel.add(row6);
         centerPanel.add(row7);
         centerPanel.add(row8);
         centerPanel.add(row9);
 
-        rightPanel.setBackground(new Color(46, 5, 74));
-        leftPanel.setBackground(new Color(46, 5, 74));
-        BottomPanel.setBackground(new Color(51, 10, 122));
-        Topcontainer.setBackground(new Color(51, 10, 122));
-        centerPanel.setBackground(new Color(131, 30, 199));
+        JMenu menu = new JMenu("Menu");
+        menu.setForeground(Color.WHITE);
+        JMenuItem PreviousPage = new JMenuItem("PreviousPage");
+        PreviousPage.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new LoginPage();
+                dispose();
+            }
+        });
+
+
+        rightPanel.setBackground(new Color(0, 0, 0));
+        leftPanel.setBackground(new Color(0, 0, 0));
+        BottomPanel.setBackground(new Color(0, 0, 0));
+        Topcontainer.setBackground(new Color(0, 0, 0));
+        centerPanel.setBackground(new Color(0, 0, 0));
+
         setLayout(new BorderLayout(0, 20));
+        JMenuBar menuBar = new JMenuBar();
+        menu.add(PreviousPage);
+        menuBar.add(menu);
+        setJMenuBar(menuBar);
+
         add(Topcontainer, BorderLayout.NORTH);
         add(centerPanel, BorderLayout.CENTER);
         add(BottomPanel, BorderLayout.SOUTH);
         add(rightPanel, BorderLayout.EAST);
         add(leftPanel, BorderLayout.WEST);
 
+
         this.setSize(900, 790);
-        this.getContentPane().setBackground(new Color(131, 30, 199));
+        this.getContentPane().setBackground(new Color(7, 7, 7));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
 
+    }
+
+    public static void main(String[] args) {
+        new StudentSignUpPage();
     }
 }

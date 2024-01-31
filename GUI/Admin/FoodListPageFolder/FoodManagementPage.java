@@ -100,9 +100,9 @@ public class FoodManagementPage extends WelcomePage {
         previewButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //ArrayList<String> imagevalues = ConnectionWithDatabase.imageExtractor(Date,Mealtime);
-                //ImageLabel.setIcon(FoodIcon.scaledIcon(imagevalues.get(1),300,300));
-                //ImageLabel.setText(imagevalues.get(0));
+                ArrayList<String> imagevalues = ConnectionWithDatabase.imageExtractor(Date,Mealtime);
+                ImageLabel.setIcon(FoodIcon.scaledIcon(imagevalues.get(1),300,300));
+                ImageLabel.setText(imagevalues.get(0));
             }
         });
         //-------------------------------------------------------
@@ -145,7 +145,7 @@ public class FoodManagementPage extends WelcomePage {
                     JOptionPane.showMessageDialog(null,"Put the new Food Name first!","Warning",JOptionPane.WARNING_MESSAGE);
                 }
                 else{
-                    //ConnectionWithDatabase.imageAdder(FoodNameField.getText(),ImagePath,Date,Mealtime);
+                    ConnectionWithDatabase.imageAdder(FoodNameField.getText(),ImagePath,Date,Mealtime);
                     JOptionPane.showMessageDialog(null,"saved successfully","save",JOptionPane.INFORMATION_MESSAGE);  //sets the food name and food image to the array
                     //-------------------------------------------------------------------
                     //NewFoodListPage.setFoodName(Date,Mealtime,FoodNameField.getText());

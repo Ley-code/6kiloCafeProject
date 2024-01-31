@@ -1,6 +1,6 @@
 package Database;
 
-import GUI.Student.StudentSignInPage;
+import GUI.Student.StudentSignUpPage;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -33,7 +33,7 @@ public class ESPcommunication extends Thread {
         System.out.println(studentID);
         socket.close();
         SignUp.accountChecker(studentID);
-        StudentSignInPage.scanType++;
+        StudentSignUpPage.scanType++;
         method(studentID);
 
     }

@@ -4,6 +4,7 @@ import GUI.Admin.FoodListPageFolder.NewFoodListPage;
 import GUI.Admin.FoodListPageFolder.NewFoodListPanel;
 import GUI.Admin.graphAndChartPage;
 import GUI.Student.LoginPageForStudent;
+import GUI.Student.StudentSignUpPage;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -47,6 +48,8 @@ public class ConnectionWithDatabase {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        System.out.println("Login successful");
+        StudentSignUpPage.flag1 = true;
         return 3;
     }
     // THis will give you all the student IDs in Student Table
@@ -453,7 +456,7 @@ public class ConnectionWithDatabase {
         return bool;
     }
     public static void addRating(int rate){
-        if (rateChecker()){
+        if (!rateChecker()){
             try(Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD)){
                 String sqlQuery = "INSERT INTO rating (Number, Rates, student_ID) VALUES (?,?,?)";
                 PreparedStatement creatingStat = connection.prepareStatement(sqlQuery);

@@ -18,7 +18,7 @@ public class NewFoodListPanel extends JPanel{
 	private String lunch;
 	private String dinner; 
 	public int count = 0;
-	public static String[][] imagepath = {{"GUI/icons/Firfir.png","GUI/icons/aynet.png","GUI/icons/cake.jpg"},{"GUI/icons/bread.png","GUI/icons/sigawot.png","GUI/icons/dinch.png"},
+	public static String[][] imagepath = {{"GUI/icons/Firfir.png","GUI/icons/aynet.png","GUI/icons/cake.jpg"},{"GUI/icons/bread.jpg","GUI/icons/sigawot.jpg","GUI/icons/dinch.png"},
 			{"GUI/icons/firfir.png","GUI/icons/dinch.png","GUI/icons/sigawot.png"},{"GUI/icons/firfir.png","GUI/icons/dinch.png","GUI/icons/sigawot.png"},{"GUI/icons/firfir.png","GUI/icons/dinch.png","GUI/icons/sigawot.png"},
 			{"GUI/icons/firfir.png","GUI/icons/dinch.png","GUI/icons/sigawot.png"},{"GUI/icons/firfir.png","GUI/icons/dinch.png","GUI/icons/sigawot.png"},};
 
@@ -47,15 +47,18 @@ public class NewFoodListPanel extends JPanel{
 		//need which day it is
 		for(int i = 0;i<3;i++){
 			JLabel label = new JLabel();
-	//		label.setIcon(FoodIcon.scaledIcon(imagepath[NewFoodListPage.daynum][i]));
+			label.setIcon(FoodIcon.scaledIcon(imagepath[NewFoodListPage.daynum][i]));
 			label.setHorizontalAlignment(JLabel.CENTER);                        //Middle section changes the image
 			label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 			this.add(label);
-            JLabel namelabel = new JLabel(bottomSection[i], SwingConstants.CENTER);
-			namelabel.setFont(new Font("Helvetica",Font.BOLD,25));
-            namelabel.setBorder(BorderFactory.createLineBorder(Color.BLACK)); // Add border for clarity
-            this.add(namelabel);
         }
+		for(int i=0;i<3;i++){
+			JLabel namelabel = new JLabel(bottomSection[i], SwingConstants.CENTER);
+			namelabel.setFont(new Font("Helvetica",Font.BOLD,25));
+			namelabel.setBorder(BorderFactory.createLineBorder(Color.BLACK)); // Add border for clarity
+			this.add(namelabel);
+		}
+
 
 	}
 	/*public static String getFoodImage(int date,int mealtime){
