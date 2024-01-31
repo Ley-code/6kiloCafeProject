@@ -15,9 +15,9 @@ public class AttendancePage extends WelcomePage {
     private JTable table2;
     private JTable table3;
     public AttendancePage() throws SQLException {
-        DefaultTableModel tableModel1 = new DefaultTableModel(new Object[][]{},new Object[]{"Student_ID", "Student_Name", "Department", "Year","BreakFast"});
-        DefaultTableModel tableModel2 = new DefaultTableModel(new Object[][]{},new Object[]{"Student_ID", "Student_Name", "Department", "Year","Lunch"});
-        DefaultTableModel tableModel3 = new DefaultTableModel(new Object[][]{},new Object[]{"Student_ID", "Student_Name", "Department", "Year","Dinner"});
+        DefaultTableModel tableModel1 = new DefaultTableModel(new Object[][]{},new Object[]{"No", "Student_Name", "Student_ID", "Department","Year","BreakFast"});
+        DefaultTableModel tableModel2 = new DefaultTableModel(new Object[][]{},new Object[]{"No", "Student_Name", "Student_ID", "Department","Year","Lunch"});
+        DefaultTableModel tableModel3 = new DefaultTableModel(new Object[][]{},new Object[]{"No", "Student_Name", "Student_ID", "Department","Year","Dinner"});
         // Create a JTable with the table model
         table1 = TableStyle(tableModel1);
         table2 = TableStyle(tableModel2);

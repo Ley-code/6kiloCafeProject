@@ -113,7 +113,7 @@ public class WelcomePage {
         // -----------------------------------------------------------------
         // creates the Title and Icon at the top of the frame
 
-        ImageIcon logo = new ImageIcon("C:\\6kiloCafeProject\\GUI\\icons\\restaurant.png");
+        ImageIcon logo = new ImageIcon("GUI\\icons\\restaurant.png");
         CafeManagementLabel = new JLabel();
         CafeManagementLabel.setIcon(logo);
         CafeManagementLabel.setIconTextGap(20);

@@ -37,13 +37,13 @@ public class LoginPageForStudent implements ActionListener {
         //it customizes the Admin ID text label
         userIDLabel.setText("Student Name: ");
         userIDLabel.setBounds(150, 300, 250, 25);
-        userIDLabel.setFont(new Font("Times New Roman", Font.BOLD, 22));
+        userIDLabel.setFont(new Font("Times New Roman", Font.ITALIC, 22));
         userIDLabel.setForeground(Color.BLACK);
         //----------------------------------------------------
 
         //it customizes the Admin password text Label
         userPasswordLabel.setBounds(150, 350, 270, 22);
-        userPasswordLabel.setFont(new Font("Times New Roman", Font.BOLD, 25));
+        userPasswordLabel.setFont(new Font("Times New Roman", Font.ITALIC, 25));
         userPasswordLabel.setForeground(Color.BLACK);
         //----------------------------------------------------
 
@@ -64,16 +64,14 @@ public class LoginPageForStudent implements ActionListener {
         loginButton.setBounds(200, 400, 100, 45);
         loginButton.addActionListener(this);
         loginButton.setFocusable(false);
-        loginButton.setForeground(Color.white);
+        loginButton.setForeground(Color.WHITE);
         loginButton.setBackground(Color.BLACK);
 
         resetButton.setBounds(325, 400, 100, 45);
         resetButton.addActionListener(this);
         resetButton.setFocusable(false);
-        resetButton.setForeground(Color.white);
+        resetButton.setForeground(Color.WHITE);
         resetButton.setBackground(Color.BLACK);
-
-        //----------------------------------------------------
 
         //adds the foreground panel which is used to store the above components and sets the background
         foreground.setBackground(new Color(166, 165, 165));
@@ -89,15 +87,11 @@ public class LoginPageForStudent implements ActionListener {
         foreground.add(loginButton);
         foreground.add(resetButton);
         //----------------------------------------------------
-
         frame.setLayout(new BorderLayout());
         frame.add(topPanel, BorderLayout.NORTH);
         topPanel.add(Title);
 
-
-        //finally we add the foreground panel to the Frame
         frame.add(foreground, BorderLayout.CENTER);
-        //frame.setUndecorated(true); //removes to minimize,maximize and close tabs
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1000, 800);
         frame.setLocationRelativeTo(null); //places it to center

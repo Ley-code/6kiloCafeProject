@@ -29,10 +29,16 @@ public class FoodManagementPage extends WelcomePage {
     private JTextField FoodNameField;
     private JButton OpenButton;
     private JButton SaveButton;
-    private JButton ChangeButton;
     private String ImagePath;
     private JFileChooser fileChooser;
-    private String FoodName;
+    private JPanel datecontainer;
+    private JPanel mealcontainer;
+    private JPanel align;
+    private JPanel tempcont;
+    private JLabel ImageLabel;
+    private JPanel placeholder;
+    private JPanel FoodInputHolder;
+    private JPanel openButtonContainer;
     public FoodManagementPage(){
         //----------------------------------------------------------
         datelabel = new JLabel("Date: ");
@@ -53,12 +59,12 @@ public class FoodManagementPage extends WelcomePage {
                 Date = datebox.getSelectedIndex();
             }
         });
-        JPanel datecontainer = new JPanel();
+        datecontainer = new JPanel();
         datecontainer.setBackground(new Color(100, 178, 237));
         datecontainer.add(datelabel);
         datecontainer.add(datebox);
-        JPanel mealcontainer = new JPanel();
         datecontainer.setBackground(new Color(100, 178, 237));
+        mealcontainer = new JPanel();
         mealcontainer.add(meallabel);
         mealcontainer.add(mealtimebox);
         //-------------------------------------------------------
@@ -73,10 +79,12 @@ public class FoodManagementPage extends WelcomePage {
         previewButton.setMargin(new Insets(0,20,0,20));
         previewButton.setFocusable(false);
         previewButton.setHorizontalAlignment(SwingConstants.CENTER);
-        JPanel tempcont = new JPanel();
+
+        tempcont = new JPanel();
         tempcont.setBackground(new Color(100, 178, 237));
         tempcont.setLayout(new BorderLayout());
-        JPanel align = new JPanel();
+
+        align = new JPanel();
         align.setLayout(new FlowLayout(FlowLayout.CENTER));
         align.add(previewButton);
         align.setBackground(new Color(100, 178, 237));
@@ -84,7 +92,7 @@ public class FoodManagementPage extends WelcomePage {
         tempcont.add(align,BorderLayout.SOUTH);
         tempcont.add(dateAndMealContainer,BorderLayout.NORTH);
 
-        JLabel ImageLabel = new JLabel();
+        ImageLabel = new JLabel();
         Border border = new LineBorder(Color.GRAY,2,true);
         ImageLabel.setBorder(border);
         ImageLabel.setIcon(FoodIcon.scaledIcon("GUI/icons/elementor-placeholder-image.png",300,300));
@@ -94,29 +102,33 @@ public class FoodManagementPage extends WelcomePage {
         ImageLabel.setVerticalTextPosition(SwingConstants.BOTTOM);
         ImageLabel.setHorizontalTextPosition(SwingConstants.CENTER);
         ImageLabel.setFont(new Font("Helvici",Font.BOLD,15));
-        JPanel placeholder= new JPanel();
+
+        placeholder= new JPanel();
         placeholder.setLayout(new FlowLayout(FlowLayout.CENTER));
         placeholder.add(ImageLabel);
         previewButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //-------------------------------------------------------------------------------
                 ArrayList<String> imagevalues = ConnectionWithDatabase.imageExtractor(Date,Mealtime);
-                ImageLabel.setIcon(FoodIcon.scaledIcon(imagevalues.get(1),300,300));
+                ImageLabel.setIcon(FoodIcon.scaledIcon(imagevalues.get(1),300,300)); // recieves data from Database and Displays it on the imagelabel
                 ImageLabel.setText(imagevalues.get(0));
+                //-------------------------------------------------------------------------------
             }
         });
         //-------------------------------------------------------
-        JLabel foodNameLabel = new JLabel("NewFood Name: ");
+        JLabel foodNameLabel = new JLabel("New Food: ");
         FoodNameField = new JTextField();
         FoodNameField.setColumns(20);
-        JPanel placeholder1 = new JPanel();
-        placeholder1.add(foodNameLabel);
-        placeholder1.add(FoodNameField);
-        placeholder1.setBackground(new Color(100, 178, 237));
+
+        FoodInputHolder = new JPanel();
+        FoodInputHolder.add(foodNameLabel);
+        FoodInputHolder.add(FoodNameField);
+        FoodInputHolder.setBackground(new Color(100, 178, 237));
         //-------------------------------------------------------
-        JPanel placeholder2 = new JPanel();
-        placeholder2.setBackground(new Color(100, 178, 237));
-        placeholder2.setLayout(new FlowLayout(FlowLayout.CENTER));
+        openButtonContainer = new JPanel();
+        openButtonContainer.setBackground(new Color(100, 178, 237));
+        openButtonContainer.setLayout(new FlowLayout(FlowLayout.CENTER));
         OpenButton = new JButton("Open Image");
 
         OpenButton.addActionListener(new ActionListener() {
@@ -133,8 +145,8 @@ public class FoodManagementPage extends WelcomePage {
                 }
             }
         });
-        placeholder2.add(new JLabel("New Food Image: "));
-        placeholder2.add(OpenButton);
+        openButtonContainer.add(new JLabel("New Food Image: "));
+        openButtonContainer.add(OpenButton);
         //-----------------------------------------------------
         JPanel placeholder3 = new JPanel();
         SaveButton = new JButton("Save");
@@ -161,8 +173,8 @@ public class FoodManagementPage extends WelcomePage {
         JPanel bottompanel = new JPanel();
         bottompanel.setBackground(new Color(100, 178, 237));
         bottompanel.setLayout(new GridLayout(3,1));
-        bottompanel.add(placeholder1);
-        bottompanel.add(placeholder2);           //the bottom panel which contains the save button label and the two inputs
+        bottompanel.add(FoodInputHolder);
+        bottompanel.add(openButtonContainer);           //the bottom panel which contains the save button label and the two inputs
         bottompanel.add(placeholder3);
         bottompanel.setBorder(new LineBorder(Color.GRAY,2,true));
         //-------------------------------------------------------
