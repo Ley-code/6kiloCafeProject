@@ -109,7 +109,6 @@ public class PollPage extends WelcomePage {
     }
     private static void displayOptions() {
         StringBuilder message = new StringBuilder("Option Counts:\n");
-        //ConnectionWithDatabase.voteExtractor()
         int selectedQuestionIndex = resultList.getSelectedIndex();
         if (selectedQuestionIndex != -1) {
             String selectedQuestion = resultListModel.getElementAt(selectedQuestionIndex);
@@ -128,8 +127,5 @@ public class PollPage extends WelcomePage {
             }
         }
         JOptionPane.showMessageDialog(null,message.toString(),"Result",JOptionPane.INFORMATION_MESSAGE);
-    }
-    public static void main(String[] args) {
-        new PollPage();
     }
 }

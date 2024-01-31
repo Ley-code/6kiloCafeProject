@@ -121,28 +121,28 @@ public class graphAndChartPage extends WelcomePage {
                 true, // Use tooltips
                 false // Generate URLs
         );
-        // Customize plot area
+// Customize plot area
         CategoryPlot plot = chart.getCategoryPlot();
 
         plot.setBackgroundPaint(Color.lightGray); // Set plot background color
         plot.setOutlinePaint(null); // Hide the plot outline
         plot.setRangeGridlinesVisible(true);
         plot.setRangeGridlinePaint(new Color(0, 0, 0)); // Set color of range gridlines
-        // Customize X-axis
-        // Customize Y-axis
+// Customize X-axis
+// Customize Y-axis
         NumberAxis valueAxis = (NumberAxis) plot.getRangeAxis();
         valueAxis.setTickLabelFont(new Font("Arial", Font.PLAIN, 16));
         valueAxis.setTickLabelsVisible(true);
         valueAxis.setTickLabelPaint(new Color(59, 89, 152)); // Set tick label color
 
-        // Customize renderer
+// Customize renderer
         BarRenderer renderer = (BarRenderer) plot.getRenderer();
         renderer.setBarPainter(new StandardBarPainter());
         renderer.setDrawBarOutline(true); // Hide bar outlines
         renderer.setShadowVisible(true); // Hide shadows
         renderer.setSeriesPaint(0, new Color(59, 89, 152)); // Set custom bar color
 
-        // Display label for each bar
+// Display label for each bar
         renderer.setDefaultItemLabelGenerator(new StandardCategoryItemLabelGenerator());
         renderer.setDefaultItemLabelsVisible(true);
         renderer.setDefaultPositiveItemLabelPosition(new ItemLabelPosition(ItemLabelAnchor.OUTSIDE12, TextAnchor.BOTTOM_CENTER));
@@ -163,8 +163,8 @@ public class graphAndChartPage extends WelcomePage {
         return myChartPanel;
     }
 
-    // 2nd part
-    // peak time analysis
+// 2nd part
+// peak time analysis
 
     public static ChartPanel plotAttendanceGraph() {
         // List<String> timestampData = retrieveTimestampData();
@@ -182,7 +182,7 @@ public class graphAndChartPage extends WelcomePage {
                 calendar.set(Calendar.SECOND, 0); // Reset seconds to zero
                 calendar.set(Calendar.MILLISECOND, 0); // Reset milliseconds to zero
 
-                // Round minutes to the nearest multiple of 5
+// Round minutes to the nearest multiple of 5
                 int minute = calendar.get(Calendar.MINUTE);
                 int roundedMinute = (minute / 5) * 5;
                 calendar.set(Calendar.MINUTE, roundedMinute);
@@ -200,13 +200,13 @@ public class graphAndChartPage extends WelcomePage {
             }
         }
 
-        // Add data points to the dataset
+// Add data points to the dataset
         for (Map.Entry<String, Integer> entry : intervalCountMap.entrySet()) {
             String interval = entry.getKey();
             Integer count = entry.getValue();
             dataset.addValue(count, "Attendance", interval);
         }
-        // Create the chart
+// Create the chart
         JFreeChart chart = ChartFactory.createLineChart(
                 "Student Attendance",
                 "Timestamp",
@@ -215,15 +215,15 @@ public class graphAndChartPage extends WelcomePage {
         CategoryPlot plot = (CategoryPlot) chart.getPlot();
         LineAndShapeRenderer renderer = (LineAndShapeRenderer) plot.getRenderer();
 
-        // Make the line bold
+// Make the line bold
         renderer.setSeriesStroke(0, new BasicStroke(2.0f));
 
-        // Customize other aspects of the plot, such as colors and shapes
+// Customize other aspects of the plot, such as colors and shapes
         renderer.setSeriesPaint(0, Color.BLUE); // Customize line color
         renderer.setSeriesShapesVisible(0, true); // Show data points as shapes
         renderer.setSeriesShape(0, new Ellipse2D.Double(-3, -3, 6, 6)); // Customize shape of data points
 
-        // Customize the axis labels
+// Customize the axis labels
         CategoryAxis domainAxis = plot.getDomainAxis();
         domainAxis.setLabelFont(new Font("Arial", Font.BOLD, 14));
         domainAxis.setTickLabelFont(new Font("Arial", Font.PLAIN, 12));
@@ -232,7 +232,7 @@ public class graphAndChartPage extends WelcomePage {
         rangeAxis.setLabelFont(new Font("Arial", Font.BOLD, 14));
         rangeAxis.setTickLabelFont(new Font("Arial", Font.PLAIN, 12));
 
-        // Display the chart in a chartFrame
+// Display the chart in a chartFrame
         ChartFrame chartFrame = new ChartFrame("Student Attendance Graph", chart);
         chartFrame.pack();
         ChartPanel myChartPanel = chartFrame.getChartPanel();
@@ -240,7 +240,7 @@ public class graphAndChartPage extends WelcomePage {
         return myChartPanel;
 
     }
-    //3 pie chart for number of students in each department analysis
+//3 pie chart for number of students in each department analysis
     public static ChartPanel pie() {
         DefaultPieDataset dataset = new DefaultPieDataset();
         ConnectionWithDatabase.numofStudentInDepartment();
@@ -255,7 +255,7 @@ public class graphAndChartPage extends WelcomePage {
 // Create the pie chart
         JFreeChart chart = ChartFactory.createPieChart(null, dataset, false, false, false);
 
-        // Customize the appearance of the chart
+// Customize the appearance of the chart
         chart.setBackgroundPaint(Color.WHITE);
         chart.setBorderVisible(false);
 
@@ -276,7 +276,7 @@ public class graphAndChartPage extends WelcomePage {
         plot.setLegendLabelGenerator(new StandardPieSectionLabelGenerator("{0} ({1})")); // Show department name and count in the legend
         plot.setLegendLabelToolTipGenerator(new StandardPieSectionLabelGenerator("{0} : {1}"));
 
-        // Add a title to the chart
+// Add a title to the chart
         TextTitle title = new TextTitle("Student Distribution Pie Chart");
         title.setFont(new Font("Arial", Font.BOLD, 20));
         title.setPaint(new Color(33, 37, 41));
@@ -295,16 +295,8 @@ public class graphAndChartPage extends WelcomePage {
             }
         };
         chartPanel.setBorder(new LineBorder(Color.BLACK,5,true));
-        // Display the chart panel
+// Display the chart panel
         return chartPanel;
     }
-    //5th average number of students preseted  in a day per meal.
-
-
-    backEND obj = new backEND();
-    double rating = obj.CalculateAverageRating(); //average rating general information leykun
-    backEND obj2 = new backEND();
-    int avg = obj2.averageStudentPresented();//averageStudent General information leykun
-    backEND obj3=new backEND();
-    LocalTime busyTime= obj3.identifyPeakTime(backEND.getTimestampData()); //busy time general information leykun
 }
+

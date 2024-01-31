@@ -48,12 +48,14 @@ public class LoginPageForStudent implements ActionListener {
         //it customizes the Admin ID text label
         userIDLabel.setText("Student Name: ");
         userIDLabel.setBounds(150, 300, 250, 25);
+
         userIDLabel.setFont(new Font("Times New Roman", Font.BOLD, 22));
         userIDLabel.setForeground(Color.BLACK);
         //----------------------------------------------------
 
         //it customizes the Admin password text Label
         userPasswordLabel.setBounds(150, 350, 270, 22);
+
         userPasswordLabel.setFont(new Font("Times New Roman", Font.BOLD, 22));
         userPasswordLabel.setForeground(Color.BLACK);
         //----------------------------------------------------
@@ -70,23 +72,23 @@ public class LoginPageForStudent implements ActionListener {
         messageLabel.setFont(new Font(null, Font.ITALIC, 20));
         messageLabel.setForeground(Color.BLACK);
         //----------------------------------------------------
-
         //creates the buttons and designs them accordingly
         loginButton.setBounds(200, 400, 100, 45);
         loginButton.addActionListener(this);
         loginButton.setFocusable(false);
+
         loginButton.setForeground(Color.white);
         loginButton.setBackground(new Color(0, 9, 105));
+
 
         resetButton.setBounds(325, 400, 100, 45);
         resetButton.addActionListener(this);
         resetButton.setFocusable(false);
+
         resetButton.setForeground(Color.white);
         resetButton.setBackground(new Color(0, 14, 93));
         //----------------------------------------------------
 
-        frame.add(topPanel,BorderLayout.NORTH);
-        topPanel.add(Title);
 
         // Add components to the top layer of the JLayeredPane
         layeredPane.add(topPanel, JLayeredPane.PALETTE_LAYER);
@@ -97,12 +99,11 @@ public class LoginPageForStudent implements ActionListener {
         layeredPane.add(userPasswordLabel, JLayeredPane.PALETTE_LAYER);
         layeredPane.add(userIDField, JLayeredPane.PALETTE_LAYER);
         layeredPane.add(userPasswordField, JLayeredPane.PALETTE_LAYER);
-
+        topPanel.add(Title);
         // Set up the JFrame with the JLayeredPane
         frame.setLayout(new BorderLayout());
         frame.add(layeredPane, BorderLayout.CENTER);
-
-
+        frame.add(topPanel,BorderLayout.NORTH);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1000, 700);
         frame.setLocationRelativeTo(null); //places it to center
@@ -148,14 +149,11 @@ public class LoginPageForStudent implements ActionListener {
                 frame.dispose();
             }
         });
-
-
         // Add menu items to the File menu
         settingMenu.add(NotificationMenuItem);
         settingMenu.add(privacyMenuItem);
         settingMenu.addSeparator(); // Adds a separator line
         backMenu.add(backMenuItem);
-
 
         // Add menus to the menu bar
         menuBar.add(settingMenu);
@@ -194,13 +192,11 @@ public class LoginPageForStudent implements ActionListener {
             messageLabel.setText("Wrong username");
         }
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == resetButton) {
             userIDField.setText("");
             userPasswordField.setText("");
-
         }
         if (e.getSource() == loginButton) {
             String userID = userIDField.getText();
@@ -214,11 +210,13 @@ public class LoginPageForStudent implements ActionListener {
                     validateLogIn(userPassword, userID);
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
-
                 }
                 //----------------------------------------------------
         }
             //if the user is a student it creates a studentSigninPage
+    }
 
+    public static void main(String[] args) {
+        new LoginPageForStudent();
     }
 }

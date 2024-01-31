@@ -119,22 +119,18 @@ public class LoginPage implements ActionListener {
         backgroundLabel.setBounds(0, 0, 1000, 700);  // Set the size according to your JFrame size
         layeredPane.add(backgroundLabel, JLayeredPane.DEFAULT_LAYER);
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == resetButton) {
             userIDField.setText("");
             userPasswordField.setText("");
-            
             //resets the password and IDfield if a user makes a mistake
         }
         if (e.getSource() == loginButton) {
-            
             String userID = userIDField.getText();
             String userPassword = String.valueOf(userPasswordField.getPassword());
             //the above variables store the password and ID of the user
             //----------------------------------------------------
-
             //below the methods check if the user ID and Password matches and if it doesnt match shows the respective message
             //and if it matches opens a new welcome page as an admin
             if (myid.getLogInfo().containsKey(userID)) {

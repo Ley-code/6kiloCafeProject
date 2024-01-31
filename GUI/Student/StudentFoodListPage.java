@@ -1,7 +1,5 @@
 package GUI.Student;
 
-import GUI.Admin.FoodListPageFolder.NewFoodListPage;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
