@@ -1,6 +1,6 @@
 package GUI.Admin;
 
-import GUI.Student.StudentSignInPage;
+import GUI.Student.StudentSignUpPage;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -82,7 +82,7 @@ public class LoginPage implements ActionListener {
         //----------------------------------------------------
 
         //adds the foreground panel which is used to store the above components and sets the background"
-        foreground.setBackground(new Color(24, 26, 79));
+        foreground.setBackground(new Color(0, 0, 0));
         foreground.setOpaque(true);
         foreground.setBounds(0, 0, 500, 500);
         foreground.setLayout(null);
@@ -100,12 +100,11 @@ public class LoginPage implements ActionListener {
 
         //finally we add the foreground panel to the Frame
         frame.add(foreground);
-        frame.setUndecorated(true); //removes the minimize,maximize and close tabs
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500, 400);
         frame.setLocationRelativeTo(null); //places it to center
         frame.setVisible(true);
-        frame.setResizable(true);
+        frame.setResizable(false);
         //----------------------------------------------------
     }
 
@@ -148,7 +147,7 @@ public class LoginPage implements ActionListener {
         }
         //if the user is a student it creates a studentsigninpage
         if (e.getSource() == signInButton) {
-            new StudentSignInPage();
+            new StudentSignUpPage();
             frame.dispose();
         }
     }
