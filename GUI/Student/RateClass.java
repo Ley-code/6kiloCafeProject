@@ -1,37 +1,28 @@
 package GUI.Student;
 
-import GUI.Admin.FoodListPageFolder.NewFoodListPage;
 import GUI.Admin.RatingIcon;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class StudentWelcomePage extends JFrame implements ActionListener {
-    JTabbedPane tabbedPane;
-    JPanel Foodpanel;
-    JPanel pollpanel;
+public class RateClass extends JFrame implements ActionListener {
     JPanel ratePanel;
+    JPanel topPanel;
+    JLabel label_1;
     ButtonGroup rateButtons;
     JRadioButton one;
     JRadioButton two;
     JRadioButton three;
     JRadioButton four;
     JRadioButton five;
-    StudentWelcomePage(){
-        initialize();
-    }
-    private void initialize(){
+    JMenu Menu;
+    JMenuBar MenuBar;
+    RateClass(){
+        setSize(600,700);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        Foodpanel = new JPanel();
-        Foodpanel.setLayout(new BorderLayout());
-        JScrollPane scrollPane = new JScrollPane(new NewFoodListPage().NewFoodListPage());
-        Foodpanel.add(scrollPane,BorderLayout.CENTER);
-
-
-        pollpanel =new NewStudentPollPanel().NewStudentPollPanel();
         one = RatingIcon.getIcon(1);
         one.addActionListener(this);
         two = RatingIcon.getIcon(2);
@@ -57,23 +48,40 @@ public class StudentWelcomePage extends JFrame implements ActionListener {
         ratePanel.add(three);
         ratePanel.add(four);
         ratePanel.add(five);
-        ratePanel.setBackground(Color.YELLOW);
+        ratePanel.setBackground(new Color(11,11,11));
 
-        tabbedPane = new JTabbedPane();
-        tabbedPane.addTab("Food Lists", Foodpanel);
-        tabbedPane.addTab("Student poll", pollpanel);
-        tabbedPane.addTab("Rate Cafe", ratePanel);
+        label_1 = new JLabel("Rate the cafe");
+        label_1.setFont(new Font("Times New Roman", Font.ITALIC, 24));
+        label_1.setForeground(Color.BLACK);
+        label_1.setHorizontalAlignment(SwingConstants.CENTER);
 
-        add(tabbedPane);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800,800);
+        topPanel = new JPanel();
+        topPanel.add(label_1);
+        setLayout(new BorderLayout(5,5));
+        add(ratePanel,BorderLayout.CENTER);
+        add(topPanel,BorderLayout.NORTH);
+
+
+
+        MenuBar = new JMenuBar();
+        Menu = new JMenu("Menu");
+        JMenuItem homeMenuItem = new JMenuItem("Home");
+        MenuBar.add(Menu);
+        Menu.add(homeMenuItem);
+        // Add action listeners to menu items
+        homeMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new WelcomePageForStudents();
+                dispose();
+            }
+        });
+
+
+        setJMenuBar(MenuBar);
         setLocationRelativeTo(null);
         setVisible(true);
     }
-    public static void main(String[] args) {
-        new StudentWelcomePage();
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==one){
@@ -87,5 +95,9 @@ public class StudentWelcomePage extends JFrame implements ActionListener {
         } else if (e.getSource()==five) {
             System.out.println("");
         }
+    }
+
+    public static void main(String[] args) {
+        new RateClass();
     }
 }
