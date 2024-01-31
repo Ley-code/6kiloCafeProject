@@ -13,7 +13,7 @@ public class NewStudentPollPanel {
     public JPanel createNewStudentPollPanel() {
         // Create a title label and set its properties
         JLabel titleLabel = new JLabel("Poll Participation");
-        titleLabel.setFont(new Font("Helvetica", Font.BOLD, 30));
+        titleLabel.setFont(new Font("Helvetica", Font.BOLD, 35));
 
         JButton participateButton = new JButton("Participate");
         JButton cancelButton = new JButton("Cancel");
@@ -28,7 +28,7 @@ public class NewStudentPollPanel {
         pollList = new JList<>(listModel);
 
         // Add sample poll questions
-        listModel.addElement("This is great - it is working"); // Backend team, do your thing
+        listModel.addElement("This is great the program is working"); // Backend team, do your thing
 
         // Create a main panel and set its layout
         JPanel mainPanel = new JPanel(new BorderLayout());
