@@ -26,15 +26,20 @@ public class ConnectionWithDatabase {
             String password = studentInfo[2];
             String department = studentInfo[3];
             String year = studentInfo[4];
+            String school_ID = studentInfo[5];
 
-            String sqlQuery = "INSERT into students values(?,?,?,?,?)";// this is a query that will insert one row in to the database.
+            String sqlQuery = "INSERT into students values(?,?,?,?,?,?)";// this is a query that will insert one row in to the database.
             PreparedStatement creatingStat = connection.prepareStatement(sqlQuery);
             creatingStat.setString(1,student_ID);
             creatingStat.setString(2,student_name);
             creatingStat.setString(3,password);
             creatingStat.setString(4,department);
             creatingStat.setString(5,year);
+            creatingStat.setString(6,school_ID);
             int resultSet = creatingStat.executeUpdate();
+            if (resultSet != 0){
+                //You can call the page Fikir is working on here
+            }
             connection.close();
             return resultSet;
 

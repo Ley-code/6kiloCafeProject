@@ -37,7 +37,7 @@ public class Attendance extends Backend {
             System.out.println("You already have an account so You are here to eat");
             //Now we can proceed to the next condition.
             //We need to check whether you are not eating again or not.
-            if (7 <= hour && hour <=10){
+            if (15 <= hour && hour <= 16){
                 // He came to eat his breakfast.
                 if (Backend.existanceChecker(stuID,sqlQuerySB)){
                     // This means he has already eaten his breakfast Kick him out.
