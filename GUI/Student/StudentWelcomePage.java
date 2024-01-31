@@ -26,11 +26,11 @@ public class StudentWelcomePage extends JFrame implements ActionListener {
 
         Foodpanel = new JPanel();
         Foodpanel.setLayout(new BorderLayout());
+
         JScrollPane scrollPane = new JScrollPane(new NewFoodListPage().NewFoodListPage());
         Foodpanel.add(scrollPane,BorderLayout.CENTER);
-
-
         pollpanel =new NewStudentPollPanel().NewStudentPollPanel();
+
         one = RatingIcon.getIcon(1);
         one.addActionListener(this);
         two = RatingIcon.getIcon(2);

@@ -249,6 +249,7 @@ public class ConnectionWithDatabase {
             creatingStat.setInt(2,votes.get(3));
             int result = creatingStat.executeUpdate();
             if (result != 0){
+                JOptionPane.showMessageDialog(null,"You voted Successfuly","Message",JOptionPane.INFORMATION_MESSAGE);
                 // You have voted successfully.
                 // Some message will be Displayed on the GUI
             }
@@ -413,7 +414,7 @@ public class ConnectionWithDatabase {
         }
         return bool;
     }
-    public static void  addRating(int rate){
+    public static void addRating(int rate){
         if (rateChecker()){
             try(Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD)){
                 String sqlQuery = "INSERT INTO rating (Number, Rates, student_ID) VALUES (?,?,?)";

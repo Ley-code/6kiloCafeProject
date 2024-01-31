@@ -14,7 +14,6 @@ public class backEND {
 //4th rating system
     //------------------------------------------------------------------
     public static int CalculateAverageRating() {
-
         ArrayList<Integer> ratings = rateExtractor();
         int sum = 0;
         for (int rating : ratings) {
@@ -131,7 +130,20 @@ public static class Poll {
     public ArrayList<String> getOptions() {
         return options;
     }
-}
+}   public static ArrayList<Integer> rateResult(int selectedOption){
+        ArrayList<Integer> selectedOptionArray = new ArrayList<>();
+        for(int i= 0; i<4;i++){
+            if (i!=selectedOption){
+                selectedOptionArray.add(0);    //backend
+            }
+            else{
+                selectedOptionArray.add(1);
+            }
+        }
+        System.out.println(selectedOptionArray.toString());
+        return selectedOptionArray;
+    }
+
 }
 
 
