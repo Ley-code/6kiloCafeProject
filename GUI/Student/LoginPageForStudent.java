@@ -30,7 +30,7 @@ public class LoginPageForStudent implements ActionListener {
         //this customizes the title of the login page
         Title.setText("Cafe Management");
         Title.setBounds(150, 40, 30, 30);
-        Title.setFont(new Font("ITALIC", Font.BOLD, 25));
+        Title.setFont(new Font("Times New Roman", Font.ITALIC, 30));
         Title.setForeground(Color.BLACK);
 
 
@@ -38,13 +38,13 @@ public class LoginPageForStudent implements ActionListener {
         userIDLabel.setText("Student Name: ");
         userIDLabel.setBounds(150, 300, 250, 25);
         userIDLabel.setFont(new Font("Times New Roman", Font.BOLD, 22));
-        userIDLabel.setForeground(Color.BLACK);
+        userIDLabel.setForeground(Color.WHITE);
         //----------------------------------------------------
 
         //it customizes the Admin password text Label
         userPasswordLabel.setBounds(150, 350, 270, 22);
-        userPasswordLabel.setFont(new Font("Times New Roman", Font.BOLD, 25));
-        userPasswordLabel.setForeground(Color.BLACK);
+        userPasswordLabel.setFont(new Font("Times New Roman", Font.BOLD, 22));
+        userPasswordLabel.setForeground(Color.WHITE);
         //----------------------------------------------------
 
         // The userID field and the userpasswordField both creates the space to write userID and password
@@ -65,18 +65,18 @@ public class LoginPageForStudent implements ActionListener {
         loginButton.addActionListener(this);
         loginButton.setFocusable(false);
         loginButton.setForeground(Color.white);
-        loginButton.setBackground(Color.BLACK);
+        loginButton.setBackground(new Color(0, 9, 105));
 
         resetButton.setBounds(325, 400, 100, 45);
         resetButton.addActionListener(this);
         resetButton.setFocusable(false);
         resetButton.setForeground(Color.white);
-        resetButton.setBackground(Color.BLACK);
+        resetButton.setBackground(new Color(0, 14, 93));
 
         //----------------------------------------------------
 
         //adds the foreground panel which is used to store the above components and sets the background
-        foreground.setBackground(new Color(166, 165, 165));
+        foreground.setBackground(new Color(7, 5, 5));
         foreground.setOpaque(true);
         foreground.setBounds(0, 0, 500, 500);
         foreground.setLayout(null);
@@ -99,7 +99,7 @@ public class LoginPageForStudent implements ActionListener {
         frame.add(foreground, BorderLayout.CENTER);
         //frame.setUndecorated(true); //removes to minimize,maximize and close tabs
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1000, 800);
+        frame.setSize(1000, 700);
         frame.setLocationRelativeTo(null); //places it to center
 
         // Create a menu bar
@@ -112,19 +112,12 @@ public class LoginPageForStudent implements ActionListener {
         JMenu exitMenu = new JMenu("Exit");
 
         // Create menu items
-        JMenuItem homeMenuItem = new JMenuItem("Home");
+
         JMenuItem NotificationMenuItem = new JMenuItem("Notification");
         JMenuItem privacyMenuItem = new JMenuItem("privacy");
+        JMenuItem backMenuItem = new JMenuItem("previous Page");
 
 
-        // Add action listeners to menu items
-        homeMenuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new WelcomePageForStudents();
-                frame.dispose();
-            }
-        });
         NotificationMenuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -138,13 +131,20 @@ public class LoginPageForStudent implements ActionListener {
                 JOptionPane.showMessageDialog(null, "privacy Menu Item Clicked");
             }
         });
+        backMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new StudentSignUpPage();
+                frame.dispose();
+            }
+        });
 
 
         // Add menu items to the File menu
-        Menu.add(homeMenuItem);
         settingMenu.add(NotificationMenuItem);
         settingMenu.add(privacyMenuItem);
         settingMenu.addSeparator(); // Adds a separator line
+        menuBar.add(backMenuItem);
 
 
         // Add menus to the menu bar
@@ -156,7 +156,7 @@ public class LoginPageForStudent implements ActionListener {
         // Set the menu bar for the JFrame
         frame.setJMenuBar(menuBar);
         frame.setVisible(true);
-        frame.setResizable(true);
+        frame.setResizable(false);
     }
 
     public void validateLogIn(String password, String userName) throws SQLException {
@@ -167,7 +167,7 @@ public class LoginPageForStudent implements ActionListener {
                 messageLabel.setForeground(Color.GREEN);
                 messageLabel.setText("Login Successful");
                 frame.dispose();
-                new StudentFoodListPage();
+                new WelcomePageForStudents();
                 logInStudentID = ConnectionWithDatabase.getStudentID(userName);
             } else {
                 messageLabel.setForeground(Color.RED);

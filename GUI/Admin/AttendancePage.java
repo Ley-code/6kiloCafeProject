@@ -33,7 +33,9 @@ public class AttendancePage extends WelcomePage {
         updateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //ConnectionWithDatabase.attendanceInfo(tableModel); //displays the table on the GUI reading data from the database
+                ConnectionWithDatabase.breakfastAttendance(tableModel1);
+                ConnectionWithDatabase.lunchAttendance(tableModel2); //displays the table on the GUI reading data from the database
+                ConnectionWithDatabase.dinnerAttendance(tableModel3);
             }
         });
         // Create a JScrollPane to add the JTable to and make it scrollable
