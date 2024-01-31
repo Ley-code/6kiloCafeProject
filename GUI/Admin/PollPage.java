@@ -27,7 +27,7 @@ public class PollPage extends WelcomePage {
                 createPoll();
             }
         });
-        JButton viewResultsButton = new JButton("View Results");
+        JButton viewResultsButton = new JButton("View Result");
         JButton cancelButton = new JButton("Cancel");
 
         // Create a panel for the buttons and set its layout
@@ -67,7 +67,7 @@ public class PollPage extends WelcomePage {
             backEND.Poll poll= new backEND.Poll(pollQuestion, (ArrayList<String>) pollOptions);
             polls.put(pollQuestion, pollOptions);
             //pollListModel.addElement(pollQuestion);
-            JOptionPane.showMessageDialog(null, "Poll created successfully!");
+            JOptionPane.showMessageDialog(null, "Poll is created successfully!");
         }
     }
     //---------------------------------------------------------------------
