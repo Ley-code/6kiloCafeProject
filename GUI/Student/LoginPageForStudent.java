@@ -37,14 +37,17 @@ public class LoginPageForStudent implements ActionListener {
         //it customizes the Admin ID text label
         userIDLabel.setText("Student Name: ");
         userIDLabel.setBounds(150, 300, 250, 25);
+
         userIDLabel.setFont(new Font("Times New Roman", Font.BOLD, 22));
         userIDLabel.setForeground(Color.WHITE);
         //----------------------------------------------------
 
         //it customizes the Admin password text Label
         userPasswordLabel.setBounds(150, 350, 270, 22);
+
         userPasswordLabel.setFont(new Font("Times New Roman", Font.BOLD, 22));
         userPasswordLabel.setForeground(Color.WHITE);
+
         //----------------------------------------------------
 
         // The userID field and the userpasswordField both creates the space to write userID and password
@@ -59,21 +62,21 @@ public class LoginPageForStudent implements ActionListener {
         messageLabel.setFont(new Font(null, Font.ITALIC, 20));
         messageLabel.setForeground(Color.BLACK);
         //----------------------------------------------------
-
         //creates the buttons and designs them accordingly
         loginButton.setBounds(200, 400, 100, 45);
         loginButton.addActionListener(this);
         loginButton.setFocusable(false);
+
         loginButton.setForeground(Color.white);
         loginButton.setBackground(new Color(0, 9, 105));
+
 
         resetButton.setBounds(325, 400, 100, 45);
         resetButton.addActionListener(this);
         resetButton.setFocusable(false);
+
         resetButton.setForeground(Color.white);
         resetButton.setBackground(new Color(0, 14, 93));
-
-        //----------------------------------------------------
 
         //adds the foreground panel which is used to store the above components and sets the background
         foreground.setBackground(new Color(7, 5, 5));
@@ -89,15 +92,11 @@ public class LoginPageForStudent implements ActionListener {
         foreground.add(loginButton);
         foreground.add(resetButton);
         //----------------------------------------------------
-
         frame.setLayout(new BorderLayout());
         frame.add(topPanel, BorderLayout.NORTH);
         topPanel.add(Title);
 
-
-        //finally we add the foreground panel to the Frame
         frame.add(foreground, BorderLayout.CENTER);
-        //frame.setUndecorated(true); //removes to minimize,maximize and close tabs
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1000, 700);
         frame.setLocationRelativeTo(null); //places it to center
@@ -138,14 +137,11 @@ public class LoginPageForStudent implements ActionListener {
                 frame.dispose();
             }
         });
-
-
         // Add menu items to the File menu
         settingMenu.add(NotificationMenuItem);
         settingMenu.add(privacyMenuItem);
         settingMenu.addSeparator(); // Adds a separator line
         menuBar.add(backMenuItem);
-
 
         // Add menus to the menu bar
         menuBar.add(settingMenu);
@@ -178,13 +174,11 @@ public class LoginPageForStudent implements ActionListener {
             messageLabel.setText("Wrong username");
         }
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == resetButton) {
             userIDField.setText("");
             userPasswordField.setText("");
-
         }
         if (e.getSource() == loginButton) {
             String userID = userIDField.getText();
@@ -198,11 +192,9 @@ public class LoginPageForStudent implements ActionListener {
                     validateLogIn(userPassword, userID);
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
-
                 }
                 //----------------------------------------------------
         }
             //if the user is a student it creates a studentSigninPage
-
     }
 }

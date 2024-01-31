@@ -1,7 +1,5 @@
 package GUI.Admin;
 
-import GUI.Student.RatingIcon;
-
 import java.awt.*;
 
 import javax.swing.*;
@@ -9,10 +7,7 @@ import backEND.backEND;
 
 public class GeneralInformationPage extends WelcomePage {
     JLabel AverageStudent;
-    JLabel FavoriteFood;
-    JLabel BusyDay;
-    JLabel LeastFavoriteFood;
-
+    JLabel highestNumber;
     GeneralInformationPage() {
         AverageStudent = new JLabel();
         AverageStudent.setText("Average Students");
@@ -34,65 +29,37 @@ public class GeneralInformationPage extends WelcomePage {
         averagePanel.setBackground(new Color(24, 26, 79));
         averagePanel.add(averageValueLabel);
         //----------------------------------------------------------
-
-        FavoriteFood = new JLabel();
-        FavoriteFood.setText(backEND.highestNumberOfAtendance());
-        FavoriteFood.setFont(new Font("Helvici", Font.BOLD, 25));
-        FavoriteFood.setBackground(new Color(24, 26, 79));
-        FavoriteFood.setOpaque(true);
-        FavoriteFood.setHorizontalAlignment(SwingConstants.CENTER);
-        FavoriteFood.setVerticalAlignment(SwingConstants.CENTER);
-        FavoriteFood.setForeground(Color.white);
-
-        BusyDay = new JLabel();
-        BusyDay.setText("Busy Day");
-        BusyDay.setFont(new Font("Helvici", Font.BOLD, 25));
-        BusyDay.setBackground(new Color(24, 26, 79));
-        BusyDay.setOpaque(true);
-        BusyDay.setHorizontalAlignment(SwingConstants.CENTER);
-        BusyDay.setVerticalAlignment(SwingConstants.CENTER);
-        BusyDay.setForeground(Color.white);
-
-        LeastFavoriteFood = new JLabel();
-        LeastFavoriteFood.setText("Least Favorite Food");
-        LeastFavoriteFood.setFont(new Font("Helvici", Font.BOLD, 25));
-        LeastFavoriteFood.setBackground(new Color(24, 26, 79));
-        LeastFavoriteFood.setOpaque(true);
-        LeastFavoriteFood.setHorizontalAlignment(SwingConstants.CENTER);
-        LeastFavoriteFood.setVerticalAlignment(SwingConstants.CENTER);
-        LeastFavoriteFood.setForeground(Color.white);
-
+        highestNumber = new JLabel();
+        highestNumber.setText("Highest No of Students");
+        highestNumber.setFont(new Font("Helvici", Font.BOLD, 25));
+        highestNumber.setBackground(new Color(24, 26, 79));
+        highestNumber.setOpaque(true);
+        highestNumber.setHorizontalAlignment(SwingConstants.CENTER);
+        highestNumber.setVerticalAlignment(SwingConstants.CENTER);
+        highestNumber.setForeground(Color.white);
+        //----------------------------------------------------------
+        JPanel highestPanel = new JPanel();
+        highestPanel.setLayout(new GridLayout(2,1));
+        highestPanel.add(highestNumber);
+        JLabel highestValueLabel = new JLabel(""+backEND.highestNumberOfAtendance());//data from backend
+        highestValueLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        highestValueLabel.setVerticalAlignment(SwingConstants.NORTH);
+        highestValueLabel.setForeground(Color.WHITE);
+        highestValueLabel.setFont(new Font("Helvici",Font.BOLD,20));
+        highestPanel.setBackground(new Color(24, 26, 79));
+        highestPanel.add(highestValueLabel);
+        //----------------------------------------------------------
         JPanel gridContainer = new JPanel();
-
         gridContainer.setBackground(new Color(32, 35, 133));
-        gridContainer.setLayout(new GridLayout(2, 2,10,10));
+        gridContainer.setLayout(new GridLayout(1, 2,10,10));
         gridContainer.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-
         gridContainer.add(averagePanel);
-        gridContainer.add(AverageStudent);
-        gridContainer.add(FavoriteFood);
-        gridContainer.add(BusyDay);
-        gridContainer.add(LeastFavoriteFood);
+        gridContainer.add(highestPanel);
         //---------------------------------------------------------------
-        JPanel ratepanel = new JPanel();
-        int rateresult = backEND.CalculateAverageRating();
-        JLabel mylabel = new JLabel();
-        mylabel.setText("Rating From Students: "+ RatingIcon.getIcon(rateresult).getText());
-        mylabel.setFont(new Font("Helvici", Font.BOLD,25));
-        mylabel.setOpaque(true);                               //displays the rating
-        mylabel.setForeground(Color.YELLOW);
-        mylabel.setBackground(new Color(24, 26, 79));
-        mylabel.setHorizontalAlignment(SwingConstants.CENTER);
-        ratepanel.setBackground(new Color(32,35,133));
-        ratepanel.add(mylabel);
-        //---------------------------------------------------------------
+
         centerPanel.setLayout(new BorderLayout());
         centerPanel.setBackground(new Color(32, 35, 133));
         centerPanel.add(gridContainer,BorderLayout.CENTER);
-        centerPanel.add(ratepanel,BorderLayout.SOUTH);
-    }
-    public static void main(String[] args) {
-        new GeneralInformationPage();
     }
 
 }

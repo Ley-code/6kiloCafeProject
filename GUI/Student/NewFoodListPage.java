@@ -1,8 +1,6 @@
-package GUI.Admin.FoodListPageFolder;
+package GUI.Student;
 
-import Database.ConnectionWithDatabase;
 import GUI.Admin.ButtonStyle;
-import GUI.Admin.WelcomePage;
 
 import java.awt.Color;
 import java.awt.Dimension;

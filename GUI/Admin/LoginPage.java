@@ -12,18 +12,18 @@ public class LoginPage implements ActionListener {
     IdandPassword myid = new IdandPassword();
     //-----------------------------------------------------
     //all the objects below are used for making the GUI Components
-    JFrame frame = new JFrame();
-    JButton signInButton;
-    JButton loginButton;
-    JButton resetButton;
-    JTextField userIDField = new JTextField();
-    JPasswordField userPasswordField = new JPasswordField();
-    JLabel userIDLabel = new JLabel("Admin ID:");
-    JLabel userPasswordLabel = new JLabel("Admin Password:");
-    JLabel messageLabel = new JLabel();
-    JLabel Title = new JLabel();
-    JLabel createAccountMessage = new JLabel("Are you a Student?");
-    JPanel foreground = new JPanel();
+    private JFrame frame = new JFrame();
+    private JButton signInButton;
+    private JButton loginButton;
+    private JButton resetButton;
+    private JTextField userIDField = new JTextField();
+    private JPasswordField userPasswordField = new JPasswordField();
+    private JLabel userIDLabel = new JLabel("Admin ID:");
+    private JLabel userPasswordLabel = new JLabel("Admin Password:");
+    private JLabel messageLabel = new JLabel();
+    private JLabel Title = new JLabel();
+    private JLabel createAccountMessage = new JLabel("Are you a Student?");
+    private JPanel foreground = new JPanel();
     //--------------------------------------------
     public LoginPage() {
         //--------------------------------------------------
@@ -107,22 +107,18 @@ public class LoginPage implements ActionListener {
         frame.setResizable(false);
         //----------------------------------------------------
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == resetButton) {
             userIDField.setText("");
             userPasswordField.setText("");
-            
             //resets the password and IDfield if a user makes a mistake
         }
         if (e.getSource() == loginButton) {
-            
             String userID = userIDField.getText();
             String userPassword = String.valueOf(userPasswordField.getPassword());
             //the above variables store the password and ID of the user
             //----------------------------------------------------
-
             //below the methods check if the user ID and Password matches and if it doesnt match shows the respective message
             //and if it matches opens a new welcome page as an admin
             if (myid.getLogInfo().containsKey(userID)) {

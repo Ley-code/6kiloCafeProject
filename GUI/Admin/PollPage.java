@@ -133,7 +133,4 @@ public class PollPage extends WelcomePage {
         }
         JOptionPane.showMessageDialog(null,message.toString(),"Result",JOptionPane.INFORMATION_MESSAGE);
     }
-    public static void main(String[] args) {
-        new PollPage();
-    }
 }
