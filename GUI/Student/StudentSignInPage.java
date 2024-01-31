@@ -88,7 +88,7 @@ public class StudentSignInPage extends JFrame implements ActionListener {
                     MessageLabel.setForeground(Color.GREEN);
                     MessageLabel.setText("Registration Successful");
                     this.flag = true;
-                    SignUp.infoInitialize(fullnameString, newpassword, department, Year);
+                    SignUp.infoInitialize(fullnameString, newpassword, department, Year, idnumber);
 
                 } else {
                     MessageLabel.setForeground(Color.RED);

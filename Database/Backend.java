@@ -13,6 +13,7 @@ public class Backend {
     public static String password;
     public static String Department;
     public static String year;
+    public static String school_ID;
 
     // This method would be called in the action listener of the scan Your ID button.
     // Remember the Action Listener there must also have a public variable called scanType-->
