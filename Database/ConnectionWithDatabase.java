@@ -205,13 +205,23 @@ public class ConnectionWithDatabase {
         return studentInDepartment;
     }
     // This only creates a poll table write the code that add values to the table after Esube finished the GUI
+    // This will be called in the Admin part of poll creator
     public static void  pollTableCreator(ArrayList<String> foods,String question){
         try(Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD)){
-            String sqlQueryF = "CREATE TABLE " + question + " (" +
+            String sqlQueryF = "CREATE TABLE ? ( " +
                     "Number INT AUTO_INCREMENT PRIMARY KEY, " +
+                    "? INT, " +
+                    "? INT, " +
+                    "? INT, " +
+                    "? INT, " +
                     "student_ID VARCHAR(15), " +
                     "FOREIGN KEY (student_ID) REFERENCES students(student_ID) );"; // CHECK THIS wHEN YOU FINISH
             PreparedStatement creatingStat = connection.prepareStatement(sqlQueryF);
+            creatingStat.setString(1,question);
+            creatingStat.setString(2,foods.get(0));
+            creatingStat.setString(3,foods.get(1));
+            creatingStat.setString(4,foods.get(2));
+            creatingStat.setString(5,foods.get(3));
             System.out.println(sqlQueryF);
             System.out.println("is it here");
             creatingStat.execute();
@@ -221,21 +231,44 @@ public class ConnectionWithDatabase {
             System.out.println("Just for the one");
             e.printStackTrace();
         }
-        try(Connection connectionNew = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);){
-            Iterator<String> iterator = foods.iterator();
-            System.out.println(foods);
-            while(iterator.hasNext()){
-                String sqlQueryNew = " ALTER TABLE " + question + " ADD COLUMN " + iterator.next() + " INT";
-                System.out.println(sqlQueryNew);
-                PreparedStatement creatingStatement = connectionNew.prepareStatement(sqlQueryNew);
-                creatingStatement.execute();
-                System.out.println("Tell me it works now");
+    }
+    public static void pollComplement(ArrayList<String> foods,String question){
+        try(Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD)){
+            String sqlQuery = "INSERT INTO Polls VALUES (?,?,?,?,?,?)";
+            PreparedStatement creatingStat = connection.prepareStatement(sqlQuery);
+            creatingStat.setInt(1,0);
+            creatingStat.setString(2,question);
+            creatingStat.setString(3,foods.get(0));
+            creatingStat.setString(3,foods.get(1));
+            creatingStat.setString(3,foods.get(2));
+            creatingStat.setString(3,foods.get(3));
+            int result = creatingStat.executeUpdate();
+            if (result != 0){
+                System.out.println("It is added");
+                //Leykun add something to be uploaded to show poll is created successfully.
             }
         }
-        catch (SQLException e){
-            System.out.println("Same here");
+        catch(SQLException e){
+            e.printStackTrace();
+            System.out.println("Complement");
+        }
+    }
+    public static HashMap<String, String[]> pollOptionDisplay(){
+        HashMap<String, String[]> pollOption = new HashMap<>();
+        try(Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD)){
+            String sqlQuery = "SELECT Questions, Food_A, Food_B, Food_C, Food_D FROM Polls";
+            PreparedStatement creatingStat = connection.prepareStatement(sqlQuery);
+            ResultSet result = creatingStat.executeQuery();
+            while(result.next()){
+                String[] optionsArray = {result.getString("Food_A"),result.getString("Food_B"),result.getString("Food_C"),result.getString("Food_D")};
+                pollOption.put(result.getString("Questions"),optionsArray);
+            }
+        }
+        catch(SQLException e){
+            System.out.println("poll displayer");
             e.printStackTrace();
         }
+        return pollOption;
     }
     //You have stated the number of poll is limited
     public static void voteAdder(ArrayList<Integer> votes,String pollName){

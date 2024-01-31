@@ -1,35 +1,23 @@
 package GUI.Student;
-
 import Database.ConnectionWithDatabase;
-import GUI.Admin.FoodListPageFolder.NewFoodListPage;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class StudentWelcomePage extends JFrame implements ActionListener {
-    JTabbedPane tabbedPane;
-    JPanel Foodpanel;
-    JPanel pollpanel;
+public class StudentRatePage extends JFrame implements ActionListener {
     JPanel ratePanel;
+    JPanel topPanel;
+    JLabel label_1;
     ButtonGroup rateButtons;
     JRadioButton one;
     JRadioButton two;
     JRadioButton three;
     JRadioButton four;
     JRadioButton five;
-    StudentWelcomePage(){
-        initialize();
-    }
-    private void initialize(){
-
-        Foodpanel = new JPanel();
-        Foodpanel.setLayout(new BorderLayout());
-
-        JScrollPane scrollPane = new JScrollPane(new NewFoodListPage().NewFoodListPage());
-        Foodpanel.add(scrollPane,BorderLayout.CENTER);
-        pollpanel =new NewStudentPollPanel().NewStudentPollPanel();
+    JMenu Menu;
+    JMenuBar MenuBar;
+    StudentRatePage(){
 
         one = RatingIcon.getIcon(1);
         one.addActionListener(this);
@@ -56,22 +44,39 @@ public class StudentWelcomePage extends JFrame implements ActionListener {
         ratePanel.add(three);
         ratePanel.add(four);
         ratePanel.add(five);
-        ratePanel.setBackground(Color.YELLOW);
+        ratePanel.setBackground(new Color(11,11,11));
 
-        tabbedPane = new JTabbedPane();
-        tabbedPane.addTab("Food Lists", Foodpanel);
-        tabbedPane.addTab("Student poll", pollpanel);
-        tabbedPane.addTab("Rate Cafe", ratePanel);
+        label_1 = new JLabel("Rate the cafe");
+        label_1.setFont(new Font("Times New Roman", Font.ITALIC, 24));
+        label_1.setForeground(Color.BLACK);
+        label_1.setHorizontalAlignment(SwingConstants.CENTER);
 
-        add(tabbedPane);
+        topPanel = new JPanel();
+        topPanel.add(label_1);
+
+        MenuBar = new JMenuBar();
+        Menu = new JMenu("Menu");
+        JMenuItem homeMenuItem = new JMenuItem("Home");
+        MenuBar.add(Menu);
+        Menu.add(homeMenuItem);
+        // Add action listeners to menu items
+        homeMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new WelcomePageForStudents();
+                dispose();
+            }
+        });
+        setSize(600,700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800,800);
+        setLayout(new BorderLayout(5,5));
+        add(ratePanel,BorderLayout.CENTER);
+        add(topPanel,BorderLayout.NORTH);
+        setJMenuBar(MenuBar);
         setLocationRelativeTo(null);
         setVisible(true);
     }
-    public static void main(String[] args) {
-        new StudentWelcomePage();
-    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         //---------------------------------------------------------------------
@@ -87,5 +92,9 @@ public class StudentWelcomePage extends JFrame implements ActionListener {
             ConnectionWithDatabase.addRating(5);
         }
         //---------------------------------------------------------------------
+    }
+
+    public static void main(String[] args) {
+        new StudentRatePage();
     }
 }

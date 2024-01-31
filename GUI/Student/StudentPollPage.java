@@ -1,5 +1,6 @@
 package GUI.Student;
 
+
 import Database.ConnectionWithDatabase;
 
 import javax.swing.*;
@@ -9,32 +10,15 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class NewStudentPollPanel {
+public class StudentPollPage {
     DefaultListModel<String> questionListModel;
-    HashMap<String, String[]> questionOptionsMap;
     JList<String> questionList;
-    JList<String> polllist;
     HashMap<String, String[]> amirsquestionoption;
-    public JPanel NewStudentPollPanel() {
-        /*JLabel titleLabel = new JLabel("Poll Participation");
-        titleLabel.setFont(new Font("Helvici",Font.BOLD,25));
-        JButton participateButton = new JButton("Particicpate");
-        JButton cancelButton = new JButton("Cancel");
-        JPanel buttonContainer = new JPanel();
-        buttonContainer.setLayout(new GridLayout(1,2));
-        buttonContainer.add(participateButton);
-        buttonContainer.add(cancelButton);
-
-        listModel = new DefaultListModel<>();
-        polllist = new JList<>(listModel);
-
-        listModel.addElement("This is great it is working");//this is where we put the poll questions is displayed //backend team do your thing
-        */
-        amirsquestionoption = new HashMap<>();
-        amirsquestionoption.put("A", new String[]{"1","2","3","4"});
-        amirsquestionoption.put("B", new String[]{"5","6","7","8"});
-        amirsquestionoption.put("C",new String[]{"9","10"});
-        ArrayList<String> amirsquestions = new ArrayList<>();
+    StudentPollPage(){
+        initialize();
+    }
+    private void initialize() {
+        HashMap<String,String[]> amirsquestionoption = ConnectionWithDatabase.pollOptionDisplay();
         //----------------------------------------------
         //access the questions list by for loop to put in string
         String[] questioninstring = amirsquestionoption.keySet().toArray(new String[0]);
@@ -50,7 +34,7 @@ public class NewStudentPollPanel {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 ArrayList<Integer> result = optionShower();
-                //ConnectionWithDatabase.voteAdder(result,getQuestion());
+                ConnectionWithDatabase.voteAdder(result,getQuestion());
             }
         });
         JLabel titleLabel = new JLabel("Poll Participation");
@@ -60,14 +44,20 @@ public class NewStudentPollPanel {
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.add(titleLabel, BorderLayout.NORTH);
         mainPanel.add(questionList, BorderLayout.CENTER);
-        return mainPanel;
+        JFrame mainframe = new JFrame();
+        mainframe.add(mainPanel);
+        mainframe.setSize(600,700);
+        mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainframe.setLocationRelativeTo(null);
+        mainframe.setVisible(true);
     }
-    private int selectedOption;
+
     private String question;
+    String selectedQuestion;
     private ArrayList<Integer> optionShower() {
         int selectedQuestionIndex = questionList.getSelectedIndex();
         if (selectedQuestionIndex != -1) {
-            String selectedQuestion = questionListModel.getElementAt(selectedQuestionIndex);
+            selectedQuestion = questionListModel.getElementAt(selectedQuestionIndex);
             setQuestion(selectedQuestion);
             System.out.println(selectedQuestion);
             //-----------------------------------------------------------------------
@@ -88,11 +78,10 @@ public class NewStudentPollPanel {
             );
 
             if (optionDialogResult == JOptionPane.OK_OPTION) {
-                selectedOption = optionsComboBox.getSelectedIndex();
+                int selectedOption = optionsComboBox.getSelectedIndex();
                 System.out.println(selectedOption);
                 return backEND.backEND.rateResult(selectedOption);
             }
-
         }
         System.out.println("No selected item");
         return null;

@@ -143,7 +143,6 @@ public static class Poll {
         System.out.println(selectedOptionArray.toString());
         return selectedOptionArray;
     }
-
 }
 
 
