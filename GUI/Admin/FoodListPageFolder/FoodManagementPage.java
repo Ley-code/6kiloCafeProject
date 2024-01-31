@@ -100,9 +100,9 @@ public class FoodManagementPage extends WelcomePage {
         previewButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //ArrayList<String> imagevalues = ConnectionWithDatabase.imageExtractor(Date,Mealtime);
-                //ImageLabel.setIcon(FoodIcon.scaledIcon(imagevalues.get(1),300,300));
-                //ImageLabel.setText(imagevalues.get(0));
+                ArrayList<String> imagevalues = ConnectionWithDatabase.imageExtractor(Date,Mealtime);
+                ImageLabel.setIcon(FoodIcon.scaledIcon(imagevalues.get(1),300,300));
+                ImageLabel.setText(imagevalues.get(0));
             }
         });
         //-------------------------------------------------------
