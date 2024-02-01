@@ -38,7 +38,6 @@ public class StudentSignUpPage extends JFrame implements ActionListener {
     private JLabel DepartmentLabel = new JLabel();
     private JLabel YearLabel = new JLabel();
     private JLabel IDNumberLabel = new JLabel();
-    private JLabel PhoneNumberLabel = new JLabel();
     private JLabel NewPasswordLabel = new JLabel();
     private JLabel ConfirmPasswordLabel = new JLabel();
     private JTextField FullNameField = new JTextField();

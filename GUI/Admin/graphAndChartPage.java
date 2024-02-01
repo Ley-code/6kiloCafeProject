@@ -298,15 +298,5 @@ public class graphAndChartPage extends WelcomePage {
 // Display the chart panel
         return chartPanel;
     }
-//5th average number of students presented  in a day per meal.
-
-
-    /*backEND obj = new backEND();
-    double rating = obj.CalculateAverageRating(); //average rating general information leykun
-    backEND obj2 = new backEND();
-    int avg = obj2.averageStudentPresented();//averageStudent General information leykun
-    backEND obj3=new backEND();
-    LocalTime busyTime= obj3.identifyPeakTime(backEND.getTimestampData()); //busy time general information leykun
-*/
 }
 

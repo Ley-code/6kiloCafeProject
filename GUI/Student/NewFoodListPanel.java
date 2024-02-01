@@ -1,10 +1,8 @@
-package GUI.Admin.FoodListPageFolder;
+package GUI.Student;
 
-import Database.ConnectionWithDatabase;
+import GUI.Admin.FoodListPageFolder.FoodIcon;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Date;
 
 import javax.swing.*;
 

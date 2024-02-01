@@ -1,7 +1,7 @@
 package Database;
 
-import GUI.Admin.FoodListPageFolder.NewFoodListPage;
-import GUI.Admin.FoodListPageFolder.NewFoodListPanel;
+import GUI.Student.NewFoodListPage;
+import GUI.Student.NewFoodListPanel;
 import GUI.Admin.graphAndChartPage;
 import GUI.Student.LoginPageForStudent;
 import GUI.Student.StudentSignUpPage;

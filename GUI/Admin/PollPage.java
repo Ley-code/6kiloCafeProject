@@ -5,6 +5,7 @@ import backEND.backEND;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
@@ -44,19 +45,13 @@ public class PollPage extends WelcomePage {
         viewResultsButton.setFocusable(false);
         viewResultsButton.setFont(new Font("Arial",Font.PLAIN,20));
         viewResultsButton.setBackground(Color.cyan);
-
-        JButton cancelButton = new JButton("Cancel");
-        cancelButton.setFocusable(false);
-        cancelButton.setFont(new Font("Arial",Font.PLAIN,20));
-        cancelButton.setBackground(Color.cyan);
         // Create a panel to hold both title and button panels
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(4,1,10,30));
+        buttonPanel.setLayout(new GridLayout(3,1,10,30));
         buttonPanel.setBackground(new Color(24, 26, 79));
         buttonPanel.add(titleLabel);
         buttonPanel.add(createPollButton);
         buttonPanel.add(viewResultsButton);
-        buttonPanel.add(cancelButton);
 
         questionMap = ConnectionWithDatabase.pollOptionDisplay();
         questioninstring = questionMap.keySet().toArray(new String[0]);
@@ -130,8 +125,5 @@ public class PollPage extends WelcomePage {
             }
         }
         JOptionPane.showMessageDialog(null,message.toString(),"Result",JOptionPane.INFORMATION_MESSAGE);
-    }
-    public static void main(String[] args) {
-        new PollPage();
     }
 }
