@@ -94,9 +94,7 @@ public class WelcomePageForStudents extends JFrame {
 
         // Set the menu bar for the JFrame
         setJMenuBar(menuBar);
-
-
-        setSize(1000, 600);
+        setSize(1000,600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);

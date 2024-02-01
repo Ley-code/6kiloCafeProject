@@ -35,6 +35,7 @@ public class ESPcommunication extends Thread {
         SignUp.accountChecker(studentID);
         StudentSignUpPage.scanType++;
         method(studentID);
+
     }
 
     @Override

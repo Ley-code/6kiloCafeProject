@@ -13,20 +13,14 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 import Database.Backend;
 import Database.SignUp;
 import GUI.Admin.ButtonStyle;
+import GUI.Admin.LoginPage;
 
 public class StudentSignUpPage extends JFrame implements ActionListener {
     private JPanel Topcontainer;
@@ -275,20 +269,39 @@ public class StudentSignUpPage extends JFrame implements ActionListener {
         centerPanel.add(row8);
         centerPanel.add(row9);
 
+        JMenu menu = new JMenu("Menu");
+        menu.setForeground(Color.WHITE);
+        JMenuItem PreviousPage = new JMenuItem("PreviousPage");
+        PreviousPage.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new LoginPage();
+                dispose();
+            }
+        });
+
+
         rightPanel.setBackground(new Color(0, 0, 0));
         leftPanel.setBackground(new Color(0, 0, 0));
         BottomPanel.setBackground(new Color(0, 0, 0));
         Topcontainer.setBackground(new Color(0, 0, 0));
         centerPanel.setBackground(new Color(0, 0, 0));
+
         setLayout(new BorderLayout(0, 20));
+        JMenuBar menuBar = new JMenuBar();
+        menu.add(PreviousPage);
+        menuBar.add(menu);
+        setJMenuBar(menuBar);
+
         add(Topcontainer, BorderLayout.NORTH);
         add(centerPanel, BorderLayout.CENTER);
         add(BottomPanel, BorderLayout.SOUTH);
         add(rightPanel, BorderLayout.EAST);
         add(leftPanel, BorderLayout.WEST);
 
+
         this.setSize(900, 790);
-        this.getContentPane().setBackground(new Color(0, 0, 0));
+        this.getContentPane().setBackground(new Color(7, 7, 7));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);

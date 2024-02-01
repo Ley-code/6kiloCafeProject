@@ -1,6 +1,7 @@
 package GUI.Admin;
 
 import Database.ConnectionWithDatabase;
+import Database.ESPcommunication;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -39,9 +40,23 @@ public class AttendancePage extends WelcomePage {
                 ConnectionWithDatabase.dinnerAttendance(tableModel3);
             }
         });
+        JButton startAttendance = new ButtonStyle("Start Attendance");
+        startAttendance.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ESPcommunication esp = new ESPcommunication();
+                esp.start();
+            }
+        });
+        JPanel buttonContainer = new JPanel();
+        buttonContainer.setLayout(new GridLayout(1,2));
+        buttonContainer.add(startAttendance);
+        buttonContainer.add(updateButton);
+        // Create a JScrollPane to add the JTable to and make it scrollable
+
         centerPanel.setLayout(new BorderLayout());
-        centerPanel.add(updateButton, BorderLayout.NORTH);
-        centerPanel.add(tablepanel, BorderLayout.CENTER);
+        centerPanel.add(buttonContainer,BorderLayout.NORTH);
+        centerPanel.add(tablepanel,BorderLayout.CENTER);
         centerPanel.setBackground(Color.BLUE);
     }
 

@@ -32,7 +32,7 @@ public class LoginPage implements ActionListener {
     public LoginPage() {
         //--------------------------------------------------
         try {
-            Image backgroundImage = ImageIO.read(new File("C:\\Users\\hp\\OneDrive\\Desktop\\6kiloCafeProject\\GUI\\icons\\cafeImage.jfif"));
+            Image backgroundImage = ImageIO.read(new File("GUI\\icons\\cafeImage.jfif"));
             setBackgroundImage(backgroundImage);
         } catch (IOException e) {
             e.printStackTrace();

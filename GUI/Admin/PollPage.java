@@ -20,7 +20,7 @@ public class PollPage extends WelcomePage {
     private static JList<String> resultList;
     private static DefaultListModel<String> resultListModel;
     private static String pollQuestion;
-    private static HashMap<String,String[]> questionMap;
+    private static HashMap<String,ArrayList<String>> questionMap;
     private static String[] questioninstring;
     PollPage(){
         // Create a title label and set its properties
@@ -114,16 +114,14 @@ public class PollPage extends WelcomePage {
             String selectedQuestion = resultListModel.getElementAt(selectedQuestionIndex);
             //setQuestion(selectedQuestion);
             System.out.println(selectedQuestion);
-            message.append(selectedQuestion+"\n");
-            String[] options = questionMap.get(selectedQuestion);
-            ArrayList<String> toarray = new ArrayList<>();
-            for(int i = 0; i<options.length;i++){
-                toarray.add(options[i]);
-            }
-            int[] voteresult = ConnectionWithDatabase.voteExtractor(toarray,selectedQuestion);
-            message.append("Total Vote"+voteresult[4]+"\n");
+            message.append(selectedQuestion).append("\n");
+
+            ArrayList<String> options = questionMap.get(selectedQuestion);
+            int[] voteResult = ConnectionWithDatabase.voteExtractor(options,selectedQuestion);
+            System.out.println(voteResult[1]);
+            message.append("Total Vote").append(voteResult[4]).append("\n");
             for(int i = 0; i<4;i++){
-                message.append(options[i]+" : "+voteresult[i]+"\n");
+                message.append(options.get(i)).append(" : ").append(voteResult[i]).append("\n");
             }
         }
         JOptionPane.showMessageDialog(null,message.toString(),"Result",JOptionPane.INFORMATION_MESSAGE);
